@@ -5,19 +5,19 @@
 JDK，Maven
 2. 克隆代码到本地
 3. 修改数据库配置文件
----
+——————
 4. 运行打包命令
----
+——————
 mvn package
----
+——————
 5. 运行项目  
----
+——————
 java -jar target/mypeojectdemo-0.0.1-SNAPSHOT.jar
----
+——————
 6. 访问项目
----
+——————
 http://localhost:8080
----
+——————
 
 
 ## 资料
@@ -39,8 +39,8 @@ http://localhost:8080
 [Postman](https://chrome.google.com/webstore/detail/coohjcphdfgbiolnekdpbcijmhambjff)
 
 ## 脚本
----
+——————
 
----
+——————
 
 ## 更新日志
