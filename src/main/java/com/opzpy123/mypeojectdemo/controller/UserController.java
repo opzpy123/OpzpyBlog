@@ -11,4 +11,9 @@ public class UserController {
     public String index(){
             return "index";
         }
+
+        @GetMapping("/userRegist")
+    public String regist(){
+            return "userRegist";
+        }
 }
