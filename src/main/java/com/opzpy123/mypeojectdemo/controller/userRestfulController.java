@@ -1,27 +1,42 @@
 package com.opzpy123.mypeojectdemo.controller;
 
-import com.alibaba.druid.support.json.JSONParser;
-import com.alibaba.druid.support.json.JSONUtils;
 import com.opzpy123.mypeojectdemo.bean.User;
+import com.opzpy123.mypeojectdemo.result.Result;
 import com.opzpy123.mypeojectdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonBuilderUtils;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+/**
+ * restfulController
+ */
 @RestController
+@RequestMapping("/user")
 public class userRestfulController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
-    public List<User> selectAllUser(){
-        return userService.selectAllUser();
+    /**
+     * 注册
+     *
+     * @param user 参数封装
+     * @return Result
+     */
+    @PostMapping(value = "/regist")
+    public Result regist(User user) {
+        return userService.regist(user);
     }
 
+    /**
+     * 登录
+     *
+     * @param user 参数封装
+     * @return Result
+     */
+    @PostMapping(value = "/login")
+    public Result login(User user) {
+        return userService.login(user);
+    }
 
 
 }

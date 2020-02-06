@@ -5,10 +5,13 @@ import lombok.Data;
 import java.io.Serializable;
 
 
+/**
+ * lombok自动生成get,set
+ */
 @Data
 public class User implements Serializable {
-    private int id;
-    private String name;
+    private Long id;
+    private String username;
     private String password;
 
 }

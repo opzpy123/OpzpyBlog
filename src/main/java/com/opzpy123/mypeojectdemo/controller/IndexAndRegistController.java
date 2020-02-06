@@ -5,15 +5,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 注册登录页面访问uri
+ */
 @Controller
 public class IndexAndRegistController {
-        @GetMapping("/index")
-    public String index(){
-            return "index";
-        }
+    /**
+     * 指定/index到index.html
+     *
+     * @return
+     */
+    @GetMapping("/index")
+    public String index() {
+        return "index";
+    }
 
-        @GetMapping("/userRegist")
-    public String regist(){
-            return "userRegist";
-        }
+    /**
+     * 访问注册页面
+     * @return
+     */
+    @GetMapping("/userRegist")
+    public String regist() {
+        return "userRegist";
+    }
 }
