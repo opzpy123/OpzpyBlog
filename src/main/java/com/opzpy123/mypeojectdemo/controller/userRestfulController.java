@@ -1,7 +1,7 @@
 package com.opzpy123.mypeojectdemo.controller;
 
 import com.opzpy123.mypeojectdemo.bean.User;
-import com.opzpy123.mypeojectdemo.result.Result;
+import com.opzpy123.mypeojectdemo.util.Result;
 import com.opzpy123.mypeojectdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
