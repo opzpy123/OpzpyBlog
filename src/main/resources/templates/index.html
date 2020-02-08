@@ -67,31 +67,23 @@
                         </div>
                         <button type="submit" class="btn btn-default">搜索</button>
                     </form>
+
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
+                        <li class="dropdown" th:if="${session.user!=null}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">消息中心</a></li>
+                                <li><a href="#">个人资料</a></li>
+                                <li><a href="/user/outLogging">退出登录</a></li>
+                                <li class="divider"></li>
+                                <li><a th:text="'欢迎回来：'+${session.user.username}">欢迎回来:</a></li>
+                            </ul>
+                        </li>
+                        <li th:if="${session.user==null}">
                             <a id="modal-933992" href="#modal-container-933992" role="button" class="btn"
                                data-toggle="modal">登录</a>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<strong
-                                    class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Another action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Something else here</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="#">Separated link</a>
-                                </li>
-                            </ul>
-                        </li>
+
                     </ul>
                 </div>
 
@@ -112,14 +104,14 @@
     <div class="row clearfix">
         <div class="col-md-9 column">
             <div class="media well">
-                <a href="#" class="pull-left"><img src="v3/default7.jpg" class="media-object" alt=''/></a>
+                <a href="#" class="pull-left"><img src="image/default7.jpg" class="media-object" alt=''/></a>
                 <div class="media-body">
                     <h4 class="media-heading">
                         Nested media heading
                     </h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
                     commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
                     <div class="media">
-                        <a href="#" class="pull-left"><img src="v3/default8.jpg" class="media-object" alt=''/></a>
+                        <a href="#" class="pull-left"><img src="image/default7.jpg" class="media-object" alt=''/></a>
                         <div class="media-body">
                             <h4 class="media-heading">
                                 Nested media heading

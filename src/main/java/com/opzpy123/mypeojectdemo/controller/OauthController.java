@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -31,7 +34,9 @@ public class OauthController {
      * @return
      */
     @GetMapping("/callback")
-    public String callback(@RequestParam(name = "code") String code, @RequestParam(name = "state") String state) throws IOException {
+    public String callback(@RequestParam(name = "code") String code,
+                           @RequestParam(name = "state") String state,
+                           HttpServletRequest request) throws IOException {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setCode(code);
         accessTokenDTO.setRedirect_uri(redirecturi);
@@ -39,9 +44,18 @@ public class OauthController {
         accessTokenDTO.setClient_id(clientid);
         accessTokenDTO.setClient_secret(secret);
         String accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
-        GitHubUser githubuser = gitHubProvider.getUser(accessToken);
-        System.out.println(githubuser);
-        return "index";
+        GitHubUser user = gitHubProvider.getUser(accessToken);
+        System.out.println(user);
+       if(user!=null){
+           //登录成功写入cookie和session;
+           HttpSession session = request.getSession();
+           session.setAttribute("user",user);
+           return "redirect:/";
+
+       }else{
+           //登录失败请重新登陆
+           return "redirect:/";
+       }
     }
 
 
