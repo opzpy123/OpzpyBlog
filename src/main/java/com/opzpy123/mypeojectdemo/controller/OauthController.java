@@ -1,8 +1,11 @@
 package com.opzpy123.mypeojectdemo.controller;
 
+import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.dto.AccessTokenDTO;
 import com.opzpy123.mypeojectdemo.dto.GitHubUser;
+import com.opzpy123.mypeojectdemo.mapper.UserMapper;
 import com.opzpy123.mypeojectdemo.provider.GitHubProvider;
+import com.opzpy123.mypeojectdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -10,9 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @Controller
@@ -36,7 +37,8 @@ public class OauthController {
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletRequest request) throws IOException {
+                           HttpServletRequest request,
+                           HttpServletResponse response) throws IOException {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setCode(code);
         accessTokenDTO.setRedirect_uri(redirecturi);
@@ -46,6 +48,7 @@ public class OauthController {
         String accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
         GitHubUser user = gitHubProvider.getUser(accessToken);
         System.out.println(user);
+        //github登录仅作游客登陆。
        if(user!=null){
            //登录成功写入cookie和session;
            HttpSession session = request.getSession();

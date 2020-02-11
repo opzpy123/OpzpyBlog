@@ -12,6 +12,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     private Long id;
     private String username;
+    //对于github用户，密码是用户id
     private String password;
 
 }
