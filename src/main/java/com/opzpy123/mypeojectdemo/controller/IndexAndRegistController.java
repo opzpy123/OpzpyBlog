@@ -3,6 +3,7 @@ package com.opzpy123.mypeojectdemo.controller;
 import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.mapper.UserMapper;
 import com.opzpy123.mypeojectdemo.service.UserService;
+import com.opzpy123.mypeojectdemo.util.TransformTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,21 +34,17 @@ public class IndexAndRegistController {
         if(request.getCookies()!=null){
             Cookie[] cookies = request.getCookies();
             for(Cookie cookie:cookies){
-                System.out.println(cookie.getName()+":{"+cookie.getValue()+"};");
                 if(cookie.getName().equals("cookie_user")){
-                    String cookie_user = cookie.getValue();
+                    String cookie_user = TransformTest.hexStr2Str(cookie.getValue());
                     User user = userMapper.findUserByName(cookie_user);
-                    userService.login(user);
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user",user);
-                    break;
+                    if(userService.login(user).isSuccess()) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("user", user);
+                        break;
+                    }
                 }
             }
         }
-
-
-
-
         return "index";
     }
 
