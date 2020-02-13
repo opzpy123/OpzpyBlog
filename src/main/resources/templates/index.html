@@ -44,7 +44,7 @@
                     </form>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
+                        <li th:if="${session.user!=null}">
                             <a  href="/publish" class="btn"><span class="glyphicon glyphicon-edit"> </span> 写博客</a>
                         </li>
                         <li class="dropdown" th:if="${session.user!=null}">

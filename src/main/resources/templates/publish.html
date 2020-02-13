@@ -65,10 +65,10 @@
         <div class="col-md-9 column">
             <h3><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 发起</h3>
             <hr>
-            <form action="#">
+            <form action="/publish" method="post">
                 <div class="form-group">
-                    <label for="QuesTitle"><h4>问题标题(简单扼要):</h4></label>
-                    <input type="text" class="form-control" id="quesTitle" placeholder="请输入问题标题">
+                    <label for="title"><h4>问题标题(简单扼要):</h4></label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入问题标题">
                 </div>
                 <div class="form-group">
                     <label for="description"><h4>问题补充(必填，请参照右侧提示):</h4></label>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="form-group">
                     <label for="tag"><h4>添加标签:</h4></label>
-                    <input type="text" class="form-control" id="tag" placeholder="输入标签以 , 号分隔">
+                    <input type="text" class="form-control" id="tag"  name="tag" placeholder="输入标签以 , 号分隔">
                 </div>
                 <button type="submit" class="btn btn-primary" style="float: right"> 发 布</button>
             </form>
