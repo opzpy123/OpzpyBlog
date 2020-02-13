@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(rollbackFor = RuntimeException.class)
 public class QuestionService {
@@ -15,5 +17,10 @@ public class QuestionService {
 
     public void create(Question question){
         questionMapper.create(question);
+    }
+
+    public List<Question> selectAllQuestion(){
+        List<Question> questions = questionMapper.selectAllQuestion();
+        return questions;
     }
 }

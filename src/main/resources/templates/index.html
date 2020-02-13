@@ -45,7 +45,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li th:if="${session.user!=null}">
-                            <a  href="/publish" class="btn"><span class="glyphicon glyphicon-edit"> </span> 写博客</a>
+                            <a  href="/publish"  class="btn"><span class="glyphicon glyphicon-edit"> </span> 写博客</a>
                         </li>
                         <li class="dropdown" th:if="${session.user!=null}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<strong
@@ -83,12 +83,12 @@
     </div>
     <div class="row clearfix">
         <!--媒体框-->
-        <div class="col-md-9 column">
-            <div class="media well">
+        <div class="col-md-9 column well">
+            <div class="media" th:each="entries,stat:${resultList}">
                 <a href="#" class="pull-left"><img src="image/default7.jpg" class="media-object" alt='image'/></a>
                 <div class="media-body">
-                    <h4 class="media-heading">媒体名</h4>
-                    媒体内容。。。。。。。
+                    <h4 class="media-heading" th:text="${entries['title']}">媒体名</h4>
+                    <h5 th:text="${entries['description']}">aa</h5>
                 </div>
             </div>
         </div>

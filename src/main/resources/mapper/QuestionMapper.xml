@@ -8,6 +8,10 @@
         INSERT INTO question (title,description,gmt_create,gmt_modified,creator,tag) VALUES (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{tag})
     </insert>
 
+    <select id="selectAllQuestion" resultType="Question">
+        SELECT id,title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count ,tag FROM question
+    </select>
+
 
 
 </mapper>
