@@ -2,16 +2,21 @@ package com.opzpy123.mypeojectdemo.controller;
 
 import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.service.UserService;
+import com.opzpy123.mypeojectdemo.util.Result;
 import com.opzpy123.mypeojectdemo.util.TransformTest;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * restfulController
@@ -30,12 +35,28 @@ public class userRestfulController {
      * @return Result
      */
     @PostMapping(value = "/regist")
-    public String regist(User user) {
+    public String regist(User user, Model model, HttpServletResponse response, HttpServletRequest request) {
         if (userService.regist(user).isSuccess()) {
-            return "redirect:/";
-        } else {
+            this.login(user,request,response);
             return "redirect:/";
         }
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Content-type", "text/html;charset=UTF-8");
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            String registMsg = userService.regist(user).getMsg();
+            out.print("<script>alert('" + registMsg + "');window.location.href='"
+                    + "/userRegist" + "';</script>");
+
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(out);
+        }
+        return "index";
+
 
     }
 
@@ -57,7 +78,22 @@ public class userRestfulController {
             response.addCookie(cookie);
             return "redirect:/";
         } else {
-            return "redirect:/";
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("Content-type", "text/html;charset=UTF-8");
+            PrintWriter out = null;
+            try {
+                out = response.getWriter();
+                String loginMsg = userService.login(user).getMsg();
+                out.print("<script>alert('" + loginMsg + "');window.location.href='"
+                        + "/" + "';</script>");
+
+                out.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                IOUtils.closeQuietly(out);
+            }
+            return "index";
         }
     }
 
@@ -65,18 +101,18 @@ public class userRestfulController {
      * 退出登录
      */
     @GetMapping("/outLogging")
-    public String outLogging(HttpServletRequest request,HttpServletResponse response) {
+    public String outLogging(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
-        if(request.getCookies()!=null) {
+        if (request.getCookies() != null) {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("cookie_user")) {
-                   cookie.setMaxAge(0);
-                   cookie.setValue(null);
-                   cookie.setPath("/");
-                   response.addCookie(cookie);
-                   break;
+                    cookie.setMaxAge(0);
+                    cookie.setValue(null);
+                    cookie.setPath("/");
+                    response.addCookie(cookie);
+                    break;
                 }
             }
         }

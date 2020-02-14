@@ -72,10 +72,10 @@
                     Hello, world!
                 </h1>
                 <p>
-                    这是一个基于springboot开发的极客java论坛项目,前台页面使用bootstrap组件，模板使用thymeleaf。数据交互使用ajax,使用restful架构风格,数据库使用MySQL,客户端MySQLWorkbench,项目已提交Github,点击按钮直达。
+                    这是一个基于springboot开发的极客java论坛项目,登录发博客在右上角，先登录才能发博客嗷！项目已提交Github,点击按钮直达。
                 </p>
                 <p>
-                    <a class="btn btn-primary btn-large" href="https://github.com/opzpy123/JavaCommunity">项目地址</a>
+                    <a class="btn btn-primary btn-large"  href="https://github.com/opzpy123/JavaCommunity">项目地址</a>
                 </p>
             </div>
 
@@ -84,6 +84,7 @@
     <div class="row clearfix">
         <!--媒体框-->
         <div class="col-md-9 column well">
+            <a class=" btn btn-primary glyphicon glyphicon-edit" href="/publish">开始写博客</a>
             <div class="media" th:each="entries,stat:${resultList}">
                 <a href="#" class="pull-left"><img src="image/default7.jpg" class="media-object" alt='image'/></a>
                 <div class="media-body">
@@ -147,7 +148,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-5">
-                            <button id="submitBtn" type="submit"
+                            <button id="submitBtn"  type="submit"
                                     class="btn btn-default btn-block btn-primary">登录
                             </button>
                             没有账号？<a href="/userRegist">注册</a>
@@ -162,6 +163,7 @@
         </div>
     </div>
 </div>
+
 
 </body>
 </html>

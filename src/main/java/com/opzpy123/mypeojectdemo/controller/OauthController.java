@@ -50,7 +50,6 @@ public class OauthController {
         System.out.println(user);
         //github登录仅作游客登陆。
        if(user!=null){
-           //登录成功写入cookie和session;
            HttpSession session = request.getSession();
            session.setAttribute("user",user);
            return "redirect:/";

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
-    User findUserByName(String username);
+     User findUserByName(String username);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void regist(User user);

@@ -15,8 +15,19 @@ public class QuestionService {
     private QuestionMapper questionMapper;
 
 
-    public void create(Question question){
-        questionMapper.create(question);
+    //后端数据校验
+    public String create(Question question){
+        if(question.getTitle().isEmpty()){
+            return "标题不能为空";
+        }
+        if(question.getTitle().length()>30){
+            return "标题过长";
+        }
+        if(question.getDescription().isEmpty()) {
+            return "描述为空";
+        }
+            questionMapper.create(question);
+            return "";
     }
 
     public List<Question> selectAllQuestion(){

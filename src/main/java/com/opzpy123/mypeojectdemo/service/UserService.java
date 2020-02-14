@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Service
 @Transactional(rollbackFor = RuntimeException.class)
 public class UserService {
     @Autowired
+    private UserService userService;
+    @Autowired
     private UserMapper userMapper;
-
     /**
      * 注册
      *
@@ -24,7 +28,7 @@ public class UserService {
         result.setSuccess(false);
         result.setDetail(null);
         try {
-            User existUser = userMapper.findUserByName(user.getUsername());
+            User existUser = userService.findUserByName(user.getUsername());
             if (existUser != null) {
                 //如果用户名已存在
                 result.setMsg("用户名已存在");
@@ -68,6 +72,11 @@ public class UserService {
             e.printStackTrace();
         }
         return result;
+    }
+
+
+    public User findUserByName(String username){
+        return userMapper.findUserByName(username);
     }
 
 }
