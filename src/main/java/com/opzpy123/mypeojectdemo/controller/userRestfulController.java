@@ -2,6 +2,7 @@ package com.opzpy123.mypeojectdemo.controller;
 
 import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.service.UserService;
+import com.opzpy123.mypeojectdemo.util.PageAlert;
 import com.opzpy123.mypeojectdemo.util.Result;
 import com.opzpy123.mypeojectdemo.util.TransformTest;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -35,27 +36,19 @@ public class userRestfulController {
      * @return Result
      */
     @PostMapping(value = "/regist")
-    public String regist(User user, Model model, HttpServletResponse response, HttpServletRequest request) {
-        if (userService.regist(user).isSuccess()) {
-            this.login(user,request,response);
+    public String regist(User user, Model model, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        Result regist = userService.regist(user);
+        String registMsg = regist.getMsg();
+        if (regist.isSuccess()) {
+            String returnMsg = "<script>alert('" + registMsg+":"+user.getUsername()+"欢迎使用" + "');window.location.href='" + "/" + "';</script>";
+            PageAlert.Alert(returnMsg, response);
+            this.login(user, request, response, model);
             return "redirect:/";
+        } else {
+            String returnMsg = "<script>alert('" + registMsg +"请重新注册"+ "');window.location.href='" + "/userRegist" + "';</script>";
+            PageAlert.Alert(returnMsg, response);
+            return "index";
         }
-        response.setCharacterEncoding("UTF-8");
-        response.setHeader("Content-type", "text/html;charset=UTF-8");
-        PrintWriter out = null;
-        try {
-            out = response.getWriter();
-            String registMsg = userService.regist(user).getMsg();
-            out.print("<script>alert('" + registMsg + "');window.location.href='"
-                    + "/userRegist" + "';</script>");
-
-            out.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            IOUtils.closeQuietly(out);
-        }
-        return "index";
 
 
     }
@@ -67,34 +60,24 @@ public class userRestfulController {
      * @return Result
      */
     @PostMapping(value = "/login")
-    public String login(User user, HttpServletRequest request, HttpServletResponse response) {
-        if (userService.login(user).isSuccess()) {
+    public String login(User user, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+        Result login = userService.login(user);
+        String loginMsg = login.getMsg();
+        if(login.isSuccess()) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-
             Cookie cookie = new Cookie("cookie_user", TransformTest.str2HexStr(user.getUsername()));
             cookie.setMaxAge(60 * 60 * 24 * 3);//3天免登录
             cookie.setPath("/");
             response.addCookie(cookie);
-            return "redirect:/";
-        } else {
-            response.setCharacterEncoding("UTF-8");
-            response.setHeader("Content-type", "text/html;charset=UTF-8");
-            PrintWriter out = null;
-            try {
-                out = response.getWriter();
-                String loginMsg = userService.login(user).getMsg();
-                out.print("<script>alert('" + loginMsg + "');window.location.href='"
-                        + "/" + "';</script>");
-
-                out.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                IOUtils.closeQuietly(out);
-            }
-            return "index";
+            String returnMsg = "<script>alert('" + loginMsg+",欢迎回来:"+user.getUsername() + "');window.location.href='" + "/" + "';</script>";
+            PageAlert.Alert(returnMsg, response);
+        }else {
+            String returnMsg = "<script>alert('" + loginMsg + "');window.location.href='" + "/" + "';</script>";
+            PageAlert.Alert(returnMsg, response);
         }
+        return "redirect:/";
+
     }
 
     /**
@@ -112,6 +95,8 @@ public class userRestfulController {
                     cookie.setValue(null);
                     cookie.setPath("/");
                     response.addCookie(cookie);
+                    String returnMsg = "<script>alert('" + "用户已退出登录" + "');window.location.href='" + "/" + "';</script>";
+                    PageAlert.Alert(returnMsg, response);
                     break;
                 }
             }

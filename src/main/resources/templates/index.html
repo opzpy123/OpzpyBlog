@@ -45,7 +45,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li th:if="${session.user!=null}">
-                            <a  href="/publish"  class="btn"><span class="glyphicon glyphicon-edit"> </span> 写博客</a>
+                            <a href="/publish" class="btn"><span class="glyphicon glyphicon-edit"> </span> 写博客</a>
                         </li>
                         <li class="dropdown" th:if="${session.user!=null}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<strong
@@ -58,7 +58,7 @@
                                 <li><a th:text="'欢迎回来：'+${session.user.username}">欢迎回来:</a></li>
                             </ul>
                         </li>
-                        <li th:if="${session.user==null}" class="active">
+                        <li th:if="${session.user==null}" class="active ">
                             <a id="modal-933992" href="#modal-container-933992" role="button" class="btn"
                                data-toggle="modal">登录</a>
                         </li>
@@ -75,7 +75,7 @@
                     这是一个基于springboot开发的极客java论坛项目,登录发博客在右上角，先登录才能发博客嗷！项目已提交Github,点击按钮直达。
                 </p>
                 <p>
-                    <a class="btn btn-primary btn-large"  href="https://github.com/opzpy123/JavaCommunity">项目地址</a>
+                    <a class="btn btn-primary btn-large" href="https://github.com/opzpy123/JavaCommunity">项目地址</a>
                 </p>
             </div>
 
@@ -131,7 +131,7 @@
             <div class="modal-body">
                 <h4 class="modal-title" align="center">用户登录</h4>
                 <br/>
-                <form action="/user/login" method="post" class="form-horizontal" role="form">
+                <form action="/user/login" method="post" class="form-horizontal" name="loginForm" role="form">
                     <div class="form-group">
                         <label for="username" class="col-sm-offset-2 col-sm-2 control-label">账号</label>
                         <div class="col-sm-5">
@@ -146,9 +146,10 @@
                                    placeholder="请输入您的密码">
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-5">
-                            <button id="submitBtn"  type="submit"
+                            <button id="submitBtn" type="submit"
                                     class="btn btn-default btn-block btn-primary">登录
                             </button>
                             没有账号？<a href="/userRegist">注册</a>
@@ -163,6 +164,7 @@
         </div>
     </div>
 </div>
+
 
 
 </body>

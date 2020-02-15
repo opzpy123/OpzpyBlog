@@ -50,7 +50,7 @@
                                 <li><a th:text="'欢迎回来：'+${session.user.username}">欢迎回来:</a></li>
                             </ul>
                         </li>
-                        <li th:if="${session.user==null}">
+                        <li th:if="${session.user==null}" class="active">
                             <a id="modal-933992" href="#modal-container-933992" role="button" class="btn"
                                data-toggle="modal">登录</a>
                         </li>
