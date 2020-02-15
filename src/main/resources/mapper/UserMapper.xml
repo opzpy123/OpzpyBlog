@@ -8,7 +8,7 @@
     <!--字段与bean类字段一致，所以不需自定义resultMap-->
 
     <select id="findUserByName" resultType="User">
-        select u.username,u.password from user u where u.username=#{username}
+        select u.id,u.username,u.password from user u where u.username=#{username}
     </select>
 
     <insert id="regist">

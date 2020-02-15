@@ -6,6 +6,7 @@ import com.opzpy123.mypeojectdemo.mapper.QuestionMapper;
 import com.opzpy123.mypeojectdemo.mapper.UserMapper;
 import com.opzpy123.mypeojectdemo.service.QuestionService;
 import com.opzpy123.mypeojectdemo.service.UserService;
+import com.opzpy123.mypeojectdemo.util.PageAlert;
 import com.opzpy123.mypeojectdemo.util.TransformTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,7 +59,8 @@ public class PublishController {
             @RequestParam("description") String description,
             @RequestParam("tag") String tag,
             HttpServletRequest request,
-            Model model
+            Model model,
+            HttpServletResponse response
     ) {
 
         User user = null;
@@ -86,7 +88,6 @@ public class PublishController {
         question.setGmtCreate(System.currentTimeMillis());
         question.setGmtModified(question.getGmtCreate());
         String s = questionService.create(question);
-        System.out.println(s);
         model.addAttribute("publishMsg", s);
         if (s.isEmpty()) {
             return "redirect:/";

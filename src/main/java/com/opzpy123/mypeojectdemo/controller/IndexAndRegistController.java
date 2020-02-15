@@ -2,6 +2,7 @@ package com.opzpy123.mypeojectdemo.controller;
 
 import com.opzpy123.mypeojectdemo.bean.Question;
 import com.opzpy123.mypeojectdemo.bean.User;
+import com.opzpy123.mypeojectdemo.mapper.UserMapper;
 import com.opzpy123.mypeojectdemo.service.QuestionService;
 import com.opzpy123.mypeojectdemo.service.UserService;
 import com.opzpy123.mypeojectdemo.util.TransformTest;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,6 +32,7 @@ public class IndexAndRegistController {
     private UserService userService;
     @Autowired
     private QuestionService questionService;
+
 
     /**
      * 指定/index到index.html
@@ -50,10 +53,10 @@ public class IndexAndRegistController {
                 }
             }
         }
-
         List<Question> questions = questionService.selectAllQuestion();
+        //帖子倒叙排列
+        Collections.reverse(questions);
         model.addAttribute("resultList", questions);
-
         return "index";
     }
 
@@ -67,7 +70,6 @@ public class IndexAndRegistController {
     public String regist() {
         return "userRegist";
     }
-
 
 
 }

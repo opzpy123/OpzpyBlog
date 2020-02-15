@@ -2,12 +2,10 @@ package com.opzpy123.mypeojectdemo.controller;
 
 import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.service.UserService;
+import com.opzpy123.mypeojectdemo.bean.Result;
 import com.opzpy123.mypeojectdemo.util.PageAlert;
-import com.opzpy123.mypeojectdemo.util.Result;
 import com.opzpy123.mypeojectdemo.util.TransformTest;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * restfulController
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class userRestfulController {
 
@@ -40,14 +37,14 @@ public class userRestfulController {
         Result regist = userService.regist(user);
         String registMsg = regist.getMsg();
         if (regist.isSuccess()) {
-            String returnMsg = "<script>alert('" + registMsg+":"+user.getUsername()+"欢迎使用" + "');window.location.href='" + "/" + "';</script>";
+            String returnMsg = "<script>alert('" + registMsg + "');window.location.href='" + "/" + "';</script>";
+          this.login(user, request, response, model);
             PageAlert.Alert(returnMsg, response);
-            this.login(user, request, response, model);
             return "redirect:/";
         } else {
-            String returnMsg = "<script>alert('" + registMsg +"请重新注册"+ "');window.location.href='" + "/userRegist" + "';</script>";
+            String returnMsg = "<script>alert('" + registMsg + "');window.location.href='" + "/userRegist" + "';</script>";
             PageAlert.Alert(returnMsg, response);
-            return "index";
+            return "redirect:/userRegist";
         }
 
 
@@ -61,30 +58,29 @@ public class userRestfulController {
      */
     @PostMapping(value = "/login")
     public String login(User user, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+        HttpSession session = request.getSession();
         Result login = userService.login(user);
         String loginMsg = login.getMsg();
         if(login.isSuccess()) {
-            HttpSession session = request.getSession();
             session.setAttribute("user", user);
             Cookie cookie = new Cookie("cookie_user", TransformTest.str2HexStr(user.getUsername()));
             cookie.setMaxAge(60 * 60 * 24 * 3);//3天免登录
             cookie.setPath("/");
             response.addCookie(cookie);
-            String returnMsg = "<script>alert('" + loginMsg+",欢迎回来:"+user.getUsername() + "');window.location.href='" + "/" + "';</script>";
-            PageAlert.Alert(returnMsg, response);
-        }else {
-            String returnMsg = "<script>alert('" + loginMsg + "');window.location.href='" + "/" + "';</script>";
-            PageAlert.Alert(returnMsg, response);
         }
-        return "redirect:/";
+        String returnMsg = "<script>alert('" + loginMsg + "');window.location.href='" + "/" + "';</script>";
+             PageAlert.Alert(returnMsg, response);
 
+        return "redirect:/";
     }
+
+
 
     /**
      * 退出登录
      */
     @GetMapping("/outLogging")
-    public String outLogging(HttpServletRequest request, HttpServletResponse response) {
+    public String outLogging(HttpServletRequest request, HttpServletResponse response,Model model) throws IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
         if (request.getCookies() != null) {
@@ -96,14 +92,14 @@ public class userRestfulController {
                     cookie.setPath("/");
                     response.addCookie(cookie);
                     String returnMsg = "<script>alert('" + "用户已退出登录" + "');window.location.href='" + "/" + "';</script>";
-                    PageAlert.Alert(returnMsg, response);
+                     PageAlert.Alert(returnMsg, response);
                     break;
                 }
             }
         }
 
-
         return "redirect:/";
     }
+
 }
 

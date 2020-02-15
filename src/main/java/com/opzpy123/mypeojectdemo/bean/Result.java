@@ -1,4 +1,4 @@
-package com.opzpy123.mypeojectdemo.util;
+package com.opzpy123.mypeojectdemo.bean;
 
 import lombok.Data;
 
