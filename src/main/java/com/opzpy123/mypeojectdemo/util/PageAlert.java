@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 
 public class PageAlert {
 
-    public static void Alert(String msg, HttpServletResponse response) throws IOException {
+    public static void Alert(String msg, HttpServletResponse response) {
 //        response.reset();
 //        response.setCharacterEncoding("UTF-8");
 //        response.setHeader("Content-type", "text/html;charset=UTF-8");
@@ -28,13 +28,19 @@ public class PageAlert {
 //        } finally {
 //            IOUtils.closeQuietly(out);
 //        }
-        response.setCharacterEncoding("UTF-8");
-        response.setHeader("Content-type", "text/html;charset=UTF-8");
-        ServletOutputStream outs = response.getOutputStream();
-        OutputStreamWriter ow = new OutputStreamWriter(outs, "UTF-8");
-        ow.write(msg);
-        ow.flush();
-        ow.close();
+        OutputStreamWriter ow=null;
+        try {
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("Content-type", "text/html;charset=UTF-8");
+            ServletOutputStream outs = response.getOutputStream();
+            ow = new OutputStreamWriter(outs, "UTF-8");
+            ow.write(msg);
+            ow.flush();
+            ow.close();
+        }catch (Exception e){
+            System.out.println("alert方法异常"+e.getMessage());
+        }
+
 
 
     }

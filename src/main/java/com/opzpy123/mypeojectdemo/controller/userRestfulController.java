@@ -33,7 +33,7 @@ public class userRestfulController {
      * @return Result
      */
     @PostMapping(value = "/regist")
-    public String regist(User user, Model model, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public String regist(User user, Model model, HttpServletResponse response, HttpServletRequest request)  {
         Result regist = userService.regist(user);
         String registMsg = regist.getMsg();
         if (regist.isSuccess()) {
@@ -57,7 +57,7 @@ public class userRestfulController {
      * @return Result
      */
     @PostMapping(value = "/login")
-    public String login(User user, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+    public String login(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
         HttpSession session = request.getSession();
         Result login = userService.login(user);
         String loginMsg = login.getMsg();
@@ -67,6 +67,7 @@ public class userRestfulController {
             cookie.setMaxAge(60 * 60 * 24 * 3);//3天免登录
             cookie.setPath("/");
             response.addCookie(cookie);
+            System.out.println("用户:"+user.getUsername()+"已登录。");
         }
         String returnMsg = "<script>alert('" + loginMsg + "');window.location.href='" + "/" + "';</script>";
              PageAlert.Alert(returnMsg, response);
@@ -80,7 +81,7 @@ public class userRestfulController {
      * 退出登录
      */
     @GetMapping("/outLogging")
-    public String outLogging(HttpServletRequest request, HttpServletResponse response,Model model) throws IOException {
+    public String outLogging(HttpServletRequest request, HttpServletResponse response,Model model)  {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
         if (request.getCookies() != null) {
