@@ -86,11 +86,12 @@
         <div class="col-md-9 column well">
             <a class=" btn btn-primary glyphicon glyphicon-edit" href="/publish">开始写博客</a>
             <div class="media" th:each="entries,stat:${resultList}">
-                <a href="#" class="pull-left"><img src="image/default7.jpg" class="media-object" alt='image'/></a>
+                <a href="#" class="pull-left"><img src="/image/default7.jpg" class="media-object" alt='image'/></a>
                 <div class="media-body">
                     <h4 class="media-heading" th:text="${entries['title']}">媒体名</h4>
                     <h5 th:text="${entries['description']}">aa</h5>
                 </div>
+                <hr>
             </div>
         </div>
         <!--导航框-->

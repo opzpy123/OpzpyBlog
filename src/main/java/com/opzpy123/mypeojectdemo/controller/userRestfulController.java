@@ -2,11 +2,11 @@ package com.opzpy123.mypeojectdemo.controller;
 
 import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.service.UserService;
-import com.opzpy123.mypeojectdemo.bean.Result;
+import com.opzpy123.mypeojectdemo.util.AvatarGenerater;
+import com.opzpy123.mypeojectdemo.util.Result;
 import com.opzpy123.mypeojectdemo.util.PageAlert;
 import com.opzpy123.mypeojectdemo.util.TransformTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 /**
  * restfulController
@@ -68,6 +67,7 @@ public class userRestfulController {
             cookie.setPath("/");
             response.addCookie(cookie);
             System.out.println("用户:"+user.getUsername()+"已登录。");
+            System.out.println(user.getAvatarUrl());
         }
         String returnMsg = "<script>alert('" + loginMsg + "');window.location.href='" + "/" + "';</script>";
              PageAlert.Alert(returnMsg, response);

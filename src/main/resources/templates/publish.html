@@ -70,16 +70,16 @@
             <form action="/publish" method="post">
                 <div class="form-group">
                     <label for="title"><h4>问题标题(必填,简单扼要):</h4></label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入问题标题">
+                    <input type="text" class="form-control" id="title" name="title"th:value="${returnTitle}" placeholder="请输入问题标题">
                 </div>
                 <div class="form-group">
                     <label for="description"><h4>问题补充(必填，请参照右侧提示):</h4></label>
-                    <textarea name="description" id="description" cols="30" class="form-control" rows="10"
+                    <textarea name="description" id="description" cols="30" th:utext="${returnDescription}" class="form-control" rows="10"
                               placeholder="请输入问题描述"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="tag"><h4>添加标签:(选填)</h4></label>
-                    <input type="text" class="form-control" id="tag"  name="tag" placeholder="输入标签以 , 号分隔">
+                    <input type="text" class="form-control" id="tag"  name="tag" th:value="${returnTag}" placeholder="输入标签以 , 号分隔">
                 </div>
                 <div >
                     <button type="submit" class="btn btn-primary" style="float: right"> 发 布</button>

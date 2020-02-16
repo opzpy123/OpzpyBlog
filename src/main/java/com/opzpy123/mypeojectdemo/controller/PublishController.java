@@ -87,7 +87,7 @@ public class PublishController {
         question.setCreator(user.getId());
         question.setGmtCreate(System.currentTimeMillis());
         question.setGmtModified(question.getGmtCreate());
-        String s = questionService.create(question);
+        String s = questionService.create(question,model);
         model.addAttribute("publishMsg", s);
         if (s.isEmpty()) {
             return "redirect:/";

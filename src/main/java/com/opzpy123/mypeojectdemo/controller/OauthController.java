@@ -1,16 +1,12 @@
 package com.opzpy123.mypeojectdemo.controller;
 
-import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.dto.AccessTokenDTO;
 import com.opzpy123.mypeojectdemo.dto.GitHubUser;
-import com.opzpy123.mypeojectdemo.mapper.UserMapper;
 import com.opzpy123.mypeojectdemo.provider.GitHubProvider;
-import com.opzpy123.mypeojectdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.*;

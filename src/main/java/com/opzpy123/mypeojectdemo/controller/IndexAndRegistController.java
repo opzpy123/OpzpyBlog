@@ -40,7 +40,7 @@ public class IndexAndRegistController {
      * @return
      */
     @GetMapping("/")
-    public String index(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
+    public String index(HttpServletRequest request, Model model, HttpServletResponse response) {
         if (request.getCookies() != null) {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {

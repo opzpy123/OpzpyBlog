@@ -5,14 +5,28 @@
 
 <mapper namespace="com.opzpy123.mypeojectdemo.mapper.UserMapper">
 
-    <!--字段与bean类字段一致，所以不需自定义resultMap-->
+    <!-- resultMap最终还是要将结果映射到pojo上，type就是指定映射到哪一个pojo -->
+    <!-- id：设置ResultMap的id -->
+    <resultMap type="user" id="userResultMap">
+        <!-- 定义主键 ,非常重要。如果是多个字段,则定义多个id -->
+        <!-- property：主键在pojo中的属性名 -->
+        <!-- column：主键在数据库中的列名 -->
+        <id property="id" column="id" />
 
-    <select id="findUserByName" resultType="User">
-        select u.id,u.username,u.password from user u where u.username=#{username}
+        <!-- 定义普通属性 -->
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="avatarUrl" column="avatar_url" />
+    </resultMap>
+
+
+
+    <select id="findUserByName" resultMap="userResultMap">
+        select id,username,password,avatar_url from user u where u.username=#{username}
     </select>
 
     <insert id="regist">
-        insert into user values(#{id},#{username},#{password})
+        insert into user values(#{id},#{username},#{password},#{avatarUrl})
     </insert>
 
     <select id="login" resultType="Long">
