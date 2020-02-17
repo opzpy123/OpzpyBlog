@@ -18,6 +18,7 @@ public class QuestionService {
 
     //后端数据校验
     public String create(Question question, Model model){
+        //校验数据回显
         model.addAttribute("returnTitle",question.getTitle());
         model.addAttribute("returnDescription",question.getDescription());
         model.addAttribute("returnTag",question.getTag());
