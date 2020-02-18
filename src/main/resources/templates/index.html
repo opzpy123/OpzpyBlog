@@ -60,7 +60,7 @@
                             </ul>
                         </li>
                         <li th:if="${session.user==null}" class="active">
-                            <a id="modal-933992" href="#modal-container-933992"  role="button" class="btn "
+                            <a id="modal-933992" href="#modal-container-933992" role="button" class="btn "
                                data-toggle="modal">登录</a>
                         </li>
 
@@ -83,14 +83,17 @@
     <!--媒体列表-->
     <div class="row clearfix">
         <div class="col-md-9 column well">
-            <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>博客块</h2><hr>
-            <div class="media" th:each="entries,stat:${resultList}">
+            <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 博客块</h2>
+            <hr>
+            <div class="media" th:each="entries:${resultList}">
                 <a href="#" class="pull-left">
-                    <img src="/image/default7.jpg" class="media-object img-rounded" style="width: 65px;height: 65px" alt='avatar'/></a>
+                    <img  th:src="${entries.user.avatarUrl}" src="image/default7.jpg" class="media-object img-rounded" style="width: 60px;height: 60px"
+                         alt='avatar'/></a>
                 <div class="media-body">
-                    <h3 class="media-heading" th:text="${entries['title']}">媒体名</h3>
-<!--                    <h5 th:text="${entries['description']}">aa</h5>-->
-                    <h4>来学习springboot</h4>
+                    <h4 class="media-heading" th:text="${entries.title}">媒体名</h4>
+                    <h5 th:text="${entries.description}">aa</h5>
+
+                    <span style="font-size: 12px;font-weight: normal;color: #999;"><b th:text="'作者:'+${entries.user.username}">springboot</b>● <b th:text="${entries.commentCount}">2</b> 回复 ● <b th:text="${entries.viewCount}">31</b> 次浏览 ● 1 小时前</span>
                 </div>
                 <hr>
             </div>
@@ -98,8 +101,7 @@
         <!--热门话题-->
         <div class="col-md-3 column">
             <div class="list-group">
-                <h3>
-                <a href="/" class="list-group-item active">热门话题</a>
+                <h3><a href="/" class="list-group-item active">热门话题</a></h3>
                 <a href="#" class="list-group-item">
                     List header
                 </a>
@@ -115,7 +117,6 @@
                     <span class="badge">14</span> 未读消息
                 </a>
                 <a class="list-group-item active" href="#">帮助</a>
-                </h3>
             </div>
         </div>
 
@@ -155,9 +156,9 @@
                                     class="btn btn-default btn-block btn-primary input-lg"><h4>登录</h4>
                             </button>
                             <h5>
-                            没有账号？<a href="/userRegist">注册</a>
-                            <a href="https://github.com/login/oauth/authorize?client_id=740a311703dbdcbfeddd&redirect_uri=http://localhost:8080/callback?scope=user&state=1"
-                               style="display: block ; text-align: right">github游客登录</a></h5>
+                                没有账号？<a href="/userRegist">注册</a>
+                                <a href="https://github.com/login/oauth/authorize?client_id=740a311703dbdcbfeddd&redirect_uri=http://localhost:8080/callback?scope=user&state=1"
+                                   style="display: block ; text-align: right">github游客登录</a></h5>
                         </div>
                     </div>
                 </form>

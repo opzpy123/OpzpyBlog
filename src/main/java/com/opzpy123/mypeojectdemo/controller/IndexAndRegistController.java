@@ -1,8 +1,7 @@
 package com.opzpy123.mypeojectdemo.controller;
 
-import com.opzpy123.mypeojectdemo.bean.Question;
 import com.opzpy123.mypeojectdemo.bean.User;
-import com.opzpy123.mypeojectdemo.mapper.UserMapper;
+import com.opzpy123.mypeojectdemo.dto.QuestionDTO;
 import com.opzpy123.mypeojectdemo.service.QuestionService;
 import com.opzpy123.mypeojectdemo.service.UserService;
 import com.opzpy123.mypeojectdemo.util.TransformTest;
@@ -10,16 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -53,10 +47,8 @@ public class IndexAndRegistController {
                 }
             }
         }
-        List<Question> questions = questionService.selectAllQuestion();
-        //帖子倒叙排列
-        Collections.reverse(questions);
-        model.addAttribute("resultList", questions);
+        List<QuestionDTO> questionDTOS = questionService.selectQuestionDTO();
+        model.addAttribute("resultList", questionDTOS);
         return "index";
     }
 

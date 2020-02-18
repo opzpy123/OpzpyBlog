@@ -13,13 +13,13 @@ import javax.imageio.ImageIO;
 
 public class AvatarGenerater {
 
-//    public static void main(String[] args) throws IOException {
-//        generateImg("opzpy","C:\\IDEA_WorkSpace\\mywebtempelte\\mypeojectdemo\\src\\main\\resources\\static\\image","opzpy");
+//    public static void main(String[] args) {
+////      generateImg("Test01","Test01");
 //    }
     public static void generateImg(String name, String outputName) {
         String outputPath="C:\\IDEA_WorkSpace\\mywebtempelte\\mypeojectdemo\\src\\main\\resources\\static\\image";
-        int width = 100;
-        int height = 100;
+        int width = 60;
+        int height = 60;
         int nameLen = name.length();
         String nameWritten;
         //如果用户输入的姓名少于等于2个字符，不用截取
@@ -49,13 +49,13 @@ public class AvatarGenerater {
         Font font = null;
         //两个字及以上
         if(nameWritten.length() >= 2) {
-            font = new Font("微软雅黑", Font.PLAIN, 30);
+            font = new Font("微软雅黑", Font.PLAIN, 25);
             g2.setFont(font);
             String firstWritten = nameWritten.substring(0, 1);
             String secondWritten = nameWritten.substring(1, 2);
             //两个中文 如 言曌
             if (isChinese(firstWritten) && isChinese(secondWritten)) {
-                g2.drawString(nameWritten, 20, 60);
+                g2.drawString(nameWritten, 5, 38);
             }
             //首中次英 如 罗Q
             else if (isChinese(firstWritten) && !isChinese(secondWritten)) {
@@ -69,15 +69,15 @@ public class AvatarGenerater {
         if(nameWritten.length() ==1) {
             //中文
             if(isChinese(nameWritten)) {
-                font = new Font("微软雅黑", Font.PLAIN, 50);
+                font = new Font("微软雅黑", Font.PLAIN, 35);
                 g2.setFont(font);
-                g2.drawString(nameWritten, 25, 70);
+                g2.drawString(nameWritten, 13, 42);
             }
             //英文
             else {
-                font = new Font("微软雅黑", Font.PLAIN, 55);
+                font = new Font("微软雅黑", Font.PLAIN, 42);
                 g2.setFont(font);
-                g2.drawString(nameWritten.toUpperCase(), 33, 67);
+                g2.drawString(nameWritten.toUpperCase(), 10, 47);
             }
         }
         BufferedImage rounded = makeRoundedCorner(bi, 99);

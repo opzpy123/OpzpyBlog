@@ -19,4 +19,6 @@ public interface UserMapper {
 
     Long login(User user);
 
+    User findUserById(Long id);
+
 }

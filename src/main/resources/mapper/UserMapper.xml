@@ -33,6 +33,10 @@
         select u.id from user u where u.username = #{username} and password = #{password}
     </select>
 
+    <select id="findUserById" resultMap="userResultMap">
+        select id,username,password,avatar_url from user u where u.id=#{id}
+    </select>
+
 
 
 </mapper>
