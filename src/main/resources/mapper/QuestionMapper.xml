@@ -25,11 +25,15 @@
     </resultMap>
 
     <insert id="create" keyProperty="id">
-        INSERT INTO question (title,description,gmt_create,gmt_modified,creator,tag) VALUES (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{tag})
+        insert into question (title,description,gmt_create,gmt_modified,creator,tag) values (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{tag})
     </insert>
 
     <select id="selectAllQuestion" resultMap="questionResultMap">
-        SELECT id,title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count ,tag FROM question
+        select id,title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count ,tag from question order by id desc limit #{offset},#{size} ;
+    </select>
+
+    <select id="count" resultType="Integer">
+        select count(1) from question;
     </select>
 
 

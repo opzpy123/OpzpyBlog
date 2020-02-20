@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>opzpy123的java社区</title>
+    <title>opzpy123的java博客社区</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!--    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>-->
     <!--    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>-->
@@ -85,18 +85,50 @@
         <div class="col-md-9 column well">
             <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 博客块</h2>
             <hr>
-            <div class="media" th:each="entries:${resultList}">
+            <div class="media" th:each="entries:${resultList.questionDTOS}">
                 <a href="#" class="pull-left">
                     <img  th:src="${entries.user.avatarUrl}" src="image/default7.jpg" class="media-object img-rounded" style="width: 60px;height: 60px"
                          alt='avatar'/></a>
                 <div class="media-body">
                     <h4 class="media-heading" th:text="${entries.title}">媒体名</h4>
                     <h5 th:text="${entries.description}">aa</h5>
-
-                    <span style="font-size: 12px;font-weight: normal;color: #999;"><b th:text="'作者:'+${entries.user.username}">springboot</b>● <b th:text="${entries.commentCount}">2</b> 回复 ● <b th:text="${entries.viewCount}">31</b> 次浏览 ● 1 小时前</span>
+                    <span style="font-size: 12px;font-weight: normal;color: #999;">
+                        <b th:text="'作者:'+${entries.user.username}+'●'">springboot</b>
+                        <b th:text="${entries.commentCount+' 回复 ●'}">2</b>
+                        <b th:text="${entries.viewCount}+'次浏览 ●'">31</b>
+                        <b th:text="${#dates.format(entries.gmtCreate,'yyyy/MM/dd  HH:mm')}"></b>
+                    </span>
                 </div>
                 <hr>
             </div>
+            <nav aria-label="Page navigation "  style="text-align: center">
+                <ul class="pagination pagination-lg" >
+
+                    <li th:if="${resultList.showFirstPage}">
+                        <a href="/?page=1" aria-label="Previous">
+                            <span aria-hidden="true">>&lt;&lt;</span>
+                        </a>
+                    </li>
+                    <li th:if="${resultList.showPrevious}">
+                        <a th:href="@{/(page=${resultList.page - 1})}" aria-label="Previous">
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                    </li>
+                    <li th:each="page:${resultList.pages}" th:class="${resultList.page==page}?'active':''" >
+                        <a th:href="@{/(page=${page})}" th:text="${page}" ></a>
+                    </li>
+                    <li th:if="${resultList.showNext}">
+                        <a th:href="@{/(page=${resultList.page + 1})}" aria-label="next">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                    </li>
+                    <li th:if="${resultList.showEndPage}">
+                        <a th:href="@{/(page=${resultList.totalPage})}" aria-label="next">
+                            <span aria-hidden="true">>&gt;&gt;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <!--热门话题-->
         <div class="col-md-3 column">

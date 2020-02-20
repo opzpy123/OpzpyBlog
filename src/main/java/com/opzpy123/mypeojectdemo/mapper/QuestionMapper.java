@@ -12,5 +12,8 @@ public interface QuestionMapper {
 
      void create(Question question);
 
-     List<Question> selectAllQuestion();
+     List<Question> selectAllQuestion(Integer offset,Integer size);
+
+
+     Integer count();
 }
