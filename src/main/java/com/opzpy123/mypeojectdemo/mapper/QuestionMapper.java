@@ -16,4 +16,7 @@ public interface QuestionMapper {
 
 
      Integer count();
+
+
+     List<Question> selectUserQuestion(Long userId, Integer offset, Integer size);
 }

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${sectionName}"></title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!--    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>-->
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <!--顶部条和介绍巨幕-->
+    <div class="row clearfix">
+        <div class="col-md-13 column">
+            <!--顶部条-->
+            <div th:insert="navigation :: nav"></div>
+        </div>
+    </div>
+    <!--个人资料面板-->
+    <div class="row clearfix">
+        <div class="col-md-9 column well">
+            <h3><span th:text="${sectionName}">kik</span></h3>
+            <hr>
+                        <div class="media" th:each="entries:${resultList.questionDTOS}">
+                            <a href="#" class="pull-left">
+                                <img   src="/image/default1.jpg" class="media-object img-rounded" style="width: 60px;height: 60px"
+                                      alt='avatar'/></a>
+                            <div class="media-body">
+                                <h4 class="media-heading" th:text="${entries.title}">媒体名</h4>
+                                <h5 th:text="${entries.description}">aa</h5>
+                                <span style="font-size: 12px;font-weight: normal;color: #999;">
+                                    <b th:text="'作者:'+${entries.user.username}+'●'">springboot</b>
+                                    <b th:text="${entries.commentCount+' 回复 ●'}">2</b>
+                                    <b th:text="${entries.viewCount}+'次浏览 ●'">31</b>
+                                    <b th:text="${#dates.format(entries.gmtCreate,'yyyy/MM/dd  HH:mm')}"></b>
+                                </span>
+                            </div>
+                            <hr>
+                        </div>
+<!--                        <nav aria-label="Page navigation "  style="text-align: center">-->
+<!--                            <ul class="pagination pagination-lg" >-->
+
+<!--                                <li th:if="${resultList.showFirstPage}">-->
+<!--                                    <a href="/?page=1" aria-label="Previous">-->
+<!--                                        <span aria-hidden="true">>&lt;&lt;</span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li th:if="${resultList.showPrevious}">-->
+<!--                                    <a th:href="@{/(page=${resultList.page - 1})}" aria-label="Previous">-->
+<!--                                        <span aria-hidden="true">&lt;</span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li th:each="page:${resultList.pages}" th:class="${resultList.page==page}?'active':''" >-->
+<!--                                    <a th:href="@{/(page=${page})}" th:text="${page}" ></a>-->
+<!--                                </li>-->
+<!--                                <li th:if="${resultList.showNext}">-->
+<!--                                    <a th:href="@{/(page=${resultList.page + 1})}" aria-label="next">-->
+<!--                                        <span aria-hidden="true">&gt;</span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li th:if="${resultList.showEndPage}">-->
+<!--                                    <a th:href="@{/(page=${resultList.totalPage})}" aria-label="next">-->
+<!--                                        <span aria-hidden="true">>&gt;&gt;</span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </nav>-->
+        </div>
+        <!--热门话题-->
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <div class="list-group">
+                <a href="/profile/questions" class="list-group-item" th:class="${section=='questions'}?'list-group-item active':'list-group-item'">我的问题</a>
+                <a href="/profile/replies" class="list-group-item" th:class="${section=='replies'}?'list-group-item active':'list-group-item'">
+                    最新回复<span class="badge">14</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

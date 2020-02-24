@@ -3,6 +3,7 @@ package com.opzpy123.mypeojectdemo.controller;
 import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.dto.PaginationDTO;
 import com.opzpy123.mypeojectdemo.dto.QuestionDTO;
+import com.opzpy123.mypeojectdemo.mapper.UserMapper;
 import com.opzpy123.mypeojectdemo.service.QuestionService;
 import com.opzpy123.mypeojectdemo.service.UserService;
 import com.opzpy123.mypeojectdemo.util.TransformTest;
@@ -25,7 +26,8 @@ import java.util.List;
 public class IndexAndRegistController {
 
     @Autowired
-    private UserService userService;
+    private UserMapper userService;
+
     @Autowired
     private QuestionService questionService;
 
@@ -71,6 +73,7 @@ public class IndexAndRegistController {
     public String regist() {
         return "userRegist";
     }
+
 
 
 }

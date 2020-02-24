@@ -41,11 +41,11 @@ public class userRestfulController {
             String returnMsg = "<script>alert('" + registMsg + "');window.location.href='" + "/" + "';</script>";
           this.login(user, request, response, model);
             PageAlert.Alert(returnMsg, response);
-            return "redirect:/";
+            return null;
         } else {
             String returnMsg = "<script>alert('" + registMsg + "');window.location.href='" + "/userRegist" + "';</script>";
             PageAlert.Alert(returnMsg, response);
-            return "redirect:/userRegist";
+            return null;
         }
 
 
@@ -69,12 +69,11 @@ public class userRestfulController {
             cookie.setPath("/");
             response.addCookie(cookie);
             System.out.println("用户:"+user.getUsername()+"已登录。");
-            System.out.println(user.getAvatarUrl());
         }
         String returnMsg = "<script>alert('" + loginMsg + "');window.location.href='" + "/" + "';</script>";
              PageAlert.Alert(returnMsg, response);
 
-        return "redirect:/";
+        return null;
     }
 
 
@@ -101,7 +100,7 @@ public class userRestfulController {
             }
         }
 
-        return "redirect:/";
+        return null;
     }
 
 }

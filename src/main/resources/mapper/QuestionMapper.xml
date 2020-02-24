@@ -36,6 +36,11 @@
         select count(1) from question;
     </select>
 
+    <select id="selectUserQuestion" resultMap="questionResultMap">
+        select id,title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count ,tag from question where creator=#{userId} order by id desc ;
+    </select>
+<!-- 分页    select id,title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count ,tag from question where creator=#{userId} order by id desc limit #{offset},#{size} ;-->
+
 
 
 </mapper>

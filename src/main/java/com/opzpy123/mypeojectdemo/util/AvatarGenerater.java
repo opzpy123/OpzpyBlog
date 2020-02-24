@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 public class AvatarGenerater {
 
     public static void main(String[] args) {
-      generateImg("huluwa","huluwa");
+//      generateImg("我","default1");
     }
     public static void generateImg(String name, String outputName) {
         String outputPath="C:\\IDEA_WorkSpace\\mywebtempelte\\mypeojectdemo\\src\\main\\resources\\static\\image";
