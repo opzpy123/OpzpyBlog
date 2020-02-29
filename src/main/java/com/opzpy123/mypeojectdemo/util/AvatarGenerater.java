@@ -13,9 +13,9 @@ import javax.imageio.ImageIO;
 
 public class AvatarGenerater {
 
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
 //      generateImg("我","default1");
-    }
+//    }
     public static void generateImg(String name, String outputName) {
         String outputPath="C:\\IDEA_WorkSpace\\mywebtempelte\\mypeojectdemo\\src\\main\\resources\\static\\image";
         int width = 60;
@@ -103,7 +103,7 @@ public class AvatarGenerater {
             return false;
     }
     /**
-     * 获得随机颜色
+     * getRandomColor
      * @return
      */
     private static Color getRandomColor() {
@@ -131,7 +131,7 @@ public class AvatarGenerater {
                 Integer.parseInt(color[2]));
     }
     /**
-     * 图片做圆角处理
+     * makeRoundedCorner
      * @param image
      * @param cornerRadius
      * @return

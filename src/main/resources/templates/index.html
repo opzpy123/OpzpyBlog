@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,23 +40,27 @@
             <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 博客块</h2>
             <hr>
             <div class="media" th:each="entries:${resultList.questionDTOS}">
-                <a href="#" class="pull-left">
-                    <img  th:src="${entries.user.avatarUrl}" src="image/default7.jpg" class="media-object img-rounded" style="width: 60px;height: 60px"
-                         alt='avatar'/></a>
+                <a  class="pull-left" style="color: #080808">
+                    <img th:src="${entries.user.avatarUrl}" src="image/default7.jpg" class="media-object img-rounded"
+                         style="width: 60px;height: 60px" alt='avatar'/>
+                </a>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${entries.title}">媒体名</h4>
+                    <h4 class="media-heading">
+                        <a style="color: #080808" th:href="@{'/question/'+${entries.id}}"
+                           th:text="${entries.title}"></a>
+                    </h4>
                     <h5 th:text="${entries.description}">aa</h5>
                     <span style="font-size: 12px;font-weight: normal;color: #999;">
-                        <b th:text="'作者:'+${entries.user.username}+'●'">springboot</b>
-                        <b th:text="${entries.commentCount+' 回复 ●'}">2</b>
-                        <b th:text="${entries.viewCount}+'次浏览 ●'">31</b>
-                        <b th:text="${#dates.format(entries.gmtCreate,'yyyy/MM/dd  HH:mm')}"></b>
+                        <b th:text="'作者:'+${entries.user.username}+' | '">springboot</b>
+                        <b th:text="'回复:'+${entries.commentCount+'   | '}">2</b>
+                        <b th:text="'浏览:'+${entries.viewCount}+' |'">31</b>
+                        <b th:text="'发布时间:'+${#dates.format(entries.gmtCreate,'yyyy/MM/dd  HH:mm')}"></b>
                     </span>
                 </div>
                 <hr>
             </div>
-            <nav aria-label="Page navigation "  style="text-align: center">
-                <ul class="pagination pagination-lg" >
+            <nav aria-label="Page navigation " style="text-align: center">
+                <ul class="pagination pagination-lg">
 
                     <li th:if="${resultList.showFirstPage}">
                         <a href="/?page=1" aria-label="Previous">
@@ -68,8 +72,8 @@
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
-                    <li th:each="page:${resultList.pages}" th:class="${resultList.page==page}?'active':''" >
-                        <a th:href="@{/(page=${page})}" th:text="${page}" ></a>
+                    <li th:each="page:${resultList.pages}" th:class="${resultList.page==page}?'active':''">
+                        <a th:href="@{/(page=${page})}" th:text="${page}"></a>
                     </li>
                     <li th:if="${resultList.showNext}">
                         <a th:href="@{/(page=${resultList.page + 1})}" aria-label="next">

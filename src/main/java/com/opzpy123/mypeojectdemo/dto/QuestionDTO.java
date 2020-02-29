@@ -1,5 +1,6 @@
 package com.opzpy123.mypeojectdemo.dto;
 
+import com.opzpy123.mypeojectdemo.bean.Question;
 import com.opzpy123.mypeojectdemo.bean.User;
 import lombok.Data;
 
@@ -16,5 +17,7 @@ public class QuestionDTO {
     private Integer commentCount;
     private Integer likeCount;
     private User user;
+
+
 
 }

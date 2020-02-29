@@ -19,4 +19,6 @@ public interface QuestionMapper {
 
 
      List<Question> selectUserQuestion(Long userId, Integer offset, Integer size);
+
+    Question selectById(Integer id);
 }

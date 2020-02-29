@@ -42,31 +42,13 @@ public class QuestionService {
         questionMapper.create(question);
         return "";
     }
-//
-//    public List<Question> selectAllQuestion(){
-//        List<Question> questions = questionMapper.selectAllQuestion();
-//        //集合倒叙排列
-////        Collections.reverse(questions);
-//        return questions;
-//    }
 
-
-//    //把question和user在后台做关联查询
-//    public List<QuestionDTO> selectQuestionDTO(){
-//        List<Question> questions = questionMapper.selectAllQuestion();
-//        List<QuestionDTO> questionDTOS =new ArrayList<>();
-//        questions.forEach(i->{
-//            User user = userService.findUserById(i.getCreator());
-//            QuestionDTO questionDTO = new QuestionDTO();
-//            BeanUtils.copyProperties(i, questionDTO);
-//            questionDTO.setUser(user);
-//            questionDTOS.add(questionDTO);
-//        });
-////        Collections.reverse(questionDTOS);
-//        return questionDTOS;
-//
-//    }
-
+    /**
+     * 拿到所有的问题
+     * @param page
+     * @param size
+     * @return
+     */
     public PaginationDTO selectQuestionDTO(Integer page, Integer size) {
 
         PaginationDTO paginationDTO = new PaginationDTO();
@@ -97,6 +79,13 @@ public class QuestionService {
 
     }
 
+    /**
+     * 根据传入的user拿到当前用户发表的question
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
     public PaginationDTO selectQuestionDTO(Long userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer totalCount = questionMapper.count();
@@ -123,5 +112,15 @@ public class QuestionService {
         });
         paginationDTO.setQuestionDTOS(questionDTOList);
         return paginationDTO;
+    }
+
+    public QuestionDTO selectById(Integer id) {
+       Question question = questionMapper.selectById(id);
+        User user = userService.findUserById(question.getCreator());
+        QuestionDTO questionDTO = new QuestionDTO();
+        questionDTO.setUser(user);
+       BeanUtils.copyProperties(question,questionDTO);
+        return questionDTO;
+
     }
 }
