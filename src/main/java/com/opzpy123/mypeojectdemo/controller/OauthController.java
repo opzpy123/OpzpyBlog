@@ -47,7 +47,7 @@ public class OauthController {
         //github登录仅作游客登陆。
        if(user!=null){
            HttpSession session = request.getSession();
-           session.setAttribute("user",user);
+//           session.setAttribute("user",user);
            return "redirect:/";
 
        }else{

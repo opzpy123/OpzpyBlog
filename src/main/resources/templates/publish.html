@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>发布</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -27,6 +27,7 @@
             <span class="alert alert-danger" style="float: right"  th:if="${publishMsg!=null}" th:text="${publishMsg}"></span>
             <hr>
             <form action="/publish" method="post">
+                <input type="hidden" name="id" th:value="${id}">
                 <div class="form-group">
                     <label for="title"><h4>问题标题(必填,简单扼要):</h4></label>
                     <input type="text" class="form-control" id="title" name="title"th:value="${returnTitle}" placeholder="请输入问题标题">

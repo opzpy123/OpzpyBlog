@@ -44,6 +44,15 @@
     <select id="selectById"  resultMap="questionResultMap">
         select id,title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count ,tag from question where id=#{id};
     </select>
+    
+    <update id="update">
+        update  question set title = #{title},description=#{description},gmt_modified=#{gmtModified},tag=#{tag} where id = #{id};
+    </update>
+
+    <delete id="delete">
+        delete  from  question where id=#{id};
+    </delete>
+    
 
 
 </mapper>

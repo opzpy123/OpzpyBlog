@@ -22,29 +22,63 @@ public class QuestionService {
     @Autowired
     private UserService userService;
 
-
-    //后端数据校验
-    public String create(Question question, Model model) {
+    public void edit(Integer id, Model model) {
+        Question question = questionMapper.selectById(id);
         //校验数据回显
         model.addAttribute("returnTitle", question.getTitle());
         model.addAttribute("returnDescription", question.getDescription());
         model.addAttribute("returnTag", question.getTag());
+        model.addAttribute("id", question.getId());
 
-        if (question.getTitle().isEmpty()) {
-            return "标题不能为空";
+    }
+
+
+    public String createOrUpdate(Question question, Model model) {
+        if (question.getId() == null) {
+            //创建
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            //校验数据回显
+            model.addAttribute("returnTitle", question.getTitle());
+            model.addAttribute("returnDescription", question.getDescription());
+            model.addAttribute("returnTag", question.getTag());
+            model.addAttribute("id", question.getId());
+
+            if (question.getTitle().isEmpty()) {
+                return "标题不能为空";
+            } else if (question.getTitle().length() > 30) {
+                return "标题过长";
+            } else if (question.getDescription().isEmpty()) {
+                return "描述不能为空";
+            } else {
+                questionMapper.create(question);
+                return "";
+            }
+        } else {
+            question.setGmtModified(question.getGmtCreate());
+            //校验数据回显
+            model.addAttribute("returnTitle", question.getTitle());
+            model.addAttribute("returnDescription", question.getDescription());
+            model.addAttribute("returnTag", question.getTag());
+            model.addAttribute("id", question.getId());
+
+            if (question.getTitle().isEmpty()) {
+                return "标题不能为空";
+            } else if (question.getTitle().length() > 30) {
+                return "标题过长";
+            } else if (question.getDescription().isEmpty()) {
+                return "描述不能为空";
+            } else {
+                questionMapper.update(question);
+                return "";
+            }
         }
-        if (question.getTitle().length() > 30) {
-            return "标题过长";
-        }
-        if (question.getDescription().isEmpty()) {
-            return "描述不能为空";
-        }
-        questionMapper.create(question);
-        return "";
+
     }
 
     /**
      * 拿到所有的问题
+     *
      * @param page
      * @param size
      * @return
@@ -81,6 +115,7 @@ public class QuestionService {
 
     /**
      * 根据传入的user拿到当前用户发表的question
+     *
      * @param userId
      * @param page
      * @param size
@@ -99,7 +134,7 @@ public class QuestionService {
         }
         //size*(page-1)
         Integer offset = size * (page - 1);
-        List<Question> questions = questionMapper.selectUserQuestion(userId,offset, size);
+        List<Question> questions = questionMapper.selectUserQuestion(userId, offset, size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
 
@@ -115,12 +150,17 @@ public class QuestionService {
     }
 
     public QuestionDTO selectById(Integer id) {
-       Question question = questionMapper.selectById(id);
+        Question question = questionMapper.selectById(id);
         User user = userService.findUserById(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         questionDTO.setUser(user);
-       BeanUtils.copyProperties(question,questionDTO);
+        BeanUtils.copyProperties(question, questionDTO);
         return questionDTO;
 
+    }
+
+
+    public void delete(Integer id) {
+        questionMapper.delete(id);
     }
 }

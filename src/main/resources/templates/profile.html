@@ -42,10 +42,15 @@
                                     <b th:text="${#dates.format(entries.gmtCreate,'yyyy/MM/dd  HH:mm')}"></b>
                     </span>
                 </div>
+                <!--删除我的问题-->
+                <a class="pull-right"  th:href="@{'/publish/delete/'+${entries.id}}" style="color: #999">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true">删除</span>
+                </a>
                 <!--修改我的问题-->
                 <a class="pull-right"  th:href="@{'/publish/'+${entries.id}}" style="color: #999">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑</span>
                 </a>
+
                 <hr>
             </div>
 
