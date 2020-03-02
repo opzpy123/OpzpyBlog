@@ -1,5 +1,7 @@
 package com.opzpy123.mypeojectdemo.service;
 
+import com.opzpy123.mypeojectdemo.exception.CustomizeErrorCode;
+import com.opzpy123.mypeojectdemo.exception.CustomizeException;
 import com.opzpy123.mypeojectdemo.bean.Question;
 import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.dto.PaginationDTO;
@@ -55,7 +57,8 @@ public class QuestionService {
                 return "";
             }
         } else {
-            question.setGmtModified(question.getGmtCreate());
+            //更新
+            question.setGmtModified(System.currentTimeMillis());
             //校验数据回显
             model.addAttribute("returnTitle", question.getTitle());
             model.addAttribute("returnDescription", question.getDescription());
@@ -69,7 +72,13 @@ public class QuestionService {
             } else if (question.getDescription().isEmpty()) {
                 return "描述不能为空";
             } else {
-                questionMapper.update(question);
+                //业务场景:处理用户的编辑中问题被删除的情况
+                Question question1 = questionMapper.selectById(question.getId());
+                if(question1==null){
+                    throw  new CustomizeException(CustomizeErrorCode.QUESTION_NOTFOUND);
+                }else {
+                    questionMapper.update(question);
+                }
                 return "";
             }
         }
@@ -151,6 +160,9 @@ public class QuestionService {
 
     public QuestionDTO selectById(Integer id) {
         Question question = questionMapper.selectById(id);
+        if(question == null){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOTFOUND);
+        }
         User user = userService.findUserById(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         questionDTO.setUser(user);
