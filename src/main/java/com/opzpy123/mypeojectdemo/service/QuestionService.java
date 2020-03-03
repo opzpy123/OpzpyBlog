@@ -175,4 +175,10 @@ public class QuestionService {
     public void delete(Integer id) {
         questionMapper.delete(id);
     }
+
+    public int incView(Integer id) {
+        Question question = questionMapper.selectById(id);
+        questionMapper.incView(id,question.getViewCount());
+        return question.getViewCount()+1;
+    }
 }

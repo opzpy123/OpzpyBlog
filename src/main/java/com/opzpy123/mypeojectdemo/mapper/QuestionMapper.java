@@ -10,19 +10,19 @@ import java.util.List;
 @Repository
 public interface QuestionMapper {
 
-     void create(Question question);
+    void create(Question question);
 
-     List<Question> selectAllQuestion(Integer offset,Integer size);
+    List<Question> selectAllQuestion(Integer offset, Integer size);
 
+    Integer count();
 
-     Integer count();
-
-
-     List<Question> selectUserQuestion(Long userId, Integer offset, Integer size);
+    List<Question> selectUserQuestion(Long userId, Integer offset, Integer size);
 
     Question selectById(Integer id);
 
     void update(Question question);
 
     void delete(Integer id);
+
+    void incView(Integer id, Integer viewCount);
 }

@@ -52,6 +52,10 @@
     <delete id="delete">
         delete  from  question where id=#{id};
     </delete>
+
+    <update id="incView">
+        update question set view_count=#{viewCount}+1 where id=#{id};
+    </update>
     
 
 

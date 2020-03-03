@@ -20,6 +20,7 @@ public class QuestionController {
                            Model model){
 
         QuestionDTO question= questionService.selectById(id);
+        question.setViewCount(questionService.incView(id));
         model.addAttribute("question",question);
         return "question";
     }
