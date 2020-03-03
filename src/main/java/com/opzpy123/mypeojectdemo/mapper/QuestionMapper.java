@@ -18,11 +18,15 @@ public interface QuestionMapper {
 
     List<Question> selectUserQuestion(Long userId, Integer offset, Integer size);
 
-    Question selectById(Integer id);
+    Question selectById(Long id);
 
     void update(Question question);
 
-    void delete(Integer id);
+    void delete(Long id);
 
-    void incView(Integer id, Integer viewCount);
+    void incView(Long id, Integer viewCount);
+
+    void incCommentCount(Long id, Integer commentCount);
+
+
 }

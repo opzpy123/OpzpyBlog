@@ -56,7 +56,11 @@
     <update id="incView">
         update question set view_count=#{viewCount}+1 where id=#{id};
     </update>
-    
+
+
+    <update id="incCommentCount">
+        update question set comment_count=#{commentCount}+1 where id=#{id};
+    </update>
 
 
 </mapper>

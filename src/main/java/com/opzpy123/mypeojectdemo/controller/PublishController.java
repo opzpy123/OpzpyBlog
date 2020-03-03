@@ -23,13 +23,13 @@ public class PublishController {
 
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable(name = "id")Integer id,Model model){
+    public String edit(@PathVariable(name = "id")Long id,Model model){
         questionService.edit(id,model);
         return "publish";
     }
 
     @GetMapping("/publish/delete/{id}")
-    public String delete(@PathVariable(name = "id")Integer id,HttpServletResponse response){
+    public String delete(@PathVariable(name = "id")Long id,HttpServletResponse response){
         questionService.delete(id);
         String returnMsg = "<script>alert('" + "删除成功！" + "');window.location.href='" + "/profile/questions" + "';</script>";
         PageAlert.Alert(returnMsg, response);
@@ -54,7 +54,7 @@ public class PublishController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("tag") String tag,
-            @RequestParam("id") Integer id,
+            @RequestParam("id") Long id,
             HttpServletRequest request,
             Model model,
             HttpServletResponse response

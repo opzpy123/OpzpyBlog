@@ -24,7 +24,7 @@ public class QuestionService {
     @Autowired
     private UserService userService;
 
-    public void edit(Integer id, Model model) {
+    public void edit(Long id, Model model) {
         Question question = questionMapper.selectById(id);
         //校验数据回显
         model.addAttribute("returnTitle", question.getTitle());
@@ -158,7 +158,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public QuestionDTO selectById(Integer id) {
+    public QuestionDTO selectById(Long id) {
         Question question = questionMapper.selectById(id);
         if(question == null){
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOTFOUND);
@@ -172,11 +172,11 @@ public class QuestionService {
     }
 
 
-    public void delete(Integer id) {
+    public void delete(Long id) {
         questionMapper.delete(id);
     }
 
-    public int incView(Integer id) {
+    public int incView(Long id) {
         Question question = questionMapper.selectById(id);
         questionMapper.incView(id,question.getViewCount());
         return question.getViewCount()+1;

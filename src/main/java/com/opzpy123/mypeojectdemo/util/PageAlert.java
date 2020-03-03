@@ -15,19 +15,7 @@ import java.io.PrintWriter;
 public class PageAlert {
 
     public static void Alert(String msg, HttpServletResponse response) {
-//        response.reset();
-//        response.setCharacterEncoding("UTF-8");
-//        response.setHeader("Content-type", "text/html;charset=UTF-8");
-//        PrintWriter out = null;
-//        try {
-//            out = response.getWriter();
-//            out.print(msg);
-//           out.flush();
-//        } catch (IOException e) {
-//            System.out.println("IO在pageAlert里报错啦");
-//        } finally {
-//            IOUtils.closeQuietly(out);
-//        }
+
         OutputStreamWriter ow=null;
         try {
             response.setCharacterEncoding("UTF-8");

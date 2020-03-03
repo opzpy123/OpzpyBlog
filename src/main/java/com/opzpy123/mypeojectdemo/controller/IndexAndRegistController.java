@@ -41,7 +41,6 @@ public class IndexAndRegistController {
 
         PaginationDTO paginationDTOs = questionService.selectQuestionDTO(page,size);
         model.addAttribute("resultList", paginationDTOs);
-        System.out.println(paginationDTOs);
         return "index";
     }
 
