@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional(rollbackFor = RuntimeException.class)
+@Transactional
 public class QuestionService {
     @Autowired
     private QuestionMapper questionMapper;

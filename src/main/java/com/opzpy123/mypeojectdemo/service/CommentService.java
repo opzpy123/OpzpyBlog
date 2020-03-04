@@ -2,23 +2,34 @@ package com.opzpy123.mypeojectdemo.service;
 
 import com.opzpy123.mypeojectdemo.bean.Comment;
 import com.opzpy123.mypeojectdemo.bean.Question;
+import com.opzpy123.mypeojectdemo.bean.User;
+import com.opzpy123.mypeojectdemo.dto.CommentDTO;
+import com.opzpy123.mypeojectdemo.dto.LikeCountDTO;
 import com.opzpy123.mypeojectdemo.enums.CommentTypeEnum;
 import com.opzpy123.mypeojectdemo.exception.CustomizeErrorCode;
 import com.opzpy123.mypeojectdemo.exception.CustomizeException;
 import com.opzpy123.mypeojectdemo.mapper.CommentMapper;
 import com.opzpy123.mypeojectdemo.mapper.QuestionMapper;
+import com.opzpy123.mypeojectdemo.mapper.UserMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
-@Transactional(rollbackFor = RuntimeException.class)
+@Transactional
 public class CommentService {
     @Autowired
     private CommentMapper commentMapper;
 
     @Autowired
     private QuestionMapper questionMapper;
+
+   @Autowired
+    private UserMapper userMapper;
 
 
     public void insert(Comment comment) {
@@ -44,5 +55,27 @@ public class CommentService {
             commentMapper.insert(comment);
             questionMapper.incCommentCount(question.getId(),question.getCommentCount());
         }
+    }
+
+    public List<CommentDTO> listByQuestionId(Long id) {
+        List<CommentDTO> commentDTOS = new ArrayList<>();
+        List<Comment> comments = commentMapper.selectByParentId(id);
+        if(comments==null){
+            return new ArrayList<>();
+        }
+        comments.forEach(i->{
+            CommentDTO commentDTO = new CommentDTO();
+            User user = userMapper.findUserById(i.getCommentator());
+            commentDTO.setUser(user);
+            BeanUtils.copyProperties(i,commentDTO);
+            commentDTOS.add(commentDTO);
+        });
+        return commentDTOS;
+
+    }
+
+    public void likeCount(LikeCountDTO likeCountDTO) {
+        commentMapper.likeCount(likeCountDTO.getCommentId(),likeCountDTO.getLikeCount());
+        likeCountDTO.setLikeCount(likeCountDTO.getLikeCount()+1);
     }
 }

@@ -33,7 +33,8 @@
                           style="width: 60px;height: 60px" alt='avatar'/>
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${entries.title}">媒体名</h4>
+                    <h4 class="media-heading"><a th:text="${entries.title}" th:href="@{'/question/'+${entries.id}}"></a></h4>
+
                     <h5 th:text="${entries.description}">aa</h5>
                     <span style="font-size: 12px;font-weight: normal;color: #999;">
                                     <b th:text="'作者:'+${entries.user.username}+'●'">springboot</b>

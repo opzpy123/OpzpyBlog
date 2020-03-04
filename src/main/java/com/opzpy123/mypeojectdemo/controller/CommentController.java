@@ -1,8 +1,11 @@
 package com.opzpy123.mypeojectdemo.controller;
 
+import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSON;
 import com.opzpy123.mypeojectdemo.bean.Comment;
 import com.opzpy123.mypeojectdemo.bean.User;
-import com.opzpy123.mypeojectdemo.dto.CommentDTO;
+import com.opzpy123.mypeojectdemo.dto.CommentCreateDTO;
+import com.opzpy123.mypeojectdemo.dto.LikeCountDTO;
 import com.opzpy123.mypeojectdemo.dto.ResultDTO;
 import com.opzpy123.mypeojectdemo.exception.CustomizeErrorCode;
 import com.opzpy123.mypeojectdemo.service.CommentService;
@@ -20,18 +23,21 @@ public class CommentController {
 
     @PostMapping("/comment")
     @ResponseBody
-    public Object post(@RequestBody CommentDTO commentDTO,HttpServletRequest request){
+    public Object post(@RequestBody CommentCreateDTO commentCreateDTO, HttpServletRequest request){
 
 
         User user = (User) request.getSession().getAttribute("user");
         if(user==null){
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
+        if(commentCreateDTO.getContent()==null|| commentCreateDTO.getContent()==""){
+            return ResultDTO.errorOf(CustomizeErrorCode.CONTENT_NULL);
+        }
         Comment comment = new Comment();
         //前端ajax传来的数据自动封装进commentDTO中;
-        comment.setParentId(commentDTO.getParentId());
-        comment.setContent(commentDTO.getContent());
-        comment.setType(commentDTO.getType());
+        comment.setParentId(commentCreateDTO.getParentId());
+        comment.setContent(commentCreateDTO.getContent());
+        comment.setType(commentCreateDTO.getType());
 
         comment.setLikeCount(0L);
         comment.setGmtCreate(System.currentTimeMillis());
@@ -41,5 +47,14 @@ public class CommentController {
 
         return ResultDTO.okOf();
     }
+
+    @PostMapping("/likeCount")
+    @ResponseBody
+    public Object likeCount(@RequestBody LikeCountDTO likeCountDTO){
+        commentService.likeCount(likeCountDTO);
+
+        return likeCountDTO;
+    }
+
 
 }
