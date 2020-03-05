@@ -36,8 +36,6 @@ public class userRestfulController {
         Result regist = userService.regist(user);
         String registMsg = regist.getMsg();
         if (regist.isSuccess()) {
-            AvatarGenerater.generateImg(user.getUsername(),user.getUsername());
-            user.setAvatarUrl("image/"+user.getUsername()+".jpg");
             String returnMsg = "<script>alert('" + registMsg + "');window.location.href='" + "/" + "';</script>";
           this.login(user, request, response, model);
             PageAlert.Alert(returnMsg, response);

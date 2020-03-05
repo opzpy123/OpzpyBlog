@@ -4,7 +4,7 @@ var settings = {
         name: 'follow',
         len: 4
     }, //len是修改验证码长度的
-    codeTip: '换个验证码?',
+    codeTip: '看不清?',
     inputID: 'idcode-btn' //验证元素的ID
 };
 

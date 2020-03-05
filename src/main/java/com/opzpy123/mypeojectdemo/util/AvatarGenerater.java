@@ -13,11 +13,38 @@ import javax.imageio.ImageIO;
 
 public class AvatarGenerater {
 
-//    public static void main(String[] args) {
-//      generateImg("我","default1");
-//    }
+    public static void main(String[] args) {
+//        generateImg("b","b");
+//        generateImg("c","c");
+//        generateImg("d","d");
+//        generateImg("e","e");
+//        generateImg("f","f");
+//        generateImg("g","g");
+//        generateImg("h","h");
+//        generateImg("i","i");
+//        generateImg("j","j");
+//        generateImg("k","k");
+//        generateImg("l","l");
+//        generateImg("m","m");
+//        generateImg("n","n");
+//        generateImg("o","o");
+//        generateImg("p","p");
+//        generateImg("q","q");
+//        generateImg("r","r");
+//        generateImg("s","s");
+//        generateImg("t","t");
+//        generateImg("u","u");
+//        generateImg("v","v");
+//        generateImg("w","w");
+//        generateImg("x","x");
+//        generateImg("y","y");
+//        generateImg("z","z");
+
+
+
+    }
     public static void generateImg(String name, String outputName) {
-        String outputPath="C:\\IDEA_WorkSpace\\mywebtempelte\\mypeojectdemo\\src\\main\\resources\\static\\image";
+        String outputPath="C:\\IDEA_WorkSpace\\mywebtempelte\\mypeojectdemo\\src\\main\\resources\\static\\image\\letterAvatar";
         int width = 60;
         int height = 60;
         int nameLen = name.length();
@@ -77,7 +104,7 @@ public class AvatarGenerater {
             else {
                 font = new Font("微软雅黑", Font.PLAIN, 42);
                 g2.setFont(font);
-                g2.drawString(nameWritten.toUpperCase(), 10, 47);
+                g2.drawString(nameWritten.toUpperCase(), 14, 47);
             }
         }
         BufferedImage rounded = makeRoundedCorner(bi, 99);

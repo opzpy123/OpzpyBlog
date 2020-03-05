@@ -30,10 +30,8 @@ public class UserService {
                 result.setMsg("用户名已存在");
 
             } else {
-                AvatarGenerater.generateImg(user.getUsername(),user.getUsername());
-                user.setAvatarUrl("/image/"+user.getUsername()+".jpg");
+                user.setAvatarUrl("/image/letterAvatar/"+user.getUsername().charAt(0)+".jpg");
                 userMapper.regist(user);
-                //System.out.println(user.getId());
                 result.setMsg("注册成功");
                 result.setSuccess(true);
                 result.setDetail(user);
