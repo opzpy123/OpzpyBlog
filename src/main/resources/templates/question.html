@@ -15,15 +15,15 @@
 <div class="container">
     <!--顶部条和介绍巨幕-->
     <div class="row clearfix">
-        <div class="col-md-13 column">
+        <div class="col-13 column">
             <!--顶部条-->
             <div th:insert="navigation :: nav"></div>
         </div>
     </div>
 
-    <div class="container-fluid main profile well">
-        <div class="col-md-9 column ">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column ">
+    <div class="row clearfix well">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 column ">
+            <div class="col-13 column ">
                 <h2><span th:text="${question.title}">kik</span></h2>
 
                 <span style="font-size: 12px;font-weight: normal;color: #999;">
@@ -37,24 +37,24 @@
                 </span>
                 <hr>
                 <h4>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}"></div>
+                    <div class="col-12" th:text="${question.description}"></div>
                 </h4>
-                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <hr class="col-12">
             </div>
 
             <!--回复列表-->
             <h3>
                 <span th:text="'&nbsp;&nbsp;'+${question.getCommentCount()}+'个回复'"></span>
             </h3>
-            <hr style="margin-top: 0px" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <hr style="margin-top: 0px" class="col-12">
 
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column " style="padding: 0px">
+            <div class="col-13 column">
+                <div class="col-13 column " style="padding: 0px">
                     <div class="media" th:each="comment:${comments}">
                         <div class="media-left">
                             <a class="pull-left" style="color: #080808;padding: 3px">
                                 <img th:src="'/'+${comment.user.avatarUrl}" class="media-object img-rounded"
-                                     style="width: 55px;height: 55px" alt='avatar'/>
+                                     style="width: 50px;height: 50px" alt='avatar'/>
                             </a>
                         </div>
                         <div class="media-body">
@@ -65,17 +65,15 @@
                                 <button type="button" class="btn btn-default glyphicon glyphicon-comment"></button>
                                 <input th:value="${comment.id}" id="commentId" type="hidden">
                             </div>
+                            <p class="pull-right" th:text="${#dates.format(comment.gmtCreate,'yyyy/MM/dd  HH:mm')}"></p>
                             <hr>
-                        </div>
-                        <div class="media-right">
-                            <span th:text="${#dates.format(comment.gmtCreate,'yyyy/MM/dd  HH:mm')}"></span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!--回复框-->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column" id="comment-section">
+            <div class="col-13 column" id="comment-section">
                 <input type="hidden" id="questionId" th:value="${question.id}">
                 <span class="alert alert-danger" style="float: left" th:if="${session.user==null}">用户未登录,请在登陆之后回复</span>
                 <textarea id="textArea" style="margin: 10px 0" class="form-control" rows="6"></textarea>
@@ -100,9 +98,9 @@
         </div>
 
         <!--发起人面板-->
-        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <br class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="col-12">
+                <br class="col-12">
                 <h3>发起人</h3>
 
 
@@ -114,8 +112,8 @@
                     <h3 style="margin-top: 14px" th:text="${question.user.username}"></h3>
                 </div>
             </div>
-            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <hr class="col-12">
+            <div class="col-12">
                 <h3>相关问题</h3>
                 功能开发中...
             </div>

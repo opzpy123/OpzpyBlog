@@ -19,9 +19,8 @@
 
         </div>
     </div>
-    <div class="container-fluid main profile well">
-        <!--编辑框-->
-        <div class="col-md-9 column">
+    <div class="row clearfix well">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 column ">
             <h3><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 发起</h3>
             <span class="alert alert-danger" style="float: right" th:if="${error!=null}" th:text="${error}"></span>
             <span class="alert alert-danger" style="float: right"  th:if="${publishMsg!=null}" th:text="${publishMsg}"></span>
@@ -47,9 +46,10 @@
 
             </form>
         </div>
+
         <br><hr>
         <!--提示框-->
-        <div class="col-md-3 column">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 column ">
             <h3>问题发起指南</h3>
             <hr>
             <h4>·问题标题：</h4><h5>请用精简的语言描述您发布的问题，不超过25个字.</h5>
