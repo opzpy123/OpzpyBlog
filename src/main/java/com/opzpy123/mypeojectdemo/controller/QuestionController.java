@@ -1,8 +1,8 @@
 package com.opzpy123.mypeojectdemo.controller;
 
-import com.opzpy123.mypeojectdemo.dto.CommentCreateDTO;
 import com.opzpy123.mypeojectdemo.dto.CommentDTO;
 import com.opzpy123.mypeojectdemo.dto.QuestionDTO;
+import com.opzpy123.mypeojectdemo.enums.CommentTypeEnum;
 import com.opzpy123.mypeojectdemo.service.CommentService;
 import com.opzpy123.mypeojectdemo.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class QuestionController {
 
         QuestionDTO question = questionService.selectById(id);
 
-        List<CommentDTO> commentDTOS = commentService.listByQuestionId(id);
+        List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.QUESTION.getType());
         model.addAttribute("comments",commentDTOS);
 
         question.setViewCount(questionService.incView(id));

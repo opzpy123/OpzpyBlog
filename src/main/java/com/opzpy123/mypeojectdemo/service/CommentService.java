@@ -4,7 +4,6 @@ import com.opzpy123.mypeojectdemo.bean.Comment;
 import com.opzpy123.mypeojectdemo.bean.Question;
 import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.dto.CommentDTO;
-import com.opzpy123.mypeojectdemo.dto.LikeCountDTO;
 import com.opzpy123.mypeojectdemo.enums.CommentTypeEnum;
 import com.opzpy123.mypeojectdemo.exception.CustomizeErrorCode;
 import com.opzpy123.mypeojectdemo.exception.CustomizeException;
@@ -32,6 +31,7 @@ public class CommentService {
     private UserMapper userMapper;
 
 
+
     public void insert(Comment comment) {
         if(comment.getParentId()==null || comment.getParentId()==0){
             throw  new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOTFOUND);
@@ -46,6 +46,7 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOTFOUND);
             }
             commentMapper.insert(comment);
+            commentMapper.incCommentCount(comment.getParentId(),1);
         }else {
             //回复问题
             Question question = questionMapper.selectById(comment.getParentId());
@@ -57,9 +58,9 @@ public class CommentService {
         }
     }
 
-    public List<CommentDTO> listByQuestionId(Long id) {
+    public List<CommentDTO> listByTargetId(Long id, Integer type) {
         List<CommentDTO> commentDTOS = new ArrayList<>();
-        List<Comment> comments = commentMapper.selectByParentId(id);
+        List<Comment> comments = commentMapper.selectByParentId(id,type);
         if(comments==null){
             return new ArrayList<>();
         }
@@ -71,11 +72,10 @@ public class CommentService {
             commentDTOS.add(commentDTO);
         });
         return commentDTOS;
-
     }
 
-    public void likeCount(LikeCountDTO likeCountDTO) {
-        commentMapper.likeCount(likeCountDTO.getCommentId(),likeCountDTO.getLikeCount());
-        likeCountDTO.setLikeCount(likeCountDTO.getLikeCount()+1);
+
+    public void incLikeCount(Long id) {
+        commentMapper.incLikeCount(id,1);
     }
 }

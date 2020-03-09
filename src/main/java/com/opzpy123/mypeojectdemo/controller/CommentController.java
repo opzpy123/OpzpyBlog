@@ -1,19 +1,20 @@
 package com.opzpy123.mypeojectdemo.controller;
 
-import com.alibaba.druid.support.json.JSONUtils;
-import com.alibaba.fastjson.JSON;
 import com.opzpy123.mypeojectdemo.bean.Comment;
 import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.dto.CommentCreateDTO;
-import com.opzpy123.mypeojectdemo.dto.LikeCountDTO;
+import com.opzpy123.mypeojectdemo.dto.CommentDTO;
 import com.opzpy123.mypeojectdemo.dto.ResultDTO;
+import com.opzpy123.mypeojectdemo.enums.CommentTypeEnum;
 import com.opzpy123.mypeojectdemo.exception.CustomizeErrorCode;
 import com.opzpy123.mypeojectdemo.service.CommentService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class CommentController {
@@ -30,7 +31,7 @@ public class CommentController {
         if(user==null){
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
-        if(commentCreateDTO.getContent()==null|| commentCreateDTO.getContent()==""){
+        if(commentCreateDTO==null||StringUtils.isBlank(commentCreateDTO.getContent())){
             return ResultDTO.errorOf(CustomizeErrorCode.CONTENT_NULL);
         }
         Comment comment = new Comment();
@@ -40,6 +41,7 @@ public class CommentController {
         comment.setType(commentCreateDTO.getType());
 
         comment.setLikeCount(0L);
+        comment.setCommentCount(0L);
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setGmtModified(System.currentTimeMillis());
         comment.setCommentator(user.getId());
@@ -48,13 +50,26 @@ public class CommentController {
         return ResultDTO.okOf();
     }
 
-    @PostMapping("/likeCount")
     @ResponseBody
-    public Object likeCount(@RequestBody LikeCountDTO likeCountDTO){
-        commentService.likeCount(likeCountDTO);
-
-        return likeCountDTO;
+    @GetMapping("/comment/{id}")
+    public ResultDTO<List<CommentDTO>> comments(@PathVariable(name="id")Long id){
+        System.out.println(11);
+        List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.COMMENT.getType());
+        System.out.println(commentDTOS);
+        return ResultDTO.okOf(commentDTOS);
     }
+
+    @PostMapping("/likeCount/{id}")
+    @ResponseBody
+    public String incLikeCount(@PathVariable(name="id")Long id){
+        commentService.incLikeCount(id);
+        return "yes";
+    }
+
+
+
+
+
 
 
 }

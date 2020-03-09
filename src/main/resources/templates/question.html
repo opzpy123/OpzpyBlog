@@ -10,6 +10,7 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/community.js"></script>
+    <script src="/js/moment.js"></script>
 </head>
 <body>
 <div class="container">
@@ -23,6 +24,7 @@
 
     <div class="row clearfix well">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 column ">
+            <!-- 页头-->
             <div class="col-13 column ">
                 <h2><span th:text="${question.title}">kik</span></h2>
 
@@ -43,12 +45,9 @@
             </div>
 
             <!--回复列表-->
-            <h3>
-                <span th:text="'&nbsp;&nbsp;'+${question.getCommentCount()}+'个回复'"></span>
-            </h3>
-            <hr style="margin-top: 0px" class="col-12">
-
             <div class="col-13 column">
+                <h3 th:text="${question.getCommentCount()}+'个回复'"></h3>
+                <hr style="margin-top: 0px" class="col-12">
                 <div class="col-13 column " style="padding: 0px">
                     <div class="media" th:each="comment:${comments}">
                         <div class="media-left">
@@ -60,12 +59,25 @@
                         <div class="media-body">
                             <h5 style="margin-top: 2px" th:text="${comment.user.username}+' :'"></h5>
                             <h4 th:text="${comment.content}"></h4>
-                            <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                <button type="button" id="likeCountButton" onclick="likeCount()" class="btn btn-default glyphicon glyphicon-thumbs-up" th:text="${comment.likeCount}"  th:value="${comment.likeCount}">1</button>
-                                <button type="button" class="btn btn-default glyphicon glyphicon-comment"></button>
-                                <input th:value="${comment.id}" id="commentId" type="hidden">
+                            <div class="btn-group btn-group-sm">
+                                <span class="btn btn-default glyphicon glyphicon-thumbs-up" onclick="likeCount(this)" th:id="${comment.id}" ><span th:text="${comment.likeCount}">1</span></span>
+                                <span class="btn btn-default glyphicon glyphicon-comment" th:data-id="${comment.id}"
+                                      onclick="collapseComments(this)" ><span th:text="${comment.commentCount}">1</span></span>
                             </div>
-                            <p class="pull-right" th:text="${#dates.format(comment.gmtCreate,'yyyy/MM/dd  HH:mm')}"></p>
+                            <span class="pull-right"
+                                  th:text="${#dates.format(comment.gmtCreate,'yyyy/MM/dd  HH:mm')}"></span>
+                            <!--二级评论-->
+
+                            <div class="col-12 well  collapse sub-comments " style="margin-top: 10px"
+                                 th:id="${'comment-'+comment.id}">
+                                <form class="form-inline">
+                                    <input type="text" class="form-control" th:id="'input-'+${comment.id}"
+                                           placeholder="回复评论..">
+                                    <button type="submit"  class="btn btn-primary" onclick="comment(this)"
+                                            th:data-id="${comment.id}">回复
+                                    </button>
+                                </form>
+                            </div>
                             <hr>
                         </div>
                     </div>
@@ -76,7 +88,8 @@
             <div class="col-13 column" id="comment-section">
                 <input type="hidden" id="questionId" th:value="${question.id}">
                 <span class="alert alert-danger" style="float: left" th:if="${session.user==null}">用户未登录,请在登陆之后回复</span>
-                <textarea id="textArea" style="margin: 10px 0" class="form-control" rows="6"></textarea>
+                <textarea id="textArea" style="margin: 10px 0" placeholder="请输入回复内容..." class="form-control"
+                          rows="6"></textarea>
                 <div class="media" th:if="${session.user!=null}">
                     <div class="media-left">
                         <a class="pull-left" style="color: #080808;padding: 3px">

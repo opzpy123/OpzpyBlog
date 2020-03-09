@@ -17,14 +17,15 @@
         <result property="parentId" column="parent_id" />
         <result property="type" column="type" />
         <result property="commentator" column="commentator" />
-        <result property="gmtCreate" column="gmt_Create" />
+        <result property="gmtCreate" column="gmt_create" />
         <result property="gmtModified" column="gmt_modified" />
-        <result property="likeCount" column="like_Count" />
+        <result property="likeCount" column="like_count" />
         <result property="content" column="content" />
+        <result property="commentCount" column="comment_count" />
     </resultMap>
 
     <insert id="insert">
-        insert into comment values (#{id},#{parentId},#{type},#{commentator},#{gmtCreate},#{gmtModified},#{likeCount},#{content});
+        insert into comment values (#{id},#{parentId},#{type},#{commentator},#{gmtCreate},#{gmtModified},#{likeCount},#{content},#{commentCount});
     </insert>
 
     <select id="selectById" resultMap="commentResultMap">
@@ -32,11 +33,15 @@
     </select>
 
     <select id="selectByParentId" resultMap="commentResultMap">
-        select * from comment where parent_id = #{id};
+        select * from comment where parent_id = #{id} and type=#{type};
     </select>
 
-    <update id="likeCount">
-        update comment set like_count=#{likeCount}+1 where id=#{commentId};
+    <update id="incCommentCount">
+        update comment set comment_count=comment_count+ #{commentCount} where id=#{commentId};
+    </update>
+
+    <update id="incLikeCount">
+        update comment set like_count=like_count+ #{likeCount} where id=#{commentId};
     </update>
 
 
