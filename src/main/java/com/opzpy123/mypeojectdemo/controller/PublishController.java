@@ -24,6 +24,7 @@ public class PublishController {
 
     @GetMapping("/publish/{id}")
     public String edit(@PathVariable(name = "id")Long id,Model model){
+
         questionService.edit(id,model);
         return "publish";
     }

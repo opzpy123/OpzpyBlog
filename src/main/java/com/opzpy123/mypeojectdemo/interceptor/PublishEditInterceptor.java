@@ -1,6 +1,8 @@
 package com.opzpy123.mypeojectdemo.interceptor;
 
 import com.opzpy123.mypeojectdemo.bean.User;
+import com.opzpy123.mypeojectdemo.dto.QuestionDTO;
+import com.opzpy123.mypeojectdemo.service.QuestionService;
 import com.opzpy123.mypeojectdemo.service.UserService;
 import com.opzpy123.mypeojectdemo.util.TransformTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,31 +15,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * spring默认不接管interceptor的，
- * 加上service注解就可以被扫描到
- */
 @Service
-public class SessionInterceptor implements HandlerInterceptor {
+public class PublishEditInterceptor implements HandlerInterceptor {
+
     @Autowired
     private UserService userService;
+    @Autowired
+    private QuestionService questionService;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-
-        if (request.getCookies() != null) {
-            Cookie[] cookies = request.getCookies();
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("cookie_user")) {
-                    String cookie_user = TransformTest.hexStr2Str(cookie.getValue());
-                    User user = userService.findUserByName(cookie_user);
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user", user);
-                    break;
-                }
-            }
+        User user = (User)request.getSession().getAttribute("user");
+        String[] split = request.getRequestURI().split("/");
+        QuestionDTO questionDTO = questionService.selectById(Long.valueOf(split[split.length-1]));
+        if(questionDTO.getUser().equals(user)){
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
