@@ -32,7 +32,7 @@
                         <b th:text="'作者:'+${question.user.username}+' | '">springboot</b>
                         <b th:text="'回复:'+${question.commentCount+'   | '}">2</b>
                         <b th:text="'浏览数:'+${question.viewCount}+' | '">31</b>
-                        <b th:text="'发布时间:'+${#dates.format(question.gmtCreate,'yyyy/MM/dd  HH:mm')}"></b>
+                        <b th:text="'修改时间:'+${#dates.format(question.gmtModified,'yyyy/MM/dd  HH:mm')}"></b>
                         <a th:if="${session.user!=null && session.user.id==question.creator}"
                            th:href="@{'/publish/'+${question.id}}" style="color: #999">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑问题</span></a>
@@ -79,13 +79,19 @@
                             <div class="col-12 well  collapse sub-comments "
                                  style="margin-top: 10px;background-color: #e7e7e778"
                                  th:id="${'comment-'+comment.id}">
-                                <form class="form-inline">
-                                    <input type="text" class="form-control" th:id="'input-'+${comment.id}"
-                                           placeholder="回复评论..">
-                                    <button type="submit" class="btn btn-primary" onclick="comment(this)"
-                                            th:data-id="${comment.id}">回复
-                                    </button>
-                                </form>
+<!--                                <form class="form-inline">-->
+
+<!--                                    <button type="submit" class="pull-right btn btn-primary" onclick="comment(this)"-->
+<!--                                            th:data-id="${comment.id}">回复-->
+<!--                                    </button>-->
+<!--                                    <input type="text" class="form-control" th:id="'input-'+${comment.id}"-->
+<!--                                           placeholder="回复评论..">-->
+<!--                                </form>-->
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  th:id="'input-'+${comment.id}" placeholder="回复评论..">
+                                    <span  class="btn input-group-addon" onclick="comment(this)" th:data-id="${comment.id}">回复</span>
+                                </div>
                             </div>
                             <hr>
                         </div>

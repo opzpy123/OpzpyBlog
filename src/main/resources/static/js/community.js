@@ -85,48 +85,68 @@ function collapseComments(e) {
             e.classList.add("active");
         } else {
             $.getJSON("/comment/" + id, function (data) {
-                $.each(data.data.reverse(), function (index, comment) {
-                    var mediaBodyElement = $("<div/>", {
-                        "class": "media-body"
-                    }).append($("<img/>", {
-                        "class": "pull-left media-object img-rounded",
-                        "style": "width: 25px;height: 25px ",
-                        "src": '/' + comment.user.avatarUrl
-                    })).append($("<h5/>", {
-                        "class": "media-heading",
-                        "style": "margin-top: 3px",
-                        "html": comment.user.username + ' :',
-                    })).append($("<h4/>", {
-                        "style":"margin: 15px 2px 2px 5px;",
-                        "html": comment.content
-                    })).append($("<div/>", {
-                        "class": "menu"
-                    }).append($("<span/>", {
-                        "class": "pull-right",
-                        "html": moment(comment.gmtCreate).format('YYYY/MM/DD HH:MM'),
-                    })));
+                    $.each(data.data.reverse(), function (index, comment) {
+                        var mediaBodyElement = $("<div/>", {
+                            "class": "media-body"
+                        }).append($("<img/>", {
+                            "class": "pull-left media-object img-rounded",
+                            "style": "width: 25px;height: 25px ",
+                            "src": '/' + comment.user.avatarUrl
+                        })).append($("<h5/>", {
+                            "class": "media-heading",
+                            "style": "margin-top: 3px",
+                            "html": comment.user.username + ' :',
+                        })).append($("<h4/>", {
+                            "style": "margin: 15px 2px 2px 5px;",
+                            "html": comment.content
+                        })).append($("<div/>", {
+                            "class": "menu"
+                        }).append($("<span/>", {
+                            "class": "pull-right",
+                            "html": moment(comment.gmtCreate).format('YYYY/MM/DD HH:MM'),
+                        })));
 
-                    var mediaFootElement = $("<hr/>", {
-                        "style":"background-color:#e1e1e1;border:0px;padding-top:1px;padding-bottom:0px;margin-bottom: 20px;margin-top: 10px;"
-                });
+                        var mediaFootElement = $("<hr/>", {
+                            "style": "background-color:#e1e1e1;border:0px;padding-top:1px;padding-bottom:0px;margin-bottom: 20px;margin-top: 10px;"
+                        });
 
-                var mediaElement = $("<div/>", {
-                    "class": "media"
-                }).append(mediaBodyElement).append(mediaFootElement);
+                        var mediaElement = $("<div/>", {
+                            "class": "media"
+                        }).append(mediaBodyElement).append(mediaFootElement);
 
-                var commentElement = $("<div/>", {
-                    "class": "col-12 "
-                }).append(mediaElement);
+                        var commentElement = $("<div/>", {
+                            "class": "col-12 "
+                        }).append(mediaElement);
 
-                subCommentContainer.prepend(commentElement);
-            });
-            //展开二级评论
-            comments.addClass("in");
-            // 标记二级评论展开状态
-            e.setAttribute("data-collapse", "in");
-            e.classList.add("active");
+                        subCommentContainer.prepend(commentElement);
+                    });
+                    //展开二级评论
+                    comments.addClass("in");
+                    // 标记二级评论展开状态
+                    e.setAttribute("data-collapse", "in");
+                    e.classList.add("active");
+                }
+            );
         }
-    );
+    }
 }
+
+function selectTag(e) {
+    var value = e.getAttribute("value");
+    var previous = $("#tag").val();
+    //检索prevous中有无value
+    if (previous.indexOf(value) == -1) {
+        if (previous) {
+            $("#tag").val(previous + ',' + value)
+        } else {
+            $("#tag").val(value);
+        }
+    }
 }
+
+function tagClean() {
+    //重置tag输入框
+    $("#tag").val(null);
+
 }
+

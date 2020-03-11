@@ -41,8 +41,9 @@
             <hr>
             <div class="media" th:each="entries:${resultList.questionDTOS}">
                 <div class="media-left">
-                    <a  class="pull-left" style="color: #080808">
-                        <img th:src="${entries.user.avatarUrl}" src="../static/image/userAvatar/default7.jpg" class="media-object img-rounded"
+                    <a class="pull-left" style="color: #080808">
+                        <img th:src="${entries.user.avatarUrl}" src="../static/image/userAvatar/default7.jpg"
+                             class="media-object img-rounded"
                              style="width: 60px;height: 60px" alt='avatar'/>
                     </a>
                 </div>
@@ -51,7 +52,8 @@
                         <a style="color: #080808" th:href="@{'/question/'+${entries.id}}"
                            th:text="${entries.title}"></a>
                     </h4>
-                    <h5 th:text="${entries.description}">aa</h5>
+                    <!--过长文字溢出省略号代替： style="width: 550px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"-->
+                    <h5 style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;" th:text="${entries.description}">aa</h5>
                     <span style="font-size: 12px;font-weight: normal;color: #999;">
                         <b th:text="'作者:'+${entries.user.username}+' | '">springboot</b>
                         <b th:text="'回复:'+${entries.commentCount+'   | '}">2</b>
@@ -113,8 +115,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 <div id="dg" style="z-index: 9999; position: fixed ! important; right: 8%; top: 88%;">

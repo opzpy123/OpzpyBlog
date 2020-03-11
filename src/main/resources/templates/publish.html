@@ -8,6 +8,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/community.js"></script>
 
 </head>
 <body>
@@ -23,47 +24,57 @@
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 column ">
             <h3><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 发起</h3>
             <span class="alert alert-danger" style="float: right" th:if="${error!=null}" th:text="${error}"></span>
-            <span class="alert alert-danger" style="float: right"  th:if="${publishMsg!=null}" th:text="${publishMsg}"></span>
+            <span class="alert alert-danger" style="float: right" th:if="${publishMsg!=null}"
+                  th:text="${publishMsg}"></span>
             <hr>
             <form action="/publish" method="post">
                 <input type="hidden" name="id" th:value="${id}">
                 <div class="form-group">
                     <label for="title"><h4>问题标题(必填,简单扼要):</h4></label>
-                    <input type="text" class="form-control" id="title" name="title"th:value="${returnTitle}" placeholder="请输入问题标题">
+                    <input type="text" autocomplete="off" class="form-control" id="title" name="title"
+                           th:value="${returnTitle}" placeholder="请输入问题标题">
                 </div>
                 <div class="form-group">
                     <label for="description"><h4>问题补充(必填，请参照右侧提示):</h4></label>
-                    <textarea name="description" id="description" cols="30" th:utext="${returnDescription}" class="form-control" rows="10"
+                    <textarea name="description" id="description" cols="30" th:utext="${returnDescription}"
+                              class="form-control" rows="10"
                               placeholder="请输入问题描述"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="tag"><h4>添加标签:(选填)</h4></label>
-                    <input type="text" class="form-control" id="tag"  name="tag" th:value="${returnTag}" placeholder="输入标签以 , 号分隔">
+                    <div class="input-group">
+                        <!--disabled="ture"会导致form无法提交修改为 readonly-->
+                        <input type="text" class="form-control" readonly="readonly" autocomplete="off" id="tag" name="tag"
+                               th:value="${returnTag}" placeholder="选择合适的标签" aria-describedby="basic-addon2">
+                        <span class="btn input-group-addon" onclick="tagClean()" id="tagClean">清空标签</span>
+                    </div>
                 </div>
-                <div >
-                    <button type="submit" class="btn btn-primary" style="float: right"> 发 布</button>
+
+                <div>
+                    <button type="submit" class="pull-right btn btn-primary" style="padding: 8px 15px;"> 发 布</button>
                 </div>
+                <!--标签库-->
+                <div th:insert="TagFragment :: tag"></div>
 
             </form>
         </div>
 
-        <br><hr>
+        <br>
+        <hr>
         <!--提示框-->
-    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 column ">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 column ">
             <h3>问题发起指南</h3>
             <hr>
             <h4>·问题标题：</h4><h5>请用精简的语言描述您发布的问题，不超过25个字.</h5>
             <hr>
             <h4>·问题补充：</h4><h5>详细补充您的问题内容，确保问题描述清晰直观，并提供一些相关的资料.</h5>
             <hr>
-            <h4>·选择标签:</h4><h5>选择一个或多个合适的标签，用逗号隔开，每个标签不超过10个字.</h5>
+            <h4>·选择标签:</h4><h5>选择一个或多个合适的标签.</h5>
             <hr>
         </div>
 
     </div>
 </div>
-
-
 
 
 </body>
