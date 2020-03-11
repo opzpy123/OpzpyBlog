@@ -4,20 +4,21 @@
 function post() {
     var questionId = $("#questionId").val();
     var content = $("#textArea").val();
-    comment2target(questionId,1,content);
+    comment2target(questionId, 1, content);
 
 }
+
 function comment(e) {
     var commentId = e.getAttribute("data-id");
-    var content = $("#input-"+commentId).val();
-    comment2target(commentId,2,content)
+    var content = $("#input-" + commentId).val();
+    comment2target(commentId, 2, content)
 }
 
 function likeCount(e) {
     let commentId = e.getAttribute("id");
     $.ajax({
         type: "POST",
-        url: "/likeCount/"+commentId,
+        url: "/likeCount/" + commentId,
     });
     window.location.reload();
 
@@ -27,13 +28,12 @@ function likeCount(e) {
 }
 
 
-
 /**
  * 封装的post请求
  */
-function comment2target(targetId,type,content){
+function comment2target(targetId, type, content) {
 
-    if(!content){
+    if (!content) {
         alert("回复不能为空");
         return;
     }
@@ -90,39 +90,43 @@ function collapseComments(e) {
                         "class": "media-body"
                     }).append($("<img/>", {
                         "class": "pull-left media-object img-rounded",
-                        "style":"width: 25px;height: 25px ",
-                        "src": '/'+comment.user.avatarUrl
+                        "style": "width: 25px;height: 25px ",
+                        "src": '/' + comment.user.avatarUrl
                     })).append($("<h5/>", {
                         "class": "media-heading",
-                        "style":"margin-top: 3px",
-                        "html": comment.user.username+' :',
+                        "style": "margin-top: 3px",
+                        "html": comment.user.username + ' :',
                     })).append($("<h4/>", {
+                        "style":"margin: 15px 2px 2px 5px;",
                         "html": comment.content
                     })).append($("<div/>", {
                         "class": "menu"
-                    }).append($("<span/>",{
+                    }).append($("<span/>", {
                         "class": "pull-right",
                         "html": moment(comment.gmtCreate).format('YYYY/MM/DD HH:MM'),
                     })));
 
-                    var mediaFootElement = $("<hr/>");
-
-                    var mediaElement = $("<div/>", {
-                        "class": "media"
-                    }).append(mediaBodyElement).append(mediaFootElement);
-
-                    var commentElement = $("<div/>", {
-                        "class": "col-12 "
-                    }).append(mediaElement);
-
-                    subCommentContainer.prepend(commentElement);
+                    var mediaFootElement = $("<hr/>", {
+                        "style":"background-color:#e1e1e1;border:0px;padding-top:1px;padding-bottom:0px;margin-bottom: 20px;margin-top: 10px;"
                 });
-                //展开二级评论
-                comments.addClass("in");
-                // 标记二级评论展开状态
-                e.setAttribute("data-collapse", "in");
-                e.classList.add("active");
+
+                var mediaElement = $("<div/>", {
+                    "class": "media"
+                }).append(mediaBodyElement).append(mediaFootElement);
+
+                var commentElement = $("<div/>", {
+                    "class": "col-12 "
+                }).append(mediaElement);
+
+                subCommentContainer.prepend(commentElement);
             });
+            //展开二级评论
+            comments.addClass("in");
+            // 标记二级评论展开状态
+            e.setAttribute("data-collapse", "in");
+            e.classList.add("active");
         }
-    }
+    );
+}
+}
 }

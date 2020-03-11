@@ -28,5 +28,7 @@ public interface QuestionMapper {
 
     void incCommentCount(Long id, Integer commentCount);
 
+    List<Question> selectRelated(Question question);
+
 
 }

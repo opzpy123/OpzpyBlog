@@ -7,6 +7,7 @@ import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.dto.PaginationDTO;
 import com.opzpy123.mypeojectdemo.dto.QuestionDTO;
 import com.opzpy123.mypeojectdemo.mapper.QuestionMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -74,9 +76,9 @@ public class QuestionService {
             } else {
                 //业务场景:处理用户的编辑中问题被删除的情况
                 Question question1 = questionMapper.selectById(question.getId());
-                if(question1==null){
-                    throw  new CustomizeException(CustomizeErrorCode.QUESTION_NOTFOUND);
-                }else {
+                if (question1 == null) {
+                    throw new CustomizeException(CustomizeErrorCode.QUESTION_NOTFOUND);
+                } else {
                     questionMapper.update(question);
                 }
                 return "";
@@ -160,7 +162,7 @@ public class QuestionService {
 
     public QuestionDTO selectById(Long id) {
         Question question = questionMapper.selectById(id);
-        if(question == null){
+        if (question == null) {
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOTFOUND);
         }
         User user = userService.findUserById(question.getCreator());
@@ -178,7 +180,33 @@ public class QuestionService {
 
     public int incView(Long id) {
         Question question = questionMapper.selectById(id);
-        questionMapper.incView(id,question.getViewCount());
-        return question.getViewCount()+1;
+        questionMapper.incView(id, question.getViewCount());
+        return question.getViewCount() + 1;
+    }
+
+    public List<QuestionDTO> selectRelated(QuestionDTO questionDTO) {
+        if (StringUtils.isBlank(questionDTO.getTag())) {
+            return new ArrayList<>();
+        }
+
+        Question question = new Question();
+        question.setId(questionDTO.getId());
+        question.setTag(questionDTO.getTag().replace(',', '|'));
+
+
+        List<Question> questions = questionMapper.selectRelated(question);
+
+        //dto数据 流转换
+       List<QuestionDTO> questionDTOS = new ArrayList<>();
+       questions.forEach(i->{
+           QuestionDTO questionDTOTemp =new QuestionDTO();
+           User user = userService.findUserById(i.getCreator());
+           BeanUtils.copyProperties(i, questionDTOTemp);
+           questionDTOTemp.setUser(user);
+           questionDTOS.add(questionDTOTemp);
+       });
+        return questionDTOS;
+
+
     }
 }

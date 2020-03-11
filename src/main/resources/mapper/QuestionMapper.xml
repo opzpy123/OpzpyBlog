@@ -62,5 +62,11 @@
         update question set comment_count=#{commentCount}+1 where id=#{id};
     </update>
 
+    <select id="selectRelated" resultMap="questionResultMap">
+        select  * from question where id!=#{id} and tag regexp #{tag} LIMIT 5;
+    </select>
+
+
+
 
 </mapper>
