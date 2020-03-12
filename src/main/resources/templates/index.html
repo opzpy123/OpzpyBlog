@@ -37,9 +37,9 @@
     <!--媒体列表-->
     <div class="row clearfix">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 column well">
-            <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 博客块</h2>
+            <span style="font-size: 27px"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 博客块</span>
             <hr>
-            <div class="media" th:each="entries:${resultList.questionDTOS}">
+            <div class="media" th:each="entries:${resultList.data}">
                 <div class="media-left">
                     <a class="pull-left" style="color: #080808">
                         <img th:src="${entries.user.avatarUrl}" src="../static/image/userAvatar/default7.jpg"
@@ -53,7 +53,8 @@
                            th:text="${entries.title}"></a>
                     </h4>
                     <!--过长文字溢出省略号代替： style="width: 550px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"-->
-                    <h5 style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;" th:text="${entries.description}">aa</h5>
+                    <h5 style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;"
+                        th:text="${entries.description}">aa</h5>
                     <span style="font-size: 12px;font-weight: normal;color: #999;">
                         <b th:text="'作者:'+${entries.user.username}+' | '">springboot</b>
                         <b th:text="'回复:'+${entries.commentCount+'   | '}">2</b>
@@ -68,7 +69,7 @@
 
                     <li th:if="${resultList.showFirstPage}">
                         <a href="/?page=1" aria-label="Previous">
-                            <span aria-hidden="true">>&lt;&lt;</span>
+                            <span aria-hidden="true">&lt;&lt;</span>
                         </a>
                     </li>
                     <li th:if="${resultList.showPrevious}">
@@ -86,7 +87,7 @@
                     </li>
                     <li th:if="${resultList.showEndPage}">
                         <a th:href="@{/(page=${resultList.totalPage})}" aria-label="next">
-                            <span aria-hidden="true">>&gt;&gt;</span>
+                            <span aria-hidden="true">&gt;&gt;</span>
                         </a>
                     </li>
                 </ul>
@@ -95,31 +96,33 @@
         <!--热门话题-->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="list-group">
-                <h3><a href="/" class="list-group-item active">热门话题</a></h3>
-                <a href="#" class="list-group-item">
-                    List header
-                </a>
+                <a href="/" class="list-group-item active" style="font-size: 20px;">热门话题</a>
                 <div class="list-group-item">
                     <h4 class="list-group-item-heading">
-                        List group item heading
+                        开发中
                     </h4>
                     <p class="list-group-item-text">
                         ...
                     </p>
                 </div>
                 <a href="#" class="list-group-item">
-                    <span class="badge">14</span> 未读消息
+                     开发中
+                </a>
+                <a href="#" class="list-group-item">
+                    开发中
                 </a>
                 <a class="list-group-item active" href="#">帮助</a>
             </div>
+
         </div>
+
     </div>
 </div>
 
 
 <div id="dg" style="z-index: 9999; position: fixed ! important; right: 8%; top: 88%;">
     <table width="100%" style="position: absolute; width:260px; right: 0px; top: 0px;">
-        <a style="float: right" class=" btn btn-primary " href="/publish"><h4 class="glyphicon glyphicon-edit">写博客</h4>
+        <a style="float: right" class=" btn btn-primary " href="/publish"><h4 ><span class="glyphicon glyphicon-edit"></span>发起</h4>
         </a>
     </table>
 </div>

@@ -9,8 +9,8 @@ import java.util.List;
  * 分页功能后台实现
  */
 @Data
-public class PaginationDTO {
-    private List<QuestionDTO> questionDTOS;
+public class PaginationDTO<T> {
+    private List<T> data;
     private boolean showPrevious;//前一页按钮
     private boolean showFirstPage;//首页按钮
     private boolean showNext;//下一页按钮
@@ -29,7 +29,7 @@ public class PaginationDTO {
         if (page < 1) {
             page = 1;
         }
-        if (page > totalPage) {
+        if (page >= totalPage) {
             page = totalPage;
         }
         this.page = page;

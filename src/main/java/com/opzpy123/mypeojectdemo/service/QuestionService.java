@@ -7,6 +7,7 @@ import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.dto.PaginationDTO;
 import com.opzpy123.mypeojectdemo.dto.QuestionDTO;
 import com.opzpy123.mypeojectdemo.mapper.QuestionMapper;
+import com.opzpy123.mypeojectdemo.mapper.UserMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class QuestionService {
     @Autowired
     private QuestionMapper questionMapper;
     @Autowired
-    private UserService userService;
+    private UserMapper  userMapper;
 
     public void edit(Long id, Model model) {
         Question question = questionMapper.selectById(id);
@@ -103,7 +104,7 @@ public class QuestionService {
         if (page < 1) {
             page = 1;
         }
-        if (page > paginationDTO.getTotalPage()) {
+        if (page >= paginationDTO.getTotalPage()) {
             page = paginationDTO.getTotalPage();
         }
         //size*(page-1)
@@ -113,13 +114,13 @@ public class QuestionService {
 
 
         questions.forEach(i -> {
-            User user = userService.findUserById(i.getCreator());
+            User user = userMapper.findUserById(i.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(i, questionDTO);
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         });
-        paginationDTO.setQuestionDTOS(questionDTOList);
+        paginationDTO.setData(questionDTOList);
         return paginationDTO;
 
     }
@@ -150,13 +151,13 @@ public class QuestionService {
 
 
         questions.forEach(i -> {
-            User user = userService.findUserById(i.getCreator());
+            User user = userMapper.findUserById(i.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(i, questionDTO);
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         });
-        paginationDTO.setQuestionDTOS(questionDTOList);
+        paginationDTO.setData(questionDTOList);
         return paginationDTO;
     }
 
@@ -165,7 +166,7 @@ public class QuestionService {
         if (question == null) {
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOTFOUND);
         }
-        User user = userService.findUserById(question.getCreator());
+        User user = userMapper.findUserById(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         questionDTO.setUser(user);
         BeanUtils.copyProperties(question, questionDTO);
@@ -200,7 +201,7 @@ public class QuestionService {
        List<QuestionDTO> questionDTOS = new ArrayList<>();
        questions.forEach(i->{
            QuestionDTO questionDTOTemp =new QuestionDTO();
-           User user = userService.findUserById(i.getCreator());
+           User user = userMapper.findUserById(i.getCreator());
            BeanUtils.copyProperties(i, questionDTOTemp);
            questionDTOTemp.setUser(user);
            questionDTOS.add(questionDTOTemp);

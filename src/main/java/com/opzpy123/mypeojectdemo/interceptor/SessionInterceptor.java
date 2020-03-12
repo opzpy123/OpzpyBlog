@@ -1,10 +1,12 @@
 package com.opzpy123.mypeojectdemo.interceptor;
 
 import com.opzpy123.mypeojectdemo.bean.User;
+import com.opzpy123.mypeojectdemo.mapper.NotificationMapper;
 import com.opzpy123.mypeojectdemo.service.UserService;
 import com.opzpy123.mypeojectdemo.util.TransformTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,18 +23,23 @@ import javax.servlet.http.HttpSession;
 public class SessionInterceptor implements HandlerInterceptor {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private NotificationMapper notificationMapper;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-
+        User user = new User();
         if (request.getCookies() != null) {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("cookie_user")) {
                     String cookie_user = TransformTest.hexStr2Str(cookie.getValue());
-                    User user = userService.findUserByName(cookie_user);
+                     user = userService.findUserByName(cookie_user);
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
+                    //未读消息数
+                    session.setAttribute("unreadCount",notificationMapper.unreadCount(user.getId()));
                     break;
                 }
             }

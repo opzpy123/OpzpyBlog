@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.opzpy123.mypeojectdemo.mapper.NotificationMapper">
+
+    <!-- resultMap最终还是要将结果映射到pojo上，type就是指定映射到哪一个pojo -->
+    <!-- id：设置ResultMap的id -->
+    <resultMap type="Notification" id="notificationResultMap">
+        <!-- 定义主键 ,非常重要。如果是多个字段,则定义多个id -->
+        <!-- property：主键在pojo中的属性名 -->
+        <!-- column：主键在数据库中的列名 -->
+        <id property="id" column="id" />
+
+        <!-- 定义普通属性 -->
+        <result property="notifier" column="notifier" />
+        <result property="receiver" column="receiver" />
+        <result property="outerId" column="outerId" />
+        <result property="type" column="type" />
+        <result property="gmtCreate" column="gmt_create" />
+        <result property="status" column="status" />
+        <result property="commentContent" column="comment_content" />
+
+    </resultMap>
+
+    <insert id="insert">
+        insert into notification values (#{id},#{notifier},#{receiver},#{outerId},#{type},#{gmtCreate},#{status},#{commentContent});
+    </insert>
+    
+    <select id="count" resultType="Integer">
+        select count(1) from notification;
+    </select>
+
+    <select id="selectUserQuestion" resultMap="notificationResultMap">
+        select * from notification where receiver = #{userId} and status=0 and notifier != receiver order by id desc;
+    </select>
+
+    <select id="unreadCount" resultType="Long">
+        select count(*) from notification where receiver = #{id} and status=0 and notifier != receiver ;
+    </select>
+
+    <delete id="deleteByTypeAndOuterId">
+        delete from notification where outerId=#{id} and type=#{type};
+    </delete>
+
+
+
+
+</mapper>

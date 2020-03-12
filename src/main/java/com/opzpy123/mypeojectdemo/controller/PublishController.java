@@ -2,8 +2,11 @@ package com.opzpy123.mypeojectdemo.controller;
 
 import com.opzpy123.mypeojectdemo.bean.Question;
 import com.opzpy123.mypeojectdemo.bean.User;
+import com.opzpy123.mypeojectdemo.dto.CommentDTO;
 import com.opzpy123.mypeojectdemo.dto.QuestionDTO;
+import com.opzpy123.mypeojectdemo.enums.CommentTypeEnum;
 import com.opzpy123.mypeojectdemo.mapper.QuestionMapper;
+import com.opzpy123.mypeojectdemo.service.CommentService;
 import com.opzpy123.mypeojectdemo.service.QuestionService;
 import com.opzpy123.mypeojectdemo.service.UserService;
 import com.opzpy123.mypeojectdemo.util.PageAlert;
@@ -14,12 +17,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 public class PublishController {
 
     @Autowired
     private QuestionService questionService;
+
+    @Autowired
+    private CommentService commentService;
 
 
     @GetMapping("/publish/{id}")
@@ -32,6 +39,11 @@ public class PublishController {
     @GetMapping("/publish/delete/{id}")
     public String delete(@PathVariable(name = "id")Long id,HttpServletResponse response){
         questionService.delete(id);
+        List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.QUESTION.getType());
+        commentDTOS.forEach(i->{
+            commentService.delete(i.getId());
+        });
+
         String returnMsg = "<script>alert('" + "删除成功！" + "');window.location.href='" + "/profile/questions" + "';</script>";
         PageAlert.Alert(returnMsg, response);
         return null;

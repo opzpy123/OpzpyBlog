@@ -44,6 +44,13 @@
         update comment set like_count=like_count+ #{likeCount} where id=#{commentId};
     </update>
 
+    <delete id="deleteFromId" >
+        delete from comment where id=#{id}
+    </delete>
+    <delete id="deleteFromParentId" >
+        delete from comment where parent_id=#{id}
+    </delete>
+
 
 
 

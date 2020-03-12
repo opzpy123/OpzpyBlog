@@ -26,4 +26,9 @@ public interface CommentMapper {
 
 
     void incLikeCount(Long commentId, Integer likeCount);
+
+    void deleteFromId(Long id);
+
+
+    void deleteFromParentId(Long id);
 }

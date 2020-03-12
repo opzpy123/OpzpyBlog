@@ -53,9 +53,7 @@ public class CommentController {
     @ResponseBody
     @GetMapping("/comment/{id}")
     public ResultDTO<List<CommentDTO>> comments(@PathVariable(name="id")Long id){
-        System.out.println(11);
         List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.COMMENT.getType());
-        System.out.println(commentDTOS);
         return ResultDTO.okOf(commentDTOS);
     }
 

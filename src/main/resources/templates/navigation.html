@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
+
 <div th:fragment="nav">
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
@@ -12,12 +13,9 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active">
+            <ul class="nav navbar-nav" >
+                <li >
                     <a href="/">主页</a>
-                </li>
-                <li>
-                    <a href="#">Link</a>
                 </li>
             </ul>
             <form class="navbar-form navbar-left" role="search">
@@ -26,12 +24,18 @@
                 </div>
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
+
+
             <ul class="nav navbar-nav navbar-right">
                 <li  th:if="${session.user!=null}">
-                    <a href="/publish" class=" glyphicon glyphicon-edit">写博客</a>
+                    <a href="/publish" >发起</a>
+                </li>
+                <li th:if="${session.user!=null}" role="presentation">
+                    <a href="/profile/replies">通知 <span class="badge" style="background-color:#337ab7 ;margin-bottom: 2px;font-size: 8px;" th:text="${session.unreadCount}">14</span></a>
+<!--                    <span class="badge" th:text="${unreadCount}">14</span>-->
                 </li>
                 <li class="dropdown" th:if="${session.user!=null}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<strong
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">个人中心<strong
                             class="caret"></strong></a>
                     <ul class="dropdown-menu">
                         <!--                            <li><a href="#">消息中心</a></li>-->
@@ -41,9 +45,8 @@
                         <li><a th:text="'欢迎回来：'+${session.user.username}">欢迎回来:</a></li>
                     </ul>
                 </li>
-                <li th:if="${session.user==null}" class="active">
-                    <a id="modal-933992" href="#modal-container-933992" role="button" class="btn"
-                       data-toggle="modal">登录</a>
+                <li th:if="${session.user==null}" >
+                    <button type="button" id="modal-933992" style="margin-right: 10px" data-toggle="modal" href="#modal-container-933992" role="button" class="btn btn-default navbar-btn">登录</button>
                 </li>
 
             </ul>
@@ -97,7 +100,6 @@
 
     </div>
 </div>
-
 
 </body>
 
