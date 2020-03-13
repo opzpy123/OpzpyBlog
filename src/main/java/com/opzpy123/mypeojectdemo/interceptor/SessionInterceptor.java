@@ -29,13 +29,13 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        User user = new User();
         if (request.getCookies() != null) {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("cookie_user")) {
                     String cookie_user = TransformTest.hexStr2Str(cookie.getValue());
-                     user = userService.findUserByName(cookie_user);
+                    User user = userService.findUserByName(cookie_user);
+                    user = userService.findUserByName(cookie_user);
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
                     //未读消息数
@@ -57,3 +57,4 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     }
 }
+

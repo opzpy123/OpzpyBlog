@@ -31,41 +31,44 @@ public class CommentService {
     @Autowired
     private QuestionMapper questionMapper;
 
-   @Autowired
+    @Autowired
     private UserMapper userMapper;
 
-   @Autowired
-   private NotificationMapper notificationMapper;
-
+    @Autowired
+    private NotificationMapper notificationMapper;
 
 
     public void insert(Comment comment) {
-        if(comment.getParentId()==null || comment.getParentId()==0){
-            throw  new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOTFOUND);
+        if (comment.getParentId() == null || comment.getParentId() == 0) {
+            throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOTFOUND);
         }
-        if(comment.getType()==null || !CommentTypeEnum.isExist(comment.getType())){
+        if (comment.getType() == null || !CommentTypeEnum.isExist(comment.getType())) {
             throw new CustomizeException(CustomizeErrorCode.TYPE_PARAM_WRONG);
         }
-        if(comment.getType()==CommentTypeEnum.COMMENT.getType()){
+        if (comment.getType() == CommentTypeEnum.COMMENT.getType()) {
             //回复评论
             Comment dbComment = commentMapper.selectById(comment.getParentId());
-            if(dbComment==null){
+            if (dbComment == null) {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOTFOUND);
             }
             commentMapper.insert(comment);
-            commentMapper.incCommentCount(comment.getParentId(),1);
-            //创建通知
-            createNotify(comment, dbComment.getCommentator(), NotificationTypeEnum.REPLY_COMMENT);
-        }else {
+            commentMapper.incCommentCount(comment.getParentId(), 1);
+            //创建通知/自己回复自己不创建通知
+            if(comment.getCommentator()!=dbComment.getCommentator()) {
+                createNotify(comment, dbComment.getCommentator(), NotificationTypeEnum.REPLY_COMMENT);
+            }
+        } else {
             //回复问题
             Question question = questionMapper.selectById(comment.getParentId());
-            if(question == null){
+            if (question == null) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOTFOUND);
             }
             commentMapper.insert(comment);
-            questionMapper.incCommentCount(question.getId(),question.getCommentCount());
-           //创建通知
-             createNotify(comment,question.getCreator(), NotificationTypeEnum.REPLY_QUESTION);
+            questionMapper.incCommentCount(question.getId(), question.getCommentCount());
+            //创建通知//自己回复自己不创建通知
+            if (comment.getCommentator() != question.getCreator()) {
+                createNotify(comment, question.getCreator(), NotificationTypeEnum.REPLY_QUESTION);
+            }
         }
     }
 
@@ -80,19 +83,21 @@ public class CommentService {
         notification.setCommentContent(comment.getContent());
         notification.setGmtCreate(System.currentTimeMillis());
         notificationMapper.insert(notification);
+
+
     }
 
     public List<CommentDTO> listByTargetId(Long id, Integer type) {
         List<CommentDTO> commentDTOS = new ArrayList<>();
-        List<Comment> comments = commentMapper.selectByParentId(id,type);
-        if(comments==null){
+        List<Comment> comments = commentMapper.selectByParentId(id, type);
+        if (comments == null) {
             return new ArrayList<>();
         }
-        comments.forEach(i->{
+        comments.forEach(i -> {
             CommentDTO commentDTO = new CommentDTO();
             User user = userMapper.findUserById(i.getCommentator());
             commentDTO.setUser(user);
-            BeanUtils.copyProperties(i,commentDTO);
+            BeanUtils.copyProperties(i, commentDTO);
             commentDTOS.add(commentDTO);
         });
         return commentDTOS;
@@ -100,7 +105,7 @@ public class CommentService {
 
 
     public void incLikeCount(Long id) {
-        commentMapper.incLikeCount(id,1);
+        commentMapper.incLikeCount(id, 1);
     }
 
 
@@ -109,11 +114,15 @@ public class CommentService {
         Comment comment = commentMapper.selectById(id);
 
         commentMapper.deleteFromParentId(comment.getId());
-        notificationMapper.deleteByTypeAndOuterId(id,NotificationTypeEnum.REPLY_COMMENT.getType());
+        notificationMapper.deleteByTypeAndOuterId(id, NotificationTypeEnum.REPLY_COMMENT.getType());
+
         //再删除一级回复以及消息清空
-
         commentMapper.deleteFromId(id);
-        notificationMapper.deleteByTypeAndOuterId(comment.getParentId(),NotificationTypeEnum.REPLY_QUESTION.getType());
+        notificationMapper.deleteByTypeAndOuterId(comment.getParentId(), NotificationTypeEnum.REPLY_QUESTION.getType());
 
+    }
+
+    public Comment selectById(Long id){
+        return commentMapper.selectById(id);
     }
 }

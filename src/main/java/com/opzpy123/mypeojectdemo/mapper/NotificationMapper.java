@@ -25,4 +25,8 @@ public interface NotificationMapper {
 
 
     void deleteByTypeAndOuterId(Long id, int type);
+
+    Notification selectById(Long id);
+
+    void changeStatus(Long id);
 }

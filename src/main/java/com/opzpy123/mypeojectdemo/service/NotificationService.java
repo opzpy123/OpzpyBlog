@@ -53,6 +53,7 @@ public class NotificationService {
         notifications.forEach(i -> {
             NotificationDTO notificationDTO = new NotificationDTO();
             User user = userMapper.findUserById(i.getNotifier());
+            notificationDTO.setId(i.getId());
             notificationDTO.setGmtCreate(i.getGmtCreate());
             notificationDTO.setNotifier(user);
             notificationDTO.setStatus(i.getStatus());
@@ -85,5 +86,13 @@ public class NotificationService {
 
     public Long unreadCount(Long id) {
         return notificationMapper.unreadCount(id);
+    }
+
+    public Notification selectById(Long id){
+        return notificationMapper.selectById(id);
+    }
+
+    public void changeStatus(Long id) {
+        notificationMapper.changeStatus(id);
     }
 }

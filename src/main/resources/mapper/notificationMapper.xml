@@ -33,16 +33,25 @@
     </select>
 
     <select id="selectUserQuestion" resultMap="notificationResultMap">
-        select * from notification where receiver = #{userId} and status=0 and notifier != receiver order by id desc;
+        select * from notification where receiver = #{userId}  order by status ;
     </select>
 
     <select id="unreadCount" resultType="Long">
-        select count(*) from notification where receiver = #{id} and status=0 and notifier != receiver ;
+        select count(*) from notification where receiver = #{id} and status=0 ;
     </select>
 
     <delete id="deleteByTypeAndOuterId">
         delete from notification where outerId=#{id} and type=#{type};
     </delete>
+
+    <select id="selectById" resultMap="notificationResultMap">
+          select * from notification where id = #{id};
+    </select>
+
+
+    <update id="changeStatus">
+        update notification set status=1 where id =#{id};
+    </update>
 
 
 
