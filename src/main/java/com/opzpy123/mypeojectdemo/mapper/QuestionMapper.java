@@ -31,4 +31,9 @@ public interface QuestionMapper {
     List<Question> selectRelated(Question question);
 
 
+    Integer relatedCount(String search);
+
+    List<Question> selectBySearch(String search);
+
+    List<Question> selectByCommentCount();
 }

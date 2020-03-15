@@ -8,6 +8,7 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     TYPE_PARAM_WRONG(2005,"评论类型错误，或不存在"),
     COMMENT_NOTFOUND(2006,"你要回复的评论不存在"),
     CONTENT_NULL(2007,"回复不能为空"),
+    SEARCH_NULL(2008,"搜索结果不存在"),
     ;
 
     private Integer code;

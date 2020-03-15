@@ -2,6 +2,7 @@ package com.opzpy123.mypeojectdemo.interceptor;
 
 import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.mapper.NotificationMapper;
+import com.opzpy123.mypeojectdemo.service.NotificationService;
 import com.opzpy123.mypeojectdemo.service.UserService;
 import com.opzpy123.mypeojectdemo.util.TransformTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     private UserService userService;
 
     @Autowired
-    private NotificationMapper notificationMapper;
+    private NotificationService notificationService;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -39,7 +40,7 @@ public class SessionInterceptor implements HandlerInterceptor {
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
                     //未读消息数
-                    session.setAttribute("unreadCount",notificationMapper.unreadCount(user.getId()));
+                    session.setAttribute("unreadCount",notificationService.unreadCount(user.getId()));
                     break;
                 }
             }

@@ -210,4 +210,40 @@ public class QuestionService {
 
 
     }
+
+    public PaginationDTO selectBySearch(String search) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+        String searchParam ="%"+search+"%";
+        User userByName = userMapper.findUserByName(search);
+        List<Question> questions = null;
+        Integer totalCount;
+        if(userByName!=null){
+            questions = questionMapper.selectUserQuestion(userByName.getId(), 5, 5);
+            totalCount = questions.size();
+        }else {
+           totalCount = questionMapper.relatedCount(searchParam);
+        }
+        if(totalCount==0){
+            throw  new CustomizeException(CustomizeErrorCode.SEARCH_NULL);
+        }
+        paginationDTO.setPagination(1, 1, 1);
+        if(questions==null) {
+            questions = questionMapper.selectBySearch(searchParam);
+        }
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+        questions.forEach(i -> {
+            User user = userMapper.findUserById(i.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(i, questionDTO);
+            questionDTO.setUser(user);
+            questionDTOList.add(questionDTO);
+        });
+        paginationDTO.setData(questionDTOList);
+
+        return paginationDTO;
+    }
+
+    public List<Question> selectByCommentCount() {
+        return  questionMapper.selectByCommentCount();
+    }
 }

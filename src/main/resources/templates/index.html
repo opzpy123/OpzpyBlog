@@ -96,22 +96,19 @@
         <!--热门话题-->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="list-group">
-                <a href="/" class="list-group-item active" style="font-size: 20px;">热门话题</a>
-                <div class="list-group-item">
-                    <h4 class="list-group-item-heading">
-                        开发中
-                    </h4>
-                    <p class="list-group-item-text">
-                        ...
-                    </p>
+                <a href="/" class="list-group-item active" style="font-size: 25px;">热门话题</a>
+                <div th:each="list:${questionList}">
+                    <a th:href="@{'/question/'+${list.getId()}}">
+                        <div class="list-group-item" style="padding: 0px;background-color:#f5f5f5 ">
+                            <h4 style="margin-top: 0px"><label class="label label-info "
+                                                               th:text="${list.getTitle()}"></label></h4>
+                            <h4 style="margin: 5px"><p class="list-group-item-text"
+                                                       style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;"
+                                                       th:text="${list.getDescription()}"></p></h4>
+                        </div>
+                    </a>
                 </div>
-                <a href="#" class="list-group-item">
-                     开发中
-                </a>
-                <a href="#" class="list-group-item">
-                    开发中
-                </a>
-                <a class="list-group-item active" href="#">帮助</a>
+                <a class="list-group-item active" href="#">CreateByOpZpy123</a>
             </div>
 
         </div>
@@ -122,7 +119,8 @@
 
 <div id="dg" style="z-index: 9999; position: fixed ! important; right: 8%; top: 88%;">
     <table width="100%" style="position: absolute; width:260px; right: 0px; top: 0px;">
-        <a style="float: right" class=" btn btn-primary " href="/publish"><h4 ><span class="glyphicon glyphicon-edit"></span>发起</h4>
+        <a style="float: right" class=" btn btn-primary " href="/publish"><h4><span
+                class="glyphicon glyphicon-edit"></span>发起</h4>
         </a>
     </table>
 </div>

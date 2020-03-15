@@ -1,5 +1,6 @@
 package com.opzpy123.mypeojectdemo.controller;
 
+import com.opzpy123.mypeojectdemo.bean.Question;
 import com.opzpy123.mypeojectdemo.bean.User;
 import com.opzpy123.mypeojectdemo.dto.PaginationDTO;
 import com.opzpy123.mypeojectdemo.mapper.UserMapper;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -37,16 +39,22 @@ public class IndexAndRegistController {
      * @return
      */
     @GetMapping("/")
-    public String index(HttpServletRequest request,
-                        Model model,
-                        HttpServletResponse response,
+    public String index(Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
-                        @RequestParam(name = "size", defaultValue = "5") Integer size
-    ) {
-
-
-
-        PaginationDTO paginationDTOs = questionService.selectQuestionDTO(page,size);
+                        @RequestParam(name = "size", defaultValue = "5") Integer size,
+                        @RequestParam(name = "search", required = false) String search) {
+        //搜索列表
+        if (search != null) {
+            PaginationDTO paginationDTOs = questionService.selectBySearch(search);
+            model.addAttribute("resultList", paginationDTOs);
+            return "index";
+        }
+        //热门话题列表
+        List<Question> questionList =  questionService.selectByCommentCount();
+        System.out.println(questionList);
+        model.addAttribute("questionList", questionList);
+        //主列表
+        PaginationDTO paginationDTOs = questionService.selectQuestionDTO(page, size);
         model.addAttribute("resultList", paginationDTOs);
         return "index";
     }
@@ -61,7 +69,6 @@ public class IndexAndRegistController {
     public String regist() {
         return "userRegist";
     }
-
 
 
 }

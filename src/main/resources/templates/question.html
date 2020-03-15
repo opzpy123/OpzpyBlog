@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${question.title}"></title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/editormd.preview.min.css" rel="stylesheet">
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/community.js"></script>
     <script src="/js/moment.js"></script>
+    <script src="/js/editormd.min.js"></script>
+    <script src="/js/lib/marked.min.js"></script>
+    <script src="/js/lib/prettify.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -38,9 +42,16 @@
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑问题</span></a>
                 </span>
                 <hr>
-                <h4>
-                    <div class="col-12" th:text="${question.description}"></div>
-                </h4>
+
+                <div class="col-12 " style="background-color: #f5f5f5;margin: 10px;padding: 2px" id="question-view" >
+                    <textarea  style="display: none" th:utext="${question.description}"></textarea>
+                </div>
+
+                <script type="text/javascript">
+                    $(function() {
+                        var testView = editormd.markdownToHTML("question-view", {});
+                    });
+                </script>
                 <hr class="col-12">
                 <h4>
                     <span th:each="tag:${question.tag.split(',')}">

@@ -37,7 +37,7 @@
     </select>
 
     <select id="unreadCount" resultType="Long">
-        select count(*) from notification where receiver = #{id} and status=0 ;
+        select count(1) from notification where receiver = #{id} and status=0 ;
     </select>
 
     <delete id="deleteByTypeAndOuterId">
