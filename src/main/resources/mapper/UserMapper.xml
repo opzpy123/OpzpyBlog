@@ -22,7 +22,7 @@
 
 
     <select id="findUserByName" resultMap="userResultMap">
-        select id,username,password,avatar_url from user u where u.username=#{username}
+        select * from user  where username=#{username};
     </select>
 
     <insert id="regist">

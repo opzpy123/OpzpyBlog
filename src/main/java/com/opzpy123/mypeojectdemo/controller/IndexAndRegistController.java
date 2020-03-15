@@ -24,13 +24,7 @@ import java.util.UUID;
 public class IndexAndRegistController {
 
     @Autowired
-    private UserMapper userService;
-
-    @Autowired
     private QuestionService questionService;
-
-    @Autowired
-    private NotificationService notificationService;
 
 
     /**
@@ -47,16 +41,22 @@ public class IndexAndRegistController {
         if (search != null) {
             PaginationDTO paginationDTOs = questionService.selectBySearch(search);
             model.addAttribute("resultList", paginationDTOs);
+            //热门话题列表
+            List<Question> questionList =  questionService.selectByCommentCount();
+            System.out.println(questionList);
+            model.addAttribute("questionList", questionList);
+            return "index";
+        }else {
+            //热门话题列表
+            List<Question> questionList =  questionService.selectByCommentCount();
+            System.out.println(questionList);
+            model.addAttribute("questionList", questionList);
+            //主列表
+            PaginationDTO paginationDTOs = questionService.selectQuestionDTO(page, size);
+            model.addAttribute("resultList", paginationDTOs);
             return "index";
         }
-        //热门话题列表
-        List<Question> questionList =  questionService.selectByCommentCount();
-        System.out.println(questionList);
-        model.addAttribute("questionList", questionList);
-        //主列表
-        PaginationDTO paginationDTOs = questionService.selectQuestionDTO(page, size);
-        model.addAttribute("resultList", paginationDTOs);
-        return "index";
+
     }
 
 

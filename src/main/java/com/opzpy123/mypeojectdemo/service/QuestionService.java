@@ -25,7 +25,7 @@ public class QuestionService {
     @Autowired
     private QuestionMapper questionMapper;
     @Autowired
-    private UserMapper  userMapper;
+    private UserMapper userMapper;
 
     public void edit(Long id, Model model) {
         Question question = questionMapper.selectById(id);
@@ -198,39 +198,37 @@ public class QuestionService {
         List<Question> questions = questionMapper.selectRelated(question);
 
         //dto数据 流转换
-       List<QuestionDTO> questionDTOS = new ArrayList<>();
-       questions.forEach(i->{
-           QuestionDTO questionDTOTemp =new QuestionDTO();
-           User user = userMapper.findUserById(i.getCreator());
-           BeanUtils.copyProperties(i, questionDTOTemp);
-           questionDTOTemp.setUser(user);
-           questionDTOS.add(questionDTOTemp);
-       });
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+        questions.forEach(i -> {
+            QuestionDTO questionDTOTemp = new QuestionDTO();
+            User user = userMapper.findUserById(i.getCreator());
+            BeanUtils.copyProperties(i, questionDTOTemp);
+            questionDTOTemp.setUser(user);
+            questionDTOS.add(questionDTOTemp);
+        });
         return questionDTOS;
 
 
     }
 
     public PaginationDTO selectBySearch(String search) {
-        PaginationDTO paginationDTO = new PaginationDTO();
-        String searchParam ="%"+search+"%";
-        User userByName = userMapper.findUserByName(search);
-        List<Question> questions = null;
-        Integer totalCount;
-        if(userByName!=null){
-            questions = questionMapper.selectUserQuestion(userByName.getId(), 5, 5);
-            totalCount = questions.size();
-        }else {
-           totalCount = questionMapper.relatedCount(searchParam);
-        }
-        if(totalCount==0){
-            throw  new CustomizeException(CustomizeErrorCode.SEARCH_NULL);
-        }
-        paginationDTO.setPagination(1, 1, 1);
-        if(questions==null) {
-            questions = questionMapper.selectBySearch(searchParam);
-        }
         List<QuestionDTO> questionDTOList = new ArrayList<>();
+        PaginationDTO paginationDTO = new PaginationDTO();
+        String searchParam = "%" + search + "%";
+        paginationDTO.setPagination(1, 1, 1);
+        List<Question> questions;
+        User  TempUser = userMapper.findUserByName(search) ;
+        if(TempUser!=null){
+            questions = questionMapper.selectUserQuestion(TempUser.getId(), 1, 1);
+            questions.forEach(i -> {
+                User user = userMapper.findUserById(i.getCreator());
+                QuestionDTO questionDTO = new QuestionDTO();
+                BeanUtils.copyProperties(i, questionDTO);
+                questionDTO.setUser(user);
+                questionDTOList.add(questionDTO);
+            });
+        }
+        questions = questionMapper.selectBySearch(searchParam);
         questions.forEach(i -> {
             User user = userMapper.findUserById(i.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
@@ -239,11 +237,10 @@ public class QuestionService {
             questionDTOList.add(questionDTO);
         });
         paginationDTO.setData(questionDTOList);
-
         return paginationDTO;
     }
 
     public List<Question> selectByCommentCount() {
-        return  questionMapper.selectByCommentCount();
+        return questionMapper.selectByCommentCount();
     }
 }
