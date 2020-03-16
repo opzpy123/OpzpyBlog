@@ -1,65 +1,13 @@
-2020-03-15 13:59:16.623  INFO 7496 --- [main] c.o.m.MypeojectdemoApplicationTests      : Starting MypeojectdemoApplicationTests on opzpy123 with PID 7496 (started by opzpy123 in C:\IDEA_WorkSpace\mywebtempelte\mypeojectdemo)
-2020-03-15 13:59:16.624 DEBUG 7496 --- [main] c.o.m.MypeojectdemoApplicationTests      : Running with Spring Boot v2.2.4.RELEASE, Spring v5.2.3.RELEASE
-2020-03-15 13:59:16.625  INFO 7496 --- [main] c.o.m.MypeojectdemoApplicationTests      : No active profile set, falling back to default profiles: default
-2020-03-15 13:59:16.905  WARN 7496 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
-2020-03-15 13:59:17.932  INFO 7496 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2020-03-15 13:59:18.121  INFO 7496 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2020-03-15 13:59:19.103  INFO 7496 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-15 13:59:19.232  INFO 7496 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-03-15 13:59:19.376  WARN 7496 --- [main] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][main] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
-2020-03-15 13:59:19.536  INFO 7496 --- [main] c.o.m.MypeojectdemoApplicationTests      : Started MypeojectdemoApplicationTests in 3.167 seconds (JVM running for 4.085)
-2020-03-15 13:59:19.808  INFO 7496 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2020-03-15 13:59:19.809  INFO 7496 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2020-03-15 13:59:19.810  INFO 7496 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
-2020-03-15 14:59:00.953  INFO 15992 --- [main] c.o.m.MypeojectdemoApplicationTests      : Starting MypeojectdemoApplicationTests on opzpy123 with PID 15992 (started by opzpy123 in C:\IDEA_WorkSpace\mywebtempelte\mypeojectdemo)
-2020-03-15 14:59:00.955 DEBUG 15992 --- [main] c.o.m.MypeojectdemoApplicationTests      : Running with Spring Boot v2.2.4.RELEASE, Spring v5.2.3.RELEASE
-2020-03-15 14:59:00.956  INFO 15992 --- [main] c.o.m.MypeojectdemoApplicationTests      : No active profile set, falling back to default profiles: default
-2020-03-15 14:59:01.299  WARN 15992 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
-2020-03-15 14:59:02.313  INFO 15992 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2020-03-15 14:59:02.489  INFO 15992 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2020-03-15 14:59:03.318  INFO 15992 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-15 14:59:03.424  INFO 15992 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-03-15 14:59:03.580  WARN 15992 --- [main] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][main] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
-2020-03-15 14:59:03.797  INFO 15992 --- [main] c.o.m.MypeojectdemoApplicationTests      : Started MypeojectdemoApplicationTests in 3.165 seconds (JVM running for 4.039)
-2020-03-15 14:59:04.031  INFO 15992 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2020-03-15 14:59:04.033  INFO 15992 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2020-03-15 14:59:04.035  INFO 15992 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
-2020-03-15 15:43:02.312  INFO 17212 --- [main] c.o.m.MypeojectdemoApplicationTests      : Starting MypeojectdemoApplicationTests on opzpy123 with PID 17212 (started by opzpy123 in C:\IDEA_WorkSpace\mywebtempelte\mypeojectdemo)
-2020-03-15 15:43:02.313 DEBUG 17212 --- [main] c.o.m.MypeojectdemoApplicationTests      : Running with Spring Boot v2.2.4.RELEASE, Spring v5.2.3.RELEASE
-2020-03-15 15:43:02.314  INFO 17212 --- [main] c.o.m.MypeojectdemoApplicationTests      : No active profile set, falling back to default profiles: default
-2020-03-15 15:43:02.677  WARN 17212 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
-2020-03-15 15:43:03.540  INFO 17212 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2020-03-15 15:43:03.679  INFO 17212 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2020-03-15 15:43:04.654  INFO 17212 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-15 15:43:04.762  INFO 17212 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-03-15 15:43:04.899  WARN 17212 --- [main] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][main] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
-2020-03-15 15:43:05.143  INFO 17212 --- [main] c.o.m.MypeojectdemoApplicationTests      : Started MypeojectdemoApplicationTests in 3.156 seconds (JVM running for 4.07)
-2020-03-15 15:43:05.391  INFO 17212 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2020-03-15 15:43:05.393  INFO 17212 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2020-03-15 15:43:05.397  INFO 17212 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
-2020-03-15 16:19:23.245  INFO 12916 --- [main] c.o.m.MypeojectdemoApplicationTests      : Starting MypeojectdemoApplicationTests on opzpy123 with PID 12916 (started by opzpy123 in C:\IDEA_WorkSpace\mywebtempelte\mypeojectdemo)
-2020-03-15 16:19:23.246 DEBUG 12916 --- [main] c.o.m.MypeojectdemoApplicationTests      : Running with Spring Boot v2.2.4.RELEASE, Spring v5.2.3.RELEASE
-2020-03-15 16:19:23.248  INFO 12916 --- [main] c.o.m.MypeojectdemoApplicationTests      : No active profile set, falling back to default profiles: default
-2020-03-15 16:19:23.564  WARN 12916 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
-2020-03-15 16:19:24.565  INFO 12916 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2020-03-15 16:19:24.718  INFO 12916 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2020-03-15 16:19:25.637  INFO 12916 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-15 16:19:25.742  INFO 12916 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-03-15 16:19:25.860  WARN 12916 --- [main] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][main] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
-2020-03-15 16:19:26.089  INFO 12916 --- [main] c.o.m.MypeojectdemoApplicationTests      : Started MypeojectdemoApplicationTests in 3.153 seconds (JVM running for 4.012)
-2020-03-15 16:19:26.325  INFO 12916 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2020-03-15 16:19:26.328  INFO 12916 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2020-03-15 16:19:26.330  INFO 12916 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
-2020-03-15 16:36:28.546  INFO 17248 --- [main] c.o.m.MypeojectdemoApplicationTests      : Starting MypeojectdemoApplicationTests on opzpy123 with PID 17248 (started by opzpy123 in C:\IDEA_WorkSpace\mywebtempelte\mypeojectdemo)
-2020-03-15 16:36:28.547 DEBUG 17248 --- [main] c.o.m.MypeojectdemoApplicationTests      : Running with Spring Boot v2.2.4.RELEASE, Spring v5.2.3.RELEASE
-2020-03-15 16:36:28.547  INFO 17248 --- [main] c.o.m.MypeojectdemoApplicationTests      : No active profile set, falling back to default profiles: default
-2020-03-15 16:36:28.900  WARN 17248 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
-2020-03-15 16:36:29.904  INFO 17248 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2020-03-15 16:36:30.050  INFO 17248 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2020-03-15 16:36:30.929  INFO 17248 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-15 16:36:31.042  INFO 17248 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-03-15 16:36:31.168  WARN 17248 --- [main] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][main] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
-2020-03-15 16:36:31.351  INFO 17248 --- [main] c.o.m.MypeojectdemoApplicationTests      : Started MypeojectdemoApplicationTests in 3.081 seconds (JVM running for 3.951)
-2020-03-15 16:36:31.577  INFO 17248 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2020-03-15 16:36:31.578  INFO 17248 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2020-03-15 16:36:31.580  INFO 17248 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-03-16 16:24:44.380  INFO 17644 --- [main] c.o.m.MypeojectdemoApplicationTests      : Starting MypeojectdemoApplicationTests on opzpy123 with PID 17644 (started by opzpy123 in C:\IDEA_WorkSpace\mywebtempelte\mypeojectdemo)
+2020-03-16 16:24:44.384 DEBUG 17644 --- [main] c.o.m.MypeojectdemoApplicationTests      : Running with Spring Boot v2.2.4.RELEASE, Spring v5.2.3.RELEASE
+2020-03-16 16:24:44.385  INFO 17644 --- [main] c.o.m.MypeojectdemoApplicationTests      : No active profile set, falling back to default profiles: default
+2020-03-16 16:24:44.628  WARN 17644 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2020-03-16 16:24:45.388  INFO 17644 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-03-16 16:24:45.543  INFO 17644 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-03-16 16:24:46.377  INFO 17644 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-16 16:24:46.472  INFO 17644 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-03-16 16:24:46.608  WARN 17644 --- [main] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][main] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+2020-03-16 16:24:46.751  INFO 17644 --- [main] c.o.m.MypeojectdemoApplicationTests      : Started MypeojectdemoApplicationTests in 2.612 seconds (JVM running for 3.494)
+2020-03-16 16:24:47.038  INFO 17644 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-03-16 16:24:47.040  INFO 17644 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2020-03-16 16:24:47.041  INFO 17644 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed

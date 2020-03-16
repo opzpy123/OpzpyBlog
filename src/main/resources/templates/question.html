@@ -7,6 +7,7 @@
     <title th:text="${question.title}"></title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/editormd.preview.min.css" rel="stylesheet">
+    <link href="/css/editormd.min.css" rel="stylesheet"  >
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
@@ -46,7 +47,6 @@
                 <div class="col-12 " style="background-color: #f5f5f5;margin: 10px;padding: 2px" id="question-view" >
                     <textarea  style="display: none" th:utext="${question.description}"></textarea>
                 </div>
-
                 <script type="text/javascript">
                     $(function() {
                         var testView = editormd.markdownToHTML("question-view", {});
@@ -75,8 +75,23 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <h5 style="margin-top: 2px" th:text="${comment.user.username}+' :'"></h5>
-                            <h4 th:text="${comment.content}"></h4>
+                            <h4 style="margin-top: 2px" th:text="${comment.user.username}+' :'"></h4>
+<!--                            <h4 th:text="${comment.content}"></h4>-->
+<!--                            class="col-12 " style="background-color: #f5f5f5;margin: 10px;padding: 2px"-->
+                            <!--被一个循环标签包裹-->
+
+<!--                            <input type="hidden" th:id="${comment.id}">-->
+                            <div   th:id="${comment.id}" >
+                                <textarea  style="display: none" th:utext="${comment.content}"></textarea>
+                            </div>
+                            <script type="text/javascript">
+                                $(function() {
+                                    var v = [[${comment.id}]]
+                                    editormd.markdownToHTML(v, {});
+                                });
+                            </script>
+
+
                             <div class="btn-group btn-group-sm">
                                 <span class="btn btn-default glyphicon glyphicon-thumbs-up" onclick="likeCount(this)"
                                       th:id="${comment.id}"><span th:text="${comment.likeCount}">1</span></span>
@@ -86,19 +101,9 @@
                             <span class="pull-right"
                                   th:text="${#dates.format(comment.gmtCreate,'yyyy/MM/dd  HH:mm')}"></span>
                             <!--二级评论-->
-
                             <div class="col-12 well  collapse sub-comments "
                                  style="margin-top: 10px;background-color: #e7e7e778"
                                  th:id="${'comment-'+comment.id}">
-<!--                                <form class="form-inline">-->
-
-<!--                                    <button type="submit" class="pull-right btn btn-primary" onclick="comment(this)"-->
-<!--                                            th:data-id="${comment.id}">回复-->
-<!--                                    </button>-->
-<!--                                    <input type="text" class="form-control" th:id="'input-'+${comment.id}"-->
-<!--                                           placeholder="回复评论..">-->
-<!--                                </form>-->
-
                                 <div class="input-group">
                                     <input type="text" class="form-control"  th:id="'input-'+${comment.id}" placeholder="回复评论..">
                                     <span  class="btn input-group-addon" onclick="comment(this)" th:data-id="${comment.id}">回复</span>
@@ -114,19 +119,25 @@
             <div class="col-13 column" id="comment-section">
                 <input type="hidden" id="questionId" th:value="${question.id}">
                 <span class="alert alert-danger" style="float: left" th:if="${session.user==null}">用户未登录,请在登陆之后回复</span>
-                <textarea id="textArea" style="margin: 10px 0" placeholder="请输入回复内容..." class="form-control"
+                <div class="form-group" id="comment-editor">
+                <textarea id="textArea" style="margin: 10px 0;display: none" placeholder="请输入回复内容..." class="form-control"
                           rows="6"></textarea>
+
+                </div>
+<!--                <button class="btn bg-primary" id="open-image-dialog">上传图片</button>-->
                 <div class="media" th:if="${session.user!=null}">
                     <div class="media-left">
                         <a class="pull-left" style="color: #080808;padding: 3px">
                             <img th:src="'/'+${session.user.avatarUrl}" class="media-object img-rounded"
                                  style="width: 30px;height: 30px" alt='avatar'/>
                         </a>
+
                     </div>
                     <div class="media-body">
                         <h4 th:text="${session.user.username}"></h4>
+
                     </div>
-                    <div class="media-left">
+                    <div class="media-right">
                         <button type="submit" class="btn btn-primary " style="float: right;margin-bottom: 10px"
                                 onclick="post()"> 回 复
                         </button>
@@ -177,5 +188,37 @@
     </div>
 
 </div>
+
+<script type="text/javascript">
+
+    $(function() {
+        var editor = editormd("comment-editor", {
+            width  : "100%",
+            height : "200px",
+            path   : "/js/lib/",
+            delay: 0,
+            watch: false,
+            lineNumbers:false,
+            imageUpload: true,
+            imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "/file/upload",
+            placeholder:"请输入回复内容",
+            toolbarIcons : function() {
+                // Or return editormd.toolbarModes[name]; // full, simple, mini
+                // Using "||" set icons align right.
+                return ["undo", "redo", "|", "bold", "hr", "|", "preview", "watch", "|", "fullscreen", "info", "image"]
+            },
+    });
+
+
+        // $("#open-image-dialog").bind('click', function(){
+        //     // load and execute plugin
+        //     editor.executePlugin("imageDialog", "../plugins/image-dialog/image-dialog");
+        // });
+
+    });
+
+
+</script>
 </body>
 </html>

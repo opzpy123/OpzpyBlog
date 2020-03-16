@@ -5,31 +5,50 @@ import com.opzpy123.mypeojectdemo.dto.FileDTO;
 
 import java.io.*;
 
+import com.opzpy123.mypeojectdemo.provider.AliOssProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import java.net.URL;
 import java.sql.SQLException;
 
 
 @Controller
 public class FileController {
 
+    @Autowired
+    private AliOssProvider aliOssProvider;
+
     @PostMapping("/file/upload")
     @ResponseBody
-    public FileDTO upload(HttpServletRequest request) throws IOException, SQLException {
+    public FileDTO upload(HttpServletRequest request) {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        MultipartFile multipartFile = multipartRequest.getFile("editormd-image-file");
-
-        //图片上传接口----未实现
+        MultipartFile file = multipartRequest.getFile("editormd-image-file");
 
 
-        FileDTO fileDTO = new FileDTO();
-        fileDTO.setSuccess(1);
-        fileDTO.setUrl("/image/picture/wechat.jpg");
-        return fileDTO;
+        //图片上传接口
+        try {
+            URL  url = aliOssProvider.upload(file.getInputStream(), file.getOriginalFilename());
+            FileDTO fileDTO = new FileDTO();
+            fileDTO.setSuccess(1);
+            fileDTO.setMessage("上传成功，点击确定按钮即可");
+            fileDTO.setUrl(url.toString());
+            return fileDTO;
+        } catch (IOException e) {
+            e.printStackTrace();
+            FileDTO fileDTO = new FileDTO();
+            fileDTO.setSuccess(0);
+            fileDTO.setMessage("上传失败，请刷新重试");
+            return fileDTO;
+
+        }
+
+
+
     }
 
 
