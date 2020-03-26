@@ -62,6 +62,7 @@ public class userRestfulController {
         String loginMsg = login.getMsg();
         if(login.isSuccess()) {
             session.setAttribute("user", user);
+            System.out.println(user);
             Cookie cookie = new Cookie("cookie_user", TransformTest.str2HexStr(user.getUsername()));
             cookie.setMaxAge(60 * 60 * 24 * 3);//3天免登录
             cookie.setPath("/");
