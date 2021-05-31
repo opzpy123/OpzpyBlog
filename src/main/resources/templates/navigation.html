@@ -9,7 +9,9 @@
                     data-target="#bs-example-navbar-collapse-1"><span
                     class="sr-only">opzpy123</span><span class="icon-bar"></span><span
                     class="icon-bar"></span><span class="icon-bar"></span></button>
-            <a class="navbar-brand" href="/">opzpy123</a>
+            <a class="navbar-brand" href="/">
+<!--                <img class="pull-left" src="/image/picture/logo.png" style="width: 25px;height: 25px" alt='logo'>-->
+                opzpy123</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -32,7 +34,7 @@
                 </li>
                 <li th:if="${session.user!=null}" role="presentation">
                     <a href="/profile/replies">通知 <span class="badge" style="background-color:#337ab7 ;margin-bottom: 2px;font-size: 8px;" th:text="${session.unreadCount}">14</span></a>
-<!--                    <span class="badge" th:text="${unreadCount}">14</span>-->
+                    <!--                    <span class="badge" th:text="${unreadCount}">14</span>-->
                 </li>
                 <li class="dropdown" th:if="${session.user!=null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">个人中心<strong
@@ -40,6 +42,8 @@
                     <ul class="dropdown-menu">
                         <!--                            <li><a href="#">消息中心</a></li>-->
                         <li><a href="/profile/questions">我的博客</a></li>
+                        <li><a th:href="'/contact/toPage?userId='+${session.user.id}">联系方式</a></li>
+                        <li><a href="#">添加商品</a></li>
                         <li><a href="/user/outLogging">退出登录</a></li>
                         <li class="divider"></li>
                         <li><a th:text="'欢迎回来：'+${session.user.username}">欢迎回来:</a></li>
@@ -88,7 +92,7 @@
                                 <h5>
                                     没有账号？<a href="/userRegist">注册</a>
                                     <a href="https://github.com/login/oauth/authorize?client_id=740a311703dbdcbfeddd&redirect_uri=http://localhost:8080/callback?scope=user&state=1"
-                                       style="display: block ; text-align: right">github游客登录</a></h5>
+                                       style="display: block ; text-align: right">github登录</a></h5>
                             </div>
                         </div>
                     </form>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>联系方式</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!--    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>-->
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <!--顶部条和介绍巨幕-->
+    <div class="row clearfix">
+        <div class="col-md-13 column">
+            <!--顶部条-->
+            <div th:insert="navigation :: nav"></div>
+        </div>
+    </div>
+    <!--主页面-->
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column well">
+            <div>
+                <div style="width: 50%;margin:0 auto">
+                    <form action="/contact/addContact" method="post" name="userContact" class="form-group">
+                        <input type="text" th:value="${user.getId()}" name="userId" hidden >
+                        <div class="input-group" style="margin:20px">
+                            <span class="input-group-addon" id="input1">用户名</span>
+                            <input type="text" readonly class="form-control" th:placeholder="${user.getUsername()}"
+                                   th:value="${user.getUsername()}"
+                                   aria-describedby="basic-addon1" name="userName">
+                        </div>
+                        <div class="input-group" style="margin:20px">
+                            <span class="input-group-addon" id="input2">联系方式</span>
+                            <input type="text"  class="form-control" placeholder="请输入你的联系方式"
+                                   aria-describedby="basic-addon1" name="userContact">
+                        </div>
+                        <div style="margin:0 auto;text-align: center">
+                        <input style="margin:0 auto" type="submit" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+        <div style="text-align: center">
+            <a href="http://www.beian.miit.gov.cn/">豫ICP备‪20011717‬号</a>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

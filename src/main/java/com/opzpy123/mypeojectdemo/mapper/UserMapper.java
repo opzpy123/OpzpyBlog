@@ -22,4 +22,7 @@ public interface UserMapper {
     User findUserById(Long id);
 
 
+    Boolean updateUserContact(Long id, String contact);
+
+
 }

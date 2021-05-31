@@ -75,7 +75,7 @@
     </select>
 
     <select id="selectByCommentCount" resultMap="questionResultMap">
-        select id,title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count ,tag from question  order by comment_count desc LIMIT 7 ;
+        select id,title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count ,tag from question  order by comment_count desc LIMIT 8 ;
     </select>
 
 

@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>opzpy123的java博客社区</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>opzpy123</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!--    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>-->
     <!--    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>-->
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-    <script src="js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -21,24 +21,15 @@
         <div class="col-md-13 column">
             <!--顶部条-->
             <div th:insert="navigation :: nav"></div>
-            <div class="jumbotron well">
-                <h1>
-                    Hello, world!
-                </h1>
-                <p>
-                    这是一个基于springboot开发的极客java论坛项目,登录发博客在右上角，先登录才能发博客嗷！项目已提交Github,点击按钮直达。
-                </p>
-                <p>
-                    <a class="btn btn-primary btn-large" href="https://github.com/opzpy123/JavaCommunity">项目地址</a>
-                    <a class="btn btn-primary btn-large" href="http://118.178.138.20:8888/">个人博客</a>
-                </p>
+            <div class=" jumbotron well" style="text-align:center">
+                <img class="img-rounded " style="width: 100%" src="/image/picture/img.png" alt='slogan'>
             </div>
         </div>
     </div>
     <!--媒体列表-->
     <div class="row clearfix">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 column well">
-            <span style="font-size: 27px"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 博客块</span>
+            <span style="font-size: 27px"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 小知识</span>
             <hr>
             <div class="media" th:each="entries:${resultList.data}">
                 <div class="media-left">
@@ -54,8 +45,7 @@
                            th:text="${entries.title}"></a>
                     </h4>
                     <!--过长文字溢出省略号代替： style="width: 550px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"-->
-                    <h5 style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;"
-                        th:text="${entries.description}">aa</h5>
+                    <h5 th:text="${#strings.abbreviate(entries.description,130)}">aa</h5>
                     <span style="font-size: 12px;font-weight: normal;color: #999;">
                         <b th:text="'作者:'+${entries.user.username}+' | '">springboot</b>
                         <b th:text="'回复:'+${entries.commentCount+'   | '}">2</b>
@@ -93,35 +83,57 @@
                     </li>
                 </ul>
             </nav>
+            <div style="text-align: center">
+                <a href="http://www.beian.miit.gov.cn/">豫ICP备‪20011717‬号</a>
+            </div>
         </div>
         <!--热门话题-->
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12  hidden-xs hidden-sm">
             <div class="list-group">
                 <a href="/" class="list-group-item active" style="font-size: 25px;">热门话题</a>
                 <div th:each="list:${questionList}">
                     <a th:href="@{'/question/'+${list.getId()}}">
                         <div class="list-group-item" style="padding: 0px;background-color:#f5f5f5 ">
                             <h4 style="margin-top: 0px"><label class="label label-info "
-                                                               th:text="${list.getTitle()}"></label></h4>
-                            <h4 style="margin: 5px"><p class="list-group-item-text"
-                                                       style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;"
-                                                       th:text="${list.getDescription()}"></p></h4>
+                                                               th:text="${list.tag}==''?'1':${list.tag}"></label></h4>
+                            <h4 style="margin: 5px"><p class="list-group-item-text" th:text="${#strings.abbreviate(list.title,12)}"></p></h4>
                         </div>
                     </a>
                 </div>
                 <a class="list-group-item active" href="#">CreateByOpZpy123</a>
             </div>
-
         </div>
 
+
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12  hidden-lg hidden-md">
+            <div class="list-group">
+                <a href="/" class="list-group-item active" style="font-size: 25px;">热门话题</a>
+                <div th:each="list:${questionList}">
+                    <a th:href="@{'/question/'+${list.getId()}}">
+                        <div class="list-group-item" style="padding: 0px;background-color:#f5f5f5 ">
+                            <h4 style="margin-top: 0px"><label class="label label-info "
+                                                               th:text="${#strings.abbreviate(list.title,12)}"></label></h4>
+                            <h4 style="margin: 5px"><p class="list-group-item-text" th:text="${#strings.abbreviate(list.description,60 )}"></p></h4>
+                        </div>
+                    </a>
+                </div>
+                <a class="list-group-item active" href="#">CreateByOpZpy123</a>
+            </div>
+        </div>
+
+
     </div>
+
 </div>
+
+
+
 
 
 <div id="dg" style="z-index: 9999; position: fixed ! important; right: 8%; top: 88%;">
     <table width="100%" style="position: absolute; width:260px; right: 0px; top: 0px;">
         <a style="float: right" class=" btn btn-primary " href="/publish"><h4><span
-                class="glyphicon glyphicon-edit"></span>发起</h4>
+                class="glyphicon glyphicon-edit"></span>提问</h4>
         </a>
     </table>
 </div>

@@ -30,8 +30,8 @@ public class AliOssProvider {
 // 上传文件流。
         ossClient.putObject(bucketName, filename, fis);
 
-        // 设置URL过期时间为1小时。
-        Date expiration = new Date(new Date().getTime() + 15*24*3600 * 1000);
+        // 设置URL过期时间为10年。
+        Date expiration = new Date(new Date().getTime() + 10*12*30*24*3600*1000L);
 // 生成以GET方法访问的签名URL，访客可以直接通过浏览器访问相关内容。
         URL url = ossClient.generatePresignedUrl(bucketName, filename, expiration);
         System.out.println(url);

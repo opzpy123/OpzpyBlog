@@ -19,22 +19,27 @@
         <result property="avatarUrl" column="avatar_url" />
     </resultMap>
 
+    <update id="updateUserContact">
+        update user set contact =  #{contact} where id=#{id};
+    </update>
+
 
 
     <select id="findUserByName" resultMap="userResultMap">
-        select * from user  where username=#{username};
+        select id,username,password,avatar_url from user  where username=#{username};
     </select>
 
     <insert id="regist">
-        insert into user values(#{id},#{username},#{password},#{avatarUrl})
+        insert into user(id,username,password,avatar_url) values(#{id},#{username},#{password},#{avatarUrl});
     </insert>
+
 
     <select id="login" resultType="Long">
         select u.id from user u where u.username = #{username} and password = #{password}
     </select>
 
     <select id="findUserById" resultMap="userResultMap">
-        select id,username,password,avatar_url from user u where u.id=#{id}
+        select id,username,password,avatar_url,contact from user u where u.id=#{id}
     </select>
 
 

@@ -12,5 +12,5 @@ public class User implements Serializable {
     //对于github用户，密码是用户id
     private String password;
     private String avatarUrl;
-
+    private String contact;
 }

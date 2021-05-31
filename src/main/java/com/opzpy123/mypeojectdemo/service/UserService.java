@@ -11,72 +11,83 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserService {
-    @Autowired
-    private UserMapper userMapper;
-    /**
-     * 注册
-     *
-     * @param user 参数封装
-     * @return Result
-     */
-    public Result regist(User user) {
-        Result result = new Result();
-        result.setSuccess(false);
-        result.setDetail(null);
-        try {
-            User existUser = userMapper.findUserByName(user.getUsername());
-            if (existUser != null) {
-                //如果用户名已存在
-                result.setMsg("用户名已存在");
+	@Autowired
+	private UserMapper userMapper;
 
-            } else {
-                user.setAvatarUrl("image/letterAvatar/"+user.getUsername().charAt(0)+".jpg");
-                userMapper.regist(user);
-                result.setMsg("注册成功");
-                result.setSuccess(true);
-                result.setDetail(user);
-            }
-        } catch (Exception e) {
-            result.setMsg(e.getMessage());
-            e.printStackTrace();
-        }
-        return result;
-    }
+	/**
+	 * 注册
+	 *
+	 * @param user 参数封装
+	 * @return Result
+	 */
+	public Result regist(User user) {
+		Result result = new Result();
+		result.setSuccess(false);
+		result.setDetail(null);
+		try {
+			User existUser = userMapper.findUserByName(user.getUsername());
+			if (existUser != null) {
+				//如果用户名已存在
+				result.setMsg("用户名已存在");
 
-    /**
-     * 登录
-     *
-     * @param user 用户名和密码
-     * @return Result
-     */
-    public Result login(User user) {
-        Result result = new Result();
-        result.setSuccess(false);
-        result.setDetail(null);
-        try {
-            Long userId = userMapper.login(user);
-            if (userId == null) {
-                result.setMsg("用户名或密码错误");
-            } else {
-                result.setMsg("登录成功");
-                result.setSuccess(true);
-                user.setId(userId);
-                result.setDetail(user);
-            }
-        } catch (Exception e) {
-            result.setMsg(e.getMessage());
-            e.printStackTrace();
-        }
-        return result;
-    }
+			} else {
+				user.setAvatarUrl("image/letterAvatar/" + user.getUsername().charAt(0) + ".jpg");
+				userMapper.regist(user);
+				result.setMsg("注册成功");
+				result.setSuccess(true);
+				result.setDetail(user);
+			}
+		} catch (Exception e) {
+			result.setMsg(e.getMessage());
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/**
+	 * 登录
+	 *
+	 * @param user 用户名和密码
+	 * @return Result
+	 */
+	public Result login(User user) {
+		Result result = new Result();
+		result.setSuccess(false);
+		result.setDetail(null);
+		try {
+			Long userId = userMapper.login(user);
+			if (userId == null) {
+				result.setMsg("用户名或密码错误");
+			} else {
+				result.setMsg("登录成功");
+				result.setSuccess(true);
+				user.setId(userId);
+				result.setDetail(user);
+			}
+		} catch (Exception e) {
+			result.setMsg(e.getMessage());
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 
-    public User findUserByName(String username){
-        return userMapper.findUserByName(username);
-    }
+	public User findUserByName(String username) {
+		return userMapper.findUserByName(username);
+	}
 
-    public User findUserById(Long id){
-        return userMapper.findUserById(id);
-    }
+	public User findUserById(Long id) {
+		return userMapper.findUserById(id);
+	}
+
+	public boolean updateUserContact(Long id, String contact) {
+
+		User userById = userMapper.findUserById(id);
+		if (userById == null) {
+			return false;
+		}
+		boolean isSuccess = userMapper.updateUserContact(id, contact);
+		return isSuccess;
+	}
 
 }

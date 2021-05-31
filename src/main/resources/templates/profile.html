@@ -22,10 +22,20 @@
             <div th:insert="navigation :: nav"></div>
         </div>
     </div>
+
     <!--个人资料面板-->
     <div class="row clearfix">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12  column well">
-            <h3><span th:text="${sectionName}">kik</span></h3>
+<!--            <h3><span th:text="${sectionName}">kik</span></h3>-->
+            <ul class="nav nav-pills nav-justified ">
+                <li role="presentation" th:class="${section=='questions'}?'active':' '"><a href="/profile/questions" class="list-group-item">我的博客</a></li>
+                <li role="presentation" th:class="${section=='replies'}?'active':''"> <a href="/profile/replies" class="list-group-item">
+                    最新回复<span class="badge" th:text="${session.unreadCount}">14</span>
+                </a></li>
+            </ul>
+
+
+
             <hr>
             <!--我的博客面板-->
             <div th:if="${section=='questions'}">
@@ -39,8 +49,8 @@
                                                      th:href="@{'/question/'+${entries.id}}"></a>
                         </h4>
 
-                        <span style="font-size: 16px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;"
-                            th:text="${entries.description}">aa</span>
+                        <span th:text="${#strings.abbreviate(entries.description,60)}">aa</span>
+                        <br>
                         <span style="font-size: 12px;font-weight: normal;color: #999;">
                                     <b th:text="'作者:'+${entries.user.username}+'●'">springboot</b>
                                     <b th:text="${entries.commentCount+' 回复 ●'}">2</b>
@@ -83,7 +93,7 @@
                                 <span class="label label-warning"th:if="${notice.status==0}">未读</span>
                             </div>
                             <div>
-                                <span style="font-size: 18px" th:text="${notice.content}"></span>
+                                <span style="font-size: 18px" th:text="${#strings.abbreviate(notice.content,60)}"></span>
                             </div>
                             <span style="font-size: 12px;font-weight: normal;color: #999;">
                             <b th:text="${#dates.format(notice.gmtCreate,'yyyy/MM/dd  HH:mm')}"></b>
@@ -98,7 +108,7 @@
 
 
         <!--热门话题-->
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 column">
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs column">
             <div class="list-group">
                 <a href="/profile/questions" class="list-group-item"
                    th:class="${section=='questions'}?'list-group-item active':'list-group-item'">我的博客</a>
