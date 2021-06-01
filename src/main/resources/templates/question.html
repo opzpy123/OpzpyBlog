@@ -39,7 +39,7 @@
                         <b th:text="'浏览数:'+${question.viewCount}+' | '">31</b>
                         <b th:text="'修改时间:'+${#dates.format(question.gmtModified,'yyyy/MM/dd  HH:mm')}"></b>
                         <a th:if="${session.user!=null && session.user.id==question.creator}"
-                           th:href="@{'/publish/'+${question.id}}" style="color: #999">
+                           th:href="@{'/publish/edit/'+${question.id}}" style="color: #999">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑问题</span></a>
                 </span>
                 <hr>

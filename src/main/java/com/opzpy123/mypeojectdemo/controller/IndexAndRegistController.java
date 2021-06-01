@@ -43,13 +43,11 @@ public class IndexAndRegistController {
             model.addAttribute("resultList", paginationDTOs);
             //热门话题列表
             List<Question> questionList =  questionService.selectByCommentCount();
-            System.out.println(questionList);
             model.addAttribute("questionList", questionList);
             return "index";
         }else {
             //热门话题列表
             List<Question> questionList =  questionService.selectByCommentCount();
-            System.out.println(questionList);
             model.addAttribute("questionList", questionList);
             //主列表
             PaginationDTO paginationDTOs = questionService.selectQuestionDTO(page, size);

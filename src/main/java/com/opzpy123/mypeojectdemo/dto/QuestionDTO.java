@@ -4,8 +4,10 @@ import com.opzpy123.mypeojectdemo.bean.Question;
 import com.opzpy123.mypeojectdemo.bean.User;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class QuestionDTO {
+public class QuestionDTO implements Serializable {
     private Long id;
     private String title;
     private String description;

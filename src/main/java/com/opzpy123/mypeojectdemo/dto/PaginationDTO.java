@@ -2,6 +2,7 @@ package com.opzpy123.mypeojectdemo.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * 分页功能后台实现
  */
 @Data
-public class PaginationDTO<T> {
+public class PaginationDTO<T> implements Serializable {
     private List<T> data;
     private boolean showPrevious;//前一页按钮
     private boolean showFirstPage;//首页按钮

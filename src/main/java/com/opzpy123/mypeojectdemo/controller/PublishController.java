@@ -29,9 +29,13 @@ public class PublishController {
     private CommentService commentService;
 
 
-    @GetMapping("/publish/{id}")
+    @GetMapping("/publish/edit/{id}")
     public String edit(@PathVariable(name = "id")Long id,Model model){
-
+        System.out.println("这里进来");
+        System.out.println("这里进来");
+        System.out.println("这里进来");
+        System.out.println("这里进来");
+        System.out.println("这里进来");
         questionService.edit(id,model);
         return "publish";
     }

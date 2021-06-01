@@ -5,11 +5,12 @@ import com.opzpy123.mypeojectdemo.mapper.UserMapper;
 import com.opzpy123.mypeojectdemo.util.AvatarGenerater;
 import com.opzpy123.mypeojectdemo.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class UserService {
 	@Autowired
 	private UserMapper userMapper;
@@ -72,10 +73,13 @@ public class UserService {
 	}
 
 
+	@Cacheable(value="users", key="#username")
 	public User findUserByName(String username) {
 		return userMapper.findUserByName(username);
 	}
 
+
+	@Cacheable(value="users", key="#id")
 	public User findUserById(Long id) {
 		return userMapper.findUserById(id);
 	}

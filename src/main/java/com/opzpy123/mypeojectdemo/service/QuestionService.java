@@ -11,6 +11,9 @@ import com.opzpy123.mypeojectdemo.mapper.UserMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -36,7 +39,6 @@ public class QuestionService {
         model.addAttribute("id", question.getId());
 
     }
-
 
     public String createOrUpdate(Question question, Model model) {
         if (question.getId() == null) {
