@@ -19,4 +19,20 @@ public class CommodityService {
 		return commodityMapper.selectUsersCommodity(userId);
 	}
 
+	public void deleteCommodity(Long commodyId) {
+		commodityMapper.deleteCommodity(commodyId);
+	}
+
+	public Commodity selectById(Long commodyId) {
+		Commodity commodity = commodityMapper.selectById(commodyId);
+		return commodity;
+	}
+
+	public void updateCommodity(Commodity commodity) {
+		commodityMapper.updateCommodity(commodity);
+	}
+
+	public void addCommodity(Commodity commodity) {
+		commodityMapper.addCommodity(commodity);
+	}
 }

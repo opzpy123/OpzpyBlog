@@ -38,7 +38,7 @@
                         </div>
                         <div class="input-group" style="margin:20px">
                             <span class="input-group-addon" id="input2">联系方式</span>
-                            <input type="text"  class="form-control" placeholder="请输入你的联系方式"
+                            <input type="text" th:value="${user.getContact()}" class="form-control" placeholder="请输入你的联系方式"
                                    aria-describedby="basic-addon1" name="userContact">
                         </div>
                         <div style="margin:0 auto;text-align: center">

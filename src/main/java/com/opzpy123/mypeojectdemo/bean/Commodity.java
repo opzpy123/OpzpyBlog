@@ -9,4 +9,6 @@ public class Commodity {
 	private String name;//商品名
 	private String image;//商品展示图片(链接)
 	private String description;//商品描述
+
+
 }

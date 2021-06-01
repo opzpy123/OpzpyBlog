@@ -8,7 +8,6 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-
 </head>
 <body>
 <div class="container">
@@ -25,38 +24,56 @@
             <div hidden id="contact" class="alert alert-info" role="alert"
                  th:text="'联系方式为:'+${user.getContact()}">..
             </div>
+
             <div class="row">
                 <!-- 商品为空-->
                 <div th:if="${commodies.isEmpty()}" class="col-xs-12">
-                    <div class="jumbotron" >
+                    <div class="jumbotron">
                         <h2 style="text-align: center">这里没有商品</h2>
                         <p th:if="${session.user==null}" style="text-align: center">请联系商家添加商品</p>
 
-                        <p th:if="${session.user!=null&&session.user.getId()!=user.getId()}" style="text-align: center">请联系商家添加商品</p>
+                        <p th:if="${session.user!=null&&session.user.getId()!=user.getId()}" style="text-align: center">
+                            请联系商家添加商品</p>
                         <div style="text-align: center">
-                            <a href="#" th:if="${session.user!=null&&session.user.getId()==user.getId()}" class="btn btn-default" role="button"
-                                    onclick="addCommody()">添加商品
-                            </a>
+                            <div onclick="showContact()" class="btn btn-default" role="button">
+                                联系商家
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- 有商品-->
                 <div th:if="${!commodies.isEmpty()}" class="col-sm-6 col-md-4" th:each="commody:${commodies}">
                     <div class="thumbnail">
-                        <img th:src="${commody.image}" alt="..." src="/image/picture/potato.png"/>
+                        <div th:if="${session.user!=null && session.user.getId()==user.getId()}">
+                            <a style="float: right;font-size: 25px"
+                               th:href="'/commodity/deleteCommodity/'+${commody.getId()}+'/'+${user.getId()}"
+                               class="btn">×</a>
+                        </div>
+                        <img style="width: 340px;height: 200px" th:src="${commody.image}" alt="..." src="/image/picture/potato.png"/>
                         <div class="caption">
-                            <h3 th:text="${commody.name}">名称</h3>
-                            <p th:text="${commody.description}">简介</p>
+                            <h3 th:text="${#strings.abbreviate(commody.name,15)}">名称</h3>
+                            <p style="height: 70px" th:text="${#strings.abbreviate(commody.description,70)}">简介</p>
                             <p>
                             <div id="merchantsContact" onclick="showContact()" class="btn btn-default" role="button">
                                 联系商家
                             </div>
+                            <a th:href="'/commodity/updateCommody/'+${commody.getId()}">
+                                <div th:if="${session.user!=null && session.user.getId()==user.getId()}"
+                                     id="updateContact"
+                                     class="btn btn-default" role="button">
+                                    修改商品
+                                </div>
+                            </a>
                             </p>
-
                         </div>
                     </div>
                 </div>
             </div>
+            <a th:href="'/commodity/addCommody/'+${user.getId()}" th:if="${session.user!=null && session.user.getId()==user.getId()}">
+                <div class="alert alert-info btn" role="alert">添加商品
+                </div>
+            </a>
+
         </div>
     </div>
 </div>

@@ -19,14 +19,26 @@
         <result property="image" column="image" />
         <result property="description" column="description" />
     </resultMap>
+    <insert id="addCommodity">
+        insert into commodity(userid,name,image,description) values(#{userid},#{name},#{image},#{description});
+    </insert>
 
+    <update id="updateCommodity">
+        update  commodity set name = #{name},description=#{description},image=#{image} where id = #{id};
+    </update>
+
+    <delete id="deleteCommodity">
+        delete  from  commodity where id=#{commodyId};
+    </delete>
 
 
     <select id="selectUsersCommodity" resultMap="commodityResultMap">
         select id,userid,name,image,description from commodity  where userid=#{userId};
     </select>
 
-
+    <select id="selectById" resultMap="commodityResultMap">
+        select id,userid,name,image,description from commodity  where id=#{commodyId};
+    </select>
 
 
 </mapper>

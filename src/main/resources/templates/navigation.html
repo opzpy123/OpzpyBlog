@@ -43,7 +43,7 @@
                         <!--                            <li><a href="#">消息中心</a></li>-->
                         <li><a href="/profile/questions">我的博客</a></li>
                         <li><a th:href="'/contact/toPage?userId='+${session.user.id}">联系方式</a></li>
-                        <li><a href="#">添加商品</a></li>
+                        <li><a th:href="'/commodity/usersCommodity/'+${session.user.id}">我的商品</a></li>
                         <li><a href="/user/outLogging">退出登录</a></li>
                         <li class="divider"></li>
                         <li><a th:text="'欢迎回来：'+${session.user.username}">欢迎回来:</a></li>

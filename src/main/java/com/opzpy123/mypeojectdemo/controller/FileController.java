@@ -1,21 +1,30 @@
 package com.opzpy123.mypeojectdemo.controller;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.opzpy123.mypeojectdemo.dto.FileDTO;
 
 
 import java.io.*;
 
 import com.opzpy123.mypeojectdemo.provider.AliOssProvider;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.UUID;
 
 
 @Controller
@@ -29,7 +38,6 @@ public class FileController {
     @PostMapping("/file/upload")
     @ResponseBody
     public FileDTO upload(HttpServletRequest request) {
-
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile file = multipartRequest.getFile("editormd-image-file");
 
@@ -50,4 +58,5 @@ public class FileController {
             return fileDTO;
         }
     }
+
 }
