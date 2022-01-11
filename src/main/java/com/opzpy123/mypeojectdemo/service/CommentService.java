@@ -54,7 +54,7 @@ public class CommentService {
             commentMapper.insert(comment);
             commentMapper.incCommentCount(comment.getParentId(), 1);
             //创建通知/自己回复自己不创建通知
-            if(comment.getCommentator()!=dbComment.getCommentator()) {
+            if(!comment.getCommentator().equals(dbComment.getCommentator())) {
                 createNotify(comment, dbComment.getCommentator(), NotificationTypeEnum.REPLY_COMMENT);
             }
         } else {
@@ -66,7 +66,7 @@ public class CommentService {
             commentMapper.insert(comment);
             questionMapper.incCommentCount(question.getId(), question.getCommentCount());
             //创建通知//自己回复自己不创建通知
-            if (comment.getCommentator() != question.getCreator()) {
+            if (!comment.getCommentator().equals(question.getCreator())) {
                 createNotify(comment, question.getCreator(), NotificationTypeEnum.REPLY_QUESTION);
             }
         }
@@ -83,8 +83,6 @@ public class CommentService {
         notification.setCommentContent(comment.getContent());
         notification.setGmtCreate(System.currentTimeMillis());
         notificationMapper.insert(notification);
-
-
     }
 
     public List<CommentDTO> listByTargetId(Long id, Integer type) {

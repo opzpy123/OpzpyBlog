@@ -24,8 +24,7 @@ public class CommodityService {
 	}
 
 	public Commodity selectById(Long commodyId) {
-		Commodity commodity = commodityMapper.selectById(commodyId);
-		return commodity;
+		return commodityMapper.selectById(commodyId);
 	}
 
 	public void updateCommodity(Commodity commodity) {

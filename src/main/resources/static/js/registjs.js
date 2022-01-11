@@ -133,7 +133,6 @@ function success(Obj, counter) {
     $('.glyphicon-ok').eq(counter).show();
     $('.glyphicon-remove').eq(counter).hide();
     check[counter] = true;
-
 }
 
 // 校验失败函数
