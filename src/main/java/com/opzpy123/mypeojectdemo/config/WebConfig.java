@@ -1,5 +1,8 @@
-package com.opzpy123.mypeojectdemo.interceptor;
+package com.opzpy123.mypeojectdemo.config;
 
+import com.opzpy123.mypeojectdemo.interceptor.DeleteInteceptor;
+import com.opzpy123.mypeojectdemo.interceptor.PublishEditInterceptor;
+import com.opzpy123.mypeojectdemo.interceptor.SessionInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

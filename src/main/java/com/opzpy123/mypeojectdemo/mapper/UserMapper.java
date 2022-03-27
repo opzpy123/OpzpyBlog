@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Mapper
 @Repository
@@ -21,6 +23,7 @@ public interface UserMapper {
 
     User findUserById(Long id);
 
+    List<User> list();
 
     Boolean updateUserContact(Long id, String contact);
 

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement //开启事务支持
-//@EnableCaching//开启缓存支持
+@EnableCaching//开启缓存支持
 public class MypeojectdemoApplication {
 
     public static void main(String[] args) {

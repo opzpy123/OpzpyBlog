@@ -24,6 +24,7 @@
             <div hidden id="contact" class="alert alert-info" role="alert"
                  th:text="'联系方式为:'+${user.getContact()}">..
             </div>
+            <div class="alert alert-danger" th:if="${session.user==null}">用户未登录,请在登陆之后联系商家</div>
 
             <div class="row">
                 <!-- 商品为空-->
@@ -34,7 +35,8 @@
 
                         <p th:if="${session.user!=null&&session.user.getId()!=user.getId()}" style="text-align: center">
                             请联系商家添加商品</p>
-                        <div style="text-align: center">
+                        <span class="alert alert-danger" style="float: left" th:if="${session.user==null}">用户未登录,请在登陆之后联系商家</span>
+                        <div th:if="${session.user==null}" style="text-align: center">
                             <div onclick="showContact()" class="btn btn-default" role="button">
                                 联系商家
                             </div>
@@ -54,9 +56,9 @@
                             <h3 th:text="${#strings.abbreviate(commody.name,15)}">名称</h3>
                             <p style="height: 70px" th:text="${#strings.abbreviate(commody.description,70)}">简介</p>
                             <p>
-                            <div id="merchantsContact" onclick="showContact()" class="btn btn-default" role="button">
-                                联系商家
-                            </div>
+                            <a th:href="'/talk/page?userId='+${user.getId()}" style="float: left;color: #6788ad" th:if="${session.user!=null}" id="merchantsContact" class="btn btn-default" role="button">
+                               联系商家
+                            </a>
                             <a th:href="'/commodity/updateCommody/'+${commody.getId()}">
                                 <div th:if="${session.user!=null && session.user.getId()==user.getId()}"
                                      id="updateContact"
@@ -91,6 +93,8 @@
             count = 1;
         }
     }
+
+
 </script>
 </body>
 </html>

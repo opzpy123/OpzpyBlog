@@ -23,6 +23,10 @@
         update user set contact =  #{contact} where id=#{id};
     </update>
 
+    <select id="list" resultMap="userResultMap">
+        select * from user;
+    </select>
+
 
 
     <select id="findUserByName" resultMap="userResultMap">

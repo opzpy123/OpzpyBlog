@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>交流</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/editormd.preview.min.css" rel="stylesheet">
+    <link href="/css/editormd.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-13 column">
+            <div th:insert="navigation :: nav"></div>
+        </div>
+    </div>
+    <span class="alert alert-danger"  th:text="'联系方式为:'+${talkUserContact}">用户未登录,请在登陆之后回复</span>
+    <div  class="jumbotron p-4 p-md-7  rounded  shadow"
+         style="position: relative;margin-top: 20px;padding-top: 0;height: 650px">
+        <div class="row" id="box" style="height:480px;overflow-x:auto;white-space:nowrap;">
+            <div class="col-lg-12" id="showMessage">
+            </div>
+        </div>
+        <input id="inputValue" type="text" class=" rounded text-white"
+               style="height: 40px;width: 70%;background-color: #1b1e21;color: #eefaee;position: absolute;bottom: 30px;left: 12%;"/>
+        <button id="inputBtn" class="btn btn-info"
+                style="height: 40px;width: 80px;position: absolute;bottom: 30px;right: 12%">发送
+        </button>
+    </div>
+</div>
+
+</body>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/community.js"></script>
+<script src="/js/bootstrap.bundle.js"></script>
+<script>
+
+    var loginUser = "[[${loginUser.getUsername()}]]"
+    var talkUserId = "[[${talkUserId}]]"
+
+    //进入房间
+    $(window).ready(function () {
+        $.ajax({
+            url: "/talk/enter",
+            type: "get",
+            success: function (obj) {
+                console.log(obj);
+            }
+        });
+        loadMessage();
+        scroll();
+
+    });
+
+    window.onload = scroll;//不要括号
+    function scroll() {
+        var scrollDiv = document.getElementById('box');
+        scrollDiv.scrollTop = scrollDiv.scrollHeight;
+    }
+
+    //退出房间
+    window.onbeforeunload = function () {
+        $.ajax({
+            url: "/talk/exit",
+            type: "get",
+            success: function (obj) {
+                console.log(obj);
+            }
+        });
+    };
+
+    //接收消息
+    window.setInterval(loadMessage, 200);
+
+
+    function loadMessage() {
+        $.ajax({
+            url: "/talk/receive?talkUserId="+talkUserId,
+            type: "get",
+            success: function (obj) {
+                if (obj.data.length === 0) {
+                    //未更新 不做处理
+
+                } else {
+                    //已更新
+                    console.log("消息有更新，已刷新")
+                    var MessageHtml = '';
+                    $.each(obj.data, function (messageVoIndex, messageVo) {
+                        if (loginUser === messageVo['userName']) {
+                            MessageHtml += "<div style='text-align: right;height: 90px'>\n" +
+                                "        <div style=\"float: right;margin-left: 12px;margin-top:12px;background-image: url([['/'+${loginUser.getAvatarUrl()}]]);border-radius: 30px;width: 60px;height: 60px;background-color: #777\"></div>\n" +
+                                "        <div>\n" +
+                                "            <h5 class=\"font-weight-light\" style=\"display: inline;\">\n" +
+                                messageVo['userName'] +
+                                "            </h5>\n" +
+                                "            <div style=\"display: inline;color: #82817f;font-size: smaller\">\n" +
+                                messageVo['sendTime'] +
+                                "            </div>\n" +
+                                "        </div>\n" +
+                                "        <h5 class=\"text-white font-weight-light \"\n" +
+                                "            style=\"float: right;border-radius: 10px;padding:12px;width:fit-content;width:-webkit-fit-content;width:-moz-fit-content;background-color: #27b07c\">\n" +
+                                messageVo['message'] +
+                                "        </h5>\n" +
+                                "    </div>"
+                        } else {
+                            MessageHtml += "<div style='height: 90px'>\n" +
+                                "        <div style=\"float: left;margin-right: 12px;margin-top:12px;border-radius: 30px;width: 60px;height: 60px;background-color: #777\"></div>\n" +
+                                "        <div style=\"float: left\">\n" +
+                                "            <div>\n" +
+                                "                <h5 class=\"font-weight-light\" style=\"display: inline;\">\n" +
+                                messageVo['userName'] +
+                                "                </h5>\n" +
+                                "                <div style=\"display: inline;color: #82817f;font-size: smaller\">\n" +
+                                messageVo['sendTime'] +
+                                "                </div>\n" +
+                                "            </div>\n" +
+                                "            <h5 class=\"text-white font-weight-light \"\n" +
+                                "                style=\"border-radius: 10px;padding:12px;width:fit-content;width:-webkit-fit-content;width:-moz-fit-content;background-color: #3988bc\">\n" +
+                                messageVo['message'] +
+                                "            </h5>\n" +
+                                "        </div>\n" +
+                                "    </div>"
+                        }
+                    })
+                    $("#showMessage").html(MessageHtml);
+                    scroll();
+                }
+            },
+        })
+    }
+
+    //发送消息
+    $("#inputBtn").click(function () {
+        var inputValue = document.getElementById("inputValue").value;
+        $.ajax({
+            url: "/talk/send?message=" + inputValue,
+            type: "get",
+            success: function (obj) {
+                document.getElementById("inputValue").value = "";
+            }
+        });
+        scroll();
+    })
+
+
+    //监听回车键 发送消息
+    document.onkeyup = function (e) {
+        // 兼容FF和IE和Opera
+        var event = e || window.event;
+        var key = event.which || event.keyCode || event.charCode;
+        if (key == 13) {
+            var inputValue = document.getElementById("inputValue").value;
+            $.ajax({
+                url: "/talk/send?message=" + inputValue,
+                type: "get",
+                success: function (obj) {
+                    document.getElementById("inputValue").value = "";
+                }
+            });
+        }
+    };
+</script>
+</html>

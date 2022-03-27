@@ -18,15 +18,14 @@ import java.io.PrintWriter;
 public class CustomizeExceptionHandler {
     @ExceptionHandler(Exception.class)
     Object handle(Throwable e, Model model, HttpServletRequest request, HttpServletResponse response) {
-
         String contentType = request.getContentType();
         if ("application/json".equals(contentType)) {
             ResultDTO resultDTO;
             //返回json
             if (e instanceof CustomizeException) {
-                resultDTO= ResultDTO.errorOf((CustomizeException) e);
+                resultDTO = ResultDTO.errorOf((CustomizeException) e);
             } else {
-                resultDTO=  ResultDTO.errorOf(CustomizeErrorCode.SYSTEM_ERROR);
+                resultDTO = ResultDTO.errorOf(CustomizeErrorCode.SYSTEM_ERROR);
             }
             try {
                 response.setContentType("application/json");
@@ -36,9 +35,9 @@ public class CustomizeExceptionHandler {
                 writer.write(JSON.toJSONString(resultDTO));
                 writer.close();
             } catch (IOException ioe) {
-//                ex.printStackTrace();
+                ioe.printStackTrace();
             }
-            return  null;
+            return null;
         } else {
             //错误页面跳转
             if (e instanceof CustomizeException) {
@@ -50,7 +49,6 @@ public class CustomizeExceptionHandler {
         }
 
     }
-
 
 
 }
