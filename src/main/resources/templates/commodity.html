@@ -56,10 +56,10 @@
                             <h3 th:text="${#strings.abbreviate(commody.name,15)}">名称</h3>
                             <p style="height: 70px" th:text="${#strings.abbreviate(commody.description,70)}">简介</p>
                             <p>
-                            <a th:href="'/talk/page?userId='+${user.getId()}" style="float: left;color: #6788ad" th:if="${session.user!=null}" id="merchantsContact" class="btn btn-default" role="button">
+                            <a th:href="'/talk/page?userId='+${user.getId()}" style="display: block;color: #6788ad" th:if="${session.user!=null}" id="merchantsContact" class="btn btn-default" role="button">
                                联系商家
                             </a>
-                            <a th:href="'/commodity/updateCommody/'+${commody.getId()}">
+                            <a  th:href="'/commodity/updateCommody/'+${commody.getId()}">
                                 <div th:if="${session.user!=null && session.user.getId()==user.getId()}"
                                      id="updateContact"
                                      class="btn btn-default" role="button">

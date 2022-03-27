@@ -18231,3 +18231,72 @@ java.io.EOFException: null
 2022-03-27 22:35:16.401  INFO 7484 --- [http-nio-8080-exec-3] c.o.mypeojectdemo.service.TalkService    : opzpy进入房间
 2022-03-27 22:35:25.985  INFO 7484 --- [http-nio-8080-exec-9] c.o.mypeojectdemo.service.TalkService    : opzpy发送消息卖家在吗？
 2022-03-27 22:35:40.720  INFO 7484 --- [http-nio-8080-exec-9] c.o.mypeojectdemo.service.TalkService    : opzpy退出房间
+2022-03-27 22:38:41.713  INFO 7484 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-27 22:38:41.825  INFO 7484 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-03-27 22:38:41.829  INFO 7484 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2022-03-27 22:38:56.933  INFO 7636 --- [main] c.o.m.MypeojectdemoApplicationTests      : Starting MypeojectdemoApplicationTests on opzpy123-mbp.local with PID 7636 (started by opzpy in /Users/opzpy/Documents/codespace/idea/IDEA_WorkSpace/OpzpyBlog)
+2022-03-27 22:38:56.934  INFO 7636 --- [main] c.o.m.MypeojectdemoApplicationTests      : No active profile set, falling back to default profiles: default
+2022-03-27 22:38:57.050  WARN 7636 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-03-27 22:38:57.275  INFO 7636 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-03-27 22:38:57.276  INFO 7636 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-03-27 22:38:57.290  INFO 7636 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6ms. Found 0 Redis repository interfaces.
+2022-03-27 22:38:57.498  INFO 7636 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.opzpy123.mypeojectdemo.config.RedisConfig$$EnhancerBySpringCGLIB$$d2908bea] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-03-27 22:38:57.501  INFO 7636 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-03-27 22:38:57.627  INFO 7636 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-03-27 22:38:57.737  INFO 7636 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-03-27 22:38:58.393  INFO 7636 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-27 22:38:58.458  INFO 7636 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-03-27 22:38:58.517  WARN 7636 --- [main] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][main] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+2022-03-27 22:38:58.713  INFO 7636 --- [redisContainer-1] io.lettuce.core.EpollProvider            : Starting without optional epoll library
+2022-03-27 22:38:58.714  INFO 7636 --- [redisContainer-1] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
+2022-03-27 22:38:58.862  INFO 7636 --- [main] c.o.m.MypeojectdemoApplicationTests      : Started MypeojectdemoApplicationTests in 2.054 seconds (JVM running for 2.456)
+2022-03-27 22:38:59.059  INFO 7636 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-27 22:38:59.167  INFO 7636 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-03-27 22:38:59.167  INFO 7636 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2022-03-27 22:39:12.011  INFO 7672 --- [main] c.o.m.MypeojectdemoApplicationTests      : Starting MypeojectdemoApplicationTests on opzpy123-mbp.local with PID 7672 (started by opzpy in /Users/opzpy/Documents/codespace/idea/IDEA_WorkSpace/OpzpyBlog)
+2022-03-27 22:39:12.012  INFO 7672 --- [main] c.o.m.MypeojectdemoApplicationTests      : No active profile set, falling back to default profiles: default
+2022-03-27 22:39:12.130  WARN 7672 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-03-27 22:39:12.334  INFO 7672 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-03-27 22:39:12.336  INFO 7672 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-03-27 22:39:12.349  INFO 7672 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6ms. Found 0 Redis repository interfaces.
+2022-03-27 22:39:12.568  INFO 7672 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.opzpy123.mypeojectdemo.config.RedisConfig$$EnhancerBySpringCGLIB$$4c1611df] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-03-27 22:39:12.570  INFO 7672 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-03-27 22:39:12.692  INFO 7672 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-03-27 22:39:12.801  INFO 7672 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-03-27 22:39:13.417  INFO 7672 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-27 22:39:13.468  INFO 7672 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-03-27 22:39:13.527  WARN 7672 --- [main] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][main] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+2022-03-27 22:39:13.721  INFO 7672 --- [redisContainer-1] io.lettuce.core.EpollProvider            : Starting without optional epoll library
+2022-03-27 22:39:13.722  INFO 7672 --- [redisContainer-1] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
+2022-03-27 22:39:13.879  INFO 7672 --- [main] c.o.m.MypeojectdemoApplicationTests      : Started MypeojectdemoApplicationTests in 1.983 seconds (JVM running for 2.388)
+2022-03-27 22:39:14.053  INFO 7672 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-27 22:39:14.164  INFO 7672 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-03-27 22:39:14.164  INFO 7672 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2022-03-27 22:44:26.590  INFO 7848 --- [restartedMain] c.o.m.MypeojectdemoApplication           : Starting MypeojectdemoApplication on opzpy123-mbp.local with PID 7848 (/Users/opzpy/Documents/codespace/idea/IDEA_WorkSpace/OpzpyBlog/target/classes started by opzpy in /Users/opzpy/Documents/codespace/idea/IDEA_WorkSpace/OpzpyBlog)
+2022-03-27 22:44:26.591  INFO 7848 --- [restartedMain] c.o.m.MypeojectdemoApplication           : No active profile set, falling back to default profiles: default
+2022-03-27 22:44:26.616  INFO 7848 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-03-27 22:44:26.616  INFO 7848 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-03-27 22:44:26.630  WARN 7848 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-03-27 22:44:26.937  INFO 7848 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-03-27 22:44:26.937  INFO 7848 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-03-27 22:44:26.949  INFO 7848 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5ms. Found 0 Redis repository interfaces.
+2022-03-27 22:44:27.072  INFO 7848 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.opzpy123.mypeojectdemo.config.RedisConfig$$EnhancerBySpringCGLIB$$7777574e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-03-27 22:44:27.074  INFO 7848 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-03-27 22:44:27.209  INFO 7848 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-03-27 22:44:27.214  INFO 7848 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-03-27 22:44:27.215  INFO 7848 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2022-03-27 22:44:27.246  INFO 7848 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-03-27 22:44:27.246  INFO 7848 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 630 ms
+2022-03-27 22:44:27.289  INFO 7848 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-03-27 22:44:27.344  INFO 7848 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-03-27 22:44:27.720  INFO 7848 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-27 22:44:27.752  INFO 7848 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-03-27 22:44:27.779  WARN 7848 --- [restartedMain] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][restartedMain] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+2022-03-27 22:44:27.872  INFO 7848 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-03-27 22:44:27.935  INFO 7848 --- [redisContainer-1] io.lettuce.core.EpollProvider            : Starting without optional epoll library
+2022-03-27 22:44:27.935  INFO 7848 --- [redisContainer-1] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
+2022-03-27 22:44:28.070  INFO 7848 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-03-27 22:44:28.072  INFO 7848 --- [restartedMain] c.o.m.MypeojectdemoApplication           : Started MypeojectdemoApplication in 1.671 seconds (JVM running for 1.944)
+2022-03-27 22:44:28.132  INFO 7848 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-27 22:44:28.133  INFO 7848 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-03-27 22:44:28.136  INFO 7848 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
